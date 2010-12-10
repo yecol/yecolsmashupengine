@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<em:enginemodel xmlns:em="http://www.example.org/EngineModel"
+	xmlns:gf="http://www.example.org/GeneralFigure" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd ">
+
+	<em:figure gf:classid="FetchRss" gf:id="1">
+		<gf:LogicalAttribute>
+			<gf:Para name="rssUrl" type="String">
+				http://www.angos.cn/buluoge/feed.asp
+			</gf:Para>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>0</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>5</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+
+	<em:figure gf:classid="FetchGeoRss" gf:id="2">
+		<gf:LogicalAttribute>
+			<gf:Para name="rssUrl" type="String">
+				http://images.apple.com/main/rss/hotnews/hotnews.rss
+			</gf:Para>
+			<gf:Para name="addUngeoItems" type="String">
+			    1
+			</gf:Para>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>0</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>5</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+
+	<em:figure gf:classid="FetchGeoRss" gf:id="3">
+		<gf:LogicalAttribute>
+			<gf:Para name="rssUrl" type="String">
+				http://rss.news.yahoo.com/rss/china
+			</gf:Para>
+			<gf:Para name="addUngeoItems" type="String">
+			    0
+			</gf:Para>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>0</gf:input>
+				<gf:input>2</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>5</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+	
+	<em:figure gf:classid="TransformXml" gf:id="4">
+		<gf:LogicalAttribute>
+			<gf:Para name="xmlUrl" type="String">
+				http://www.w3schools.com/xml/cd_catalog.xml
+			</gf:Para>
+			<gf:Para name="itemRoot" type="String">
+			    /CATALOG/CD
+			</gf:Para>
+			<gf:Para name="user:yecolTitle" type="String">
+			    TITLE
+			</gf:Para>
+			<gf:Para name="yecolAir" type="String">
+			    ARTIST
+			</gf:Para>
+			<gf:Para name="yecolMoney" type="String">
+			    PRICE
+			</gf:Para>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>0</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>5</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+
+	<em:figure gf:classid="Merge" gf:id="5">
+		<gf:LogicalAttribute />
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>1</gf:input>
+				<gf:input>2</gf:input>
+				<gf:input>3</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>5</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+
+
+
+
+
+</em:enginemodel>
