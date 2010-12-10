@@ -18,6 +18,7 @@ import org.xml.sax.InputSource;
 
 import act.mashup.util.EngineNode;
 import act.mashup.util.EngineThread;
+import act.mashup.util.Item;
 
 /**
  * Session Bean implementation class EngineManager
@@ -146,9 +147,7 @@ public class EngineManager{
 
 	}
 
-	public List GetResult(Integer index){
-		return this.results.get(index);
-	}
+
 	
 	// 运行可执行序列
 	public void RunSequence() {
@@ -181,6 +180,27 @@ public class EngineManager{
 
 		System.out.println(results.toString());
 		System.out.println("ALL MODULES EXECUTE OVER");
+	}
+	
+
+	//从result中生成XML
+	public Document GetResult(Integer i){
+		Document outDoc=new Document();
+		Element rootElement=new Element("root");
+		List<Item> _itemList=this.results.get(i);
+		Element _el=null;
+		for(Item _item:_itemList){
+			_el=new Element("item");
+			for(Iterator<String> it = _item.getKeys().iterator();it.hasNext();){
+				String _name=it.next();
+				Element _ele=new Element(_name);
+				_ele.setText(_item.getValue(_name));
+				_el.addContent(_ele);				
+			}
+			rootElement.addContent(_el);
+		}
+		outDoc.setRootElement(rootElement);
+		return outDoc;
 	}
 
 	// 查询可运行的节点
