@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.jdom.output.XMLOutputter;
+
 import act.mashup.global.EngineManager;
 
 /**
@@ -41,25 +43,35 @@ public class EngineAssembler extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("yes.posted.");
-		try {
-			InitialContext ctx=new InitialContext();
+		
 			
 			//在session中查找或者设置一个新的桩
 			EngineManager emgr=new EngineManager();
 			emgr.BuildEngine(request.getParameter("xml"));
 			
-			response.setContentType("text/html");
+			
+			
+			response.setContentType("text/xml");
 			//指定响应类型
+			response.setCharacterEncoding("UTF-8");
 	        PrintWriter out = response.getWriter();
 			//获得书写器
 	        
-	        out.println(emgr.GetResult(5).toString());
+	        /*
+	        String rlt=null;
+	        rlt=request.getParameter("rlt");
+	        try{
+	        	out.println(emgr.GetResult().toString());
+	        }
+	        */
+	        
+	        //out.println(emgr.GetResult(5).toString());
+	        XMLOutputter outputter = new XMLOutputter();   
+	        outputter.output(emgr.GetResult(5), out);   
+	        out.flush();   
+	        out.close();   
 			
-			
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		/*try {
 			InitialContext ctx=new InitialContext();
 			
