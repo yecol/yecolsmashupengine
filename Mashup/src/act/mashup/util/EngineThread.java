@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class EngineThread extends Thread {
 
-	private Map<Integer, List> results;
+	private Map<Integer, Result> results;
 	private EngineNode en;
 
-	public EngineThread(EngineNode en,Map<Integer, List> results) {
+	public EngineThread(EngineNode en,Map<Integer, Result> results) {
 		super();
 		this.results = results;
 		this.en = en;

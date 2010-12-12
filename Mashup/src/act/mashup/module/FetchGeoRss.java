@@ -8,6 +8,7 @@ import java.util.Map;
 
 import act.mashup.util.EngineNode;
 import act.mashup.util.Item;
+import act.mashup.util.Result;
 
 import com.sun.syndication.feed.module.georss.GeoRSSModule;
 import com.sun.syndication.feed.module.georss.GeoRSSUtils;
@@ -31,13 +32,14 @@ import com.sun.syndication.io.XmlReader;
 
 public class FetchGeoRss {
 
-	private Map<Integer, List> results;
+	private Map<Integer, Result> results;
 	private EngineNode en;
 
 	private String rssAddress;
 	private List<Item> items;
 	private List<SyndEntry> entries;
 	private Date timeStamp;
+	private Result rlt;
 
 	private final String geoUrlPrefixWithUngeo = "http://ws.geonames.org/rssToGeoRSS?geoRSS=simple&addUngeocodedItems=true&feedUrl=";
 	private final String geoUrlPrefixWithoutUngeo = "http://ws.geonames.org/rssToGeoRSS?geoRSS=simple&addUngeocodedItems=false&feedUrl=";
@@ -47,10 +49,11 @@ public class FetchGeoRss {
 	 */
 	public FetchGeoRss() {
 		timeStamp = new Date();
+		rlt = new Result(Result.TYPE_LIST);
 	}
 
 	// 供Engine调用的函数
-	public void run(EngineNode en, Map<Integer, List> results) {
+	public void run(EngineNode en, Map<Integer, Result> results) {
 		this.en = en;
 		this.results = results;
 		Prepare();
@@ -95,21 +98,30 @@ public class FetchGeoRss {
 
 					_item = new Item();
 					_item.setValue("title", entry.getTitle());
-					_item.setValue("author",entry.getAuthor());
+					_item.setValue("author", entry.getAuthor());
 					_item.setValue("link", entry.getLink());
-					_item.setValue("publishDate",entry.getPublishedDate() == null ? timeStamp
-							.toString() : entry.getPublishedDate().toString());
-					_item.setValue("description", entry.getDescription().getValue());
-					_item.setValue("lat",Double.toString(geoRSSModule.getPosition().getLatitude()));
-					_item.setValue("Lon",Double.toString(geoRSSModule.getPosition().getLongitude()));
+					_item.setValue(
+							"publishDate",
+							entry.getPublishedDate() == null ? timeStamp
+									.toString() : entry.getPublishedDate()
+									.toString());
+					_item.setValue("description", entry.getDescription()
+							.getValue());
+					_item.setValue("lat", Double.toString(geoRSSModule
+							.getPosition().getLatitude()));
+					_item.setValue("Lon", Double.toString(geoRSSModule
+							.getPosition().getLongitude()));
 					items.add(_item);
 				}
 			} catch (Exception e) {
+				rlt.ErrorOccur("获取GeoRSS失败");
 				e.printStackTrace();
 			}
 
 		// 将结果放入结果映射集
-		results.put(en.getId(), items);
+		
+		rlt.SetResultList(items);
+		results.put(en.getId(), rlt);
 	}
 
 	// 打印列表

@@ -25,6 +25,7 @@ import org.htmlparser.visitors.NodeVisitor;
 
 import act.mashup.util.EngineNode;
 import act.mashup.util.Item;
+import act.mashup.util.Result;
 
 import com.sun.syndication.feed.module.georss.GeoRSSModule;
 import com.sun.syndication.feed.module.georss.GeoRSSUtils;
@@ -45,41 +46,47 @@ import com.sun.syndication.io.XmlReader;
 
 public class FetchRss {
 
-	private Map<Integer, List> results;
+	private Map<Integer, Result> results;
 	private EngineNode en;
 
 	private String RssAddress;
 	private List<Item> items;
 	private List<SyndEntry> entries;
 	private Date timeStamp;
+	private Result rlt;
 
 	/**
 	 * Default constructor.
 	 */
 	public FetchRss() {
 		timeStamp = new Date();
+		rlt = new Result(Result.TYPE_LIST);
 	}
 
 	// 供Engine调用的函数
-	public void run(EngineNode en, Map<Integer, List> results) {
+	public void run(EngineNode en, Map<Integer, Result> results) {
 		this.en = en;
 		this.results = results;
 		try {
 			Prepare();
+			ParseRss();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			rlt.ErrorOccur("RSS原地址错误！");
 		} catch (ParserException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			rlt.ErrorOccur("RSS解析错误！");
+		}finally{
+			results.put(en.getId(), rlt);
 		}
-		ParseRss();
+		
 	}
 
 	// 私有方法
 
 	// 从参数数组中获得第一个参数作为Rss源地址传入
-	private void Prepare() throws IOException, ParserException {
+	private void Prepare() throws MalformedURLException, ParserException{
 		String urlString = en.getParas().get("rssUrl");
 
 		System.out.println("begin to detect");
@@ -133,15 +140,10 @@ public class FetchRss {
 				e.printStackTrace();
 			}
 
-		// 将结果放入结果映射集
-		results.put(en.getId(), items);
+		// 将结果放入结果映射集	
+		rlt.SetResultList(items);
+
 	}
 
-	// 打印列表
-	private void PrintItems() {
-		for (Item i : items) {
-			System.out.println(i.toString());
-		}
-	}
 
 }
