@@ -1,12 +1,14 @@
 package act.mashup.module;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import act.mashup.util.EngineNode;
 import act.mashup.util.Item;
+import act.mashup.util.Result;
 
 /**
  * <p>
@@ -15,7 +17,7 @@ import act.mashup.util.Item;
  * 参数：无</br> 返回：内部数据结构Item的列表</br>
  */
 public class Merge {
-	private Map<Integer, List> results;
+	private Map<Integer, Result> results;
 	private EngineNode en;
 	private ArrayList<Integer> ins;
 	private ArrayList<Item> items;
@@ -30,7 +32,7 @@ public class Merge {
 	}
 
 	// 供Engine调用的函数
-	public void run(EngineNode en, Map<Integer, List> results) {
+	public void run(EngineNode en, Map<Integer, Result> results) {
 		this.en = en;
 		this.results = results;
 		Prepare();
@@ -48,9 +50,11 @@ public class Merge {
 	//××××××××××××××××××××××警告：指针合并××××××××××××××××××××××××××××××
 	private void DoMerge() {
 		for(Integer i:ins){
-			items.addAll(results.get(i));
+			items.addAll(results.get(i).GetResultList());
 		}
-		results.put(en.getId(), items);
+		Result rlt = new Result(Result.TYPE_LIST);
+		rlt.SetResultList(items);
+		results.put(en.getId(), rlt);
 	}
 
 	// 打印列表

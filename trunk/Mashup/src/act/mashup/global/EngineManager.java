@@ -19,6 +19,7 @@ import org.xml.sax.InputSource;
 import act.mashup.util.EngineNode;
 import act.mashup.util.EngineThread;
 import act.mashup.util.Item;
+import act.mashup.util.Result;
 
 /**
  * Session Bean implementation class EngineManager
@@ -33,7 +34,7 @@ public class EngineManager{
 	public Map<Integer, Boolean> satisfyStatus;
 	public Map<Integer, Boolean> doneStatus;
 	private ArrayList<EngineNode> engineNodes;
-	public Map<Integer, List> results;
+	public Map<Integer, Result> results;
 
 	// 私有临时变量
 	private ArrayList<EngineNode> satisfyingNodes;
@@ -50,7 +51,7 @@ public class EngineManager{
 		satisfyStatus.put(0, true);// 初始条件
 		engineNodes = new ArrayList<EngineNode>();
 		satisfyingNodes = new ArrayList<EngineNode>();
-		results = new HashMap<Integer, List>();
+		results = new HashMap<Integer, Result>();
 
 	}
 
@@ -187,7 +188,7 @@ public class EngineManager{
 	public Document GetResult(Integer i){
 		Document outDoc=new Document();
 		Element rootElement=new Element("root");
-		List<Item> _itemList=this.results.get(i);
+		List<Item> _itemList=this.results.get(i).GetResultList();
 		Element _el=null;
 		for(Item _item:_itemList){
 			_el=new Element("item");

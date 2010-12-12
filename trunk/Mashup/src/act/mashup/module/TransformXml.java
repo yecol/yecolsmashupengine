@@ -31,6 +31,7 @@ import org.jdom.xpath.XPath;
 
 import act.mashup.util.EngineNode;
 import act.mashup.util.Item;
+import act.mashup.util.Result;
 
 import com.sun.syndication.feed.module.georss.GeoRSSModule;
 import com.sun.syndication.feed.module.georss.GeoRSSUtils;
@@ -58,7 +59,7 @@ import com.sun.syndication.io.XmlReader;
 
 public class TransformXml {
 
-	private Map<Integer, List> results;
+	private Map<Integer, Result> results;
 	private EngineNode en;
 	private List<Item> items;
 
@@ -74,7 +75,7 @@ public class TransformXml {
 	}
 
 	// 供Engine调用的函数
-	public void run(EngineNode en, Map<Integer, List> results) {
+	public void run(EngineNode en, Map<Integer, Result> results) {
 		this.en = en;
 		this.results = results;
 		Prepare();
@@ -165,7 +166,9 @@ public class TransformXml {
 		}
 
 		// 将结果放入结果映射集
-		results.put(en.getId(), items);
+		Result rlt = new Result(Result.TYPE_LIST);
+		rlt.SetResultList(items);
+		results.put(en.getId(), rlt);
 	}
 
 }
