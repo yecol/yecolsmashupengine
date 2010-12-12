@@ -25,7 +25,7 @@ import act.mashup.util.Result;
  * Session Bean implementation class EngineManager
  */
 
-public class EngineManager{
+public class EngineManager {
 
 	/**
 	 *  
@@ -47,7 +47,7 @@ public class EngineManager{
 	public EngineManager() {
 		// TODO Auto-generated constructor stub
 		satisfyStatus = new HashMap<Integer, Boolean>();
-		doneStatus=new HashMap<Integer, Boolean>();
+		doneStatus = new HashMap<Integer, Boolean>();
 		satisfyStatus.put(0, true);// 初始条件
 		engineNodes = new ArrayList<EngineNode>();
 		satisfyingNodes = new ArrayList<EngineNode>();
@@ -65,7 +65,7 @@ public class EngineManager{
 		List ioputs;
 		String classId;
 		Integer id;
-		Map<String,String> paras;
+		Map<String, String> paras;
 		ArrayList inputs;
 		ArrayList outputs;
 
@@ -95,15 +95,16 @@ public class EngineManager{
 				classId = figure.getAttributeValue("classid", gf);
 				id = Integer.parseInt(figure.getAttributeValue("id", gf));
 				satisfyStatus.put(id, false);
-				doneStatus.put(id,false);
+				doneStatus.put(id, false);
 
 				// 获得参数
 				ioputs = figure.getChild("LogicalAttribute", gf).getChildren(
 						"Para", gf);
-				paras = new HashMap<String,String>();
+				paras = new HashMap<String, String>();
 				for (Iterator it = ioputs.iterator(); it.hasNext();) {
 					ioput = (Element) it.next();
-					paras.put(ioput.getAttributeValue("name"),ioput.getTextTrim());
+					paras.put(ioput.getAttributeValue("name"),
+							ioput.getTextTrim());
 					System.out.println(ioput.getTextTrim());
 				}
 
@@ -148,8 +149,6 @@ public class EngineManager{
 
 	}
 
-
-	
 	// 运行可执行序列
 	public void RunSequence() {
 		while (doneStatus.containsValue(false) == true) {
@@ -169,7 +168,7 @@ public class EngineManager{
 			for (EngineThread t : threads) {
 				try {
 					t.join();
-					t.updateStatus(satisfyStatus,doneStatus);
+					t.updateStatus(satisfyStatus, doneStatus);
 
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -182,23 +181,31 @@ public class EngineManager{
 		System.out.println(results.toString());
 		System.out.println("ALL MODULES EXECUTE OVER");
 	}
-	
 
-	//从result中生成XML
-	public Document GetResult(Integer i){
-		Document outDoc=new Document();
-		Element rootElement=new Element("root");
-		List<Item> _itemList=this.results.get(i).GetResultList();
-		Element _el=null;
-		for(Item _item:_itemList){
-			_el=new Element("item");
-			for(Iterator<String> it = _item.getKeys().iterator();it.hasNext();){
-				String _name=it.next();
-				Element _ele=new Element(_name);
-				_ele.setText(_item.getValue(_name));
-				_el.addContent(_ele);				
+	// 从result中生成XML
+	public Document GetResult(Integer i) {
+		Document outDoc = new Document();
+		Element rootElement = new Element("root");
+		if (this.results.get(i).GetStatus() == false) {
+			rootElement.setAttribute("status", "false");
+			Element errormsg=new Element("errormsg");
+			errormsg.setText(this.results.get(i).GetErrorMsg());
+			rootElement.addContent(errormsg);
+		} else {
+			rootElement.setAttribute("status", "true");
+			List<Item> _itemList = this.results.get(i).GetResultList();
+			Element _el = null;
+			for (Item _item : _itemList) {
+				_el = new Element("item");
+				for (Iterator<String> it = _item.getKeys().iterator(); it
+						.hasNext();) {
+					String _name = it.next();
+					Element _ele = new Element(_name);
+					_ele.setText(_item.getValue(_name));
+					_el.addContent(_ele);
+				}
+				rootElement.addContent(_el);
 			}
-			rootElement.addContent(_el);
 		}
 		outDoc.setRootElement(rootElement);
 		return outDoc;
@@ -208,7 +215,7 @@ public class EngineManager{
 	private ArrayList QueryRunnable() {
 		this.satisfyingNodes.clear();
 		for (EngineNode node : engineNodes) {
-			if (node.isSatisfy(satisfyStatus,doneStatus))
+			if (node.isSatisfy(satisfyStatus, doneStatus))
 				this.satisfyingNodes.add(node);
 		}
 		return this.satisfyingNodes;

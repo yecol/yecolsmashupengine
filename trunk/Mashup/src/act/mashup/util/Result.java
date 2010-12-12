@@ -21,6 +21,17 @@ public class Result {
 		this.timeStamp = new Date();
 		this.type = type;
 	}
+	
+	public boolean GetStatus(){
+		return this.status;
+	}
+	
+	public String GetErrorMsg(){
+		if(this.errorMsg==null){
+			return "·¢ÉúÎ´Öª´íÎó£¡";
+		}
+		else return this.errorMsg;
+	}
 
 	public void ErrorOccur(String errorMsg) {
 		this.status = false;
@@ -45,6 +56,10 @@ public class Result {
 
 	public Integer GetType() {
 		return this.type;
+	}
+	
+	public String toString(){
+		return String.valueOf(this.GetStatus());
 	}
 
 }

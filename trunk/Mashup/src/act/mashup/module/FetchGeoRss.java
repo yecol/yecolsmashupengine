@@ -1,5 +1,7 @@
 package act.mashup.module;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +16,7 @@ import com.sun.syndication.feed.module.georss.GeoRSSModule;
 import com.sun.syndication.feed.module.georss.GeoRSSUtils;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
@@ -57,7 +60,20 @@ public class FetchGeoRss {
 		this.en = en;
 		this.results = results;
 		Prepare();
-		ParseRss();
+		try {
+			ParseRss();
+		} catch (IllegalArgumentException e) {
+			rlt.ErrorOccur("获取GeoRSS参数错误！");
+			e.printStackTrace();
+		} catch (IOException e) {
+			rlt.ErrorOccur("获取GeoRSS失败！");
+			e.printStackTrace();
+		} catch (FeedException e) {
+			rlt.ErrorOccur("GeoRSS错误！");
+			e.printStackTrace();
+		}finally{
+			results.put(en.getId(), rlt);
+		}
 	}
 
 	// 私有方法
@@ -77,9 +93,9 @@ public class FetchGeoRss {
 
 	}
 
-	private void ParseRss() {
+	private void ParseRss() throws IOException, IllegalArgumentException, FeedException {
 		if (items == null)
-			try {
+		{
 				URL _url = new URL(rssAddress);
 
 				// 读取Rss源
@@ -113,15 +129,10 @@ public class FetchGeoRss {
 							.getPosition().getLongitude()));
 					items.add(_item);
 				}
-			} catch (Exception e) {
-				rlt.ErrorOccur("获取GeoRSS失败");
-				e.printStackTrace();
-			}
-
-		// 将结果放入结果映射集
-		
+			} 
+		// 将结果放入结果映射集	
 		rlt.SetResultList(items);
-		results.put(en.getId(), rlt);
+		
 	}
 
 	// 打印列表
