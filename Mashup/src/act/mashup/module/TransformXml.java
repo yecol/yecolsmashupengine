@@ -62,6 +62,7 @@ public class TransformXml {
 	private Map<Integer, Result> results;
 	private EngineNode en;
 	private List<Item> items;
+	private Result rlt;
 
 	private String urlString;
 	private String itemRoot;
@@ -71,15 +72,27 @@ public class TransformXml {
 	 * Default constructor.
 	 */
 	public TransformXml() {
-		// timeStamp = new Date();
+		rlt = new Result(Result.TYPE_LIST);
 	}
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
 		this.en = en;
 		this.results = results;
-		Prepare();
-		Transform();
+		try {
+			Prepare();
+			Transform();
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			rlt.ErrorOccur("文档对象模型解析错误");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			rlt.ErrorOccur("IO错误");
+			e.printStackTrace();
+		}finally{
+			results.put(en.getId(), rlt);
+		}
 	}
 
 	// 私有方法
@@ -89,7 +102,7 @@ public class TransformXml {
 
 		urlString = en.getParas().get("xmlUrl");
 		itemRoot = en.getParas().get("itemRoot");
-		
+
 		// ××××××××××××××××××××××警告：修改了en中的原始数据××××××××××××××××××××××××××××××
 		en.getParas().remove("xmlUrl");
 		en.getParas().remove("itemRoot");
@@ -97,7 +110,7 @@ public class TransformXml {
 		transformParas = en.getParas();
 	}
 
-	private void Transform() {
+	private void Transform() throws JDOMException, IOException {
 
 		items = new ArrayList<Item>();
 
@@ -105,21 +118,9 @@ public class TransformXml {
 		SAXBuilder sb = new SAXBuilder();
 		URL url = null;
 		Document doc = null;
-		try {
-			url = new URL(urlString);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			doc = sb.build(url);
-		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		url = new URL(urlString);
+		doc = sb.build(url);
 
 		// 获得XML文档的根节点作为上下文
 		Element rootElement = doc.getRootElement();
@@ -128,47 +129,29 @@ public class TransformXml {
 		List<Element> itemList = null;
 		Item _item = null;
 
-		
-		try {
-			itemList = XPath.selectNodes(rootElement, itemRoot);
-		} catch (JDOMException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		//局部指针
+		itemList = XPath.selectNodes(rootElement, itemRoot);
+
+		// 局部指针
 		XPath _x = null;
 		String _key = null;
-		for (Element e: itemList) {
-			//新建一个item
+		for (Element e : itemList) {
+			// 新建一个item
 			_item = new Item();
-			
-			for (Iterator<String> it = transformParas.keySet().iterator(); it.hasNext();) {
-				
-				//将item内部的每个子元素补齐
-				_key = it.next();
-				try {
-					_x = XPath.newInstance(transformParas.get(_key));
-				} catch (JDOMException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					_item.setValue(_key, _x.valueOf(e));
-				} catch (JDOMException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			
-			items.add(_item);
 
+			for (Iterator<String> it = transformParas.keySet().iterator(); it
+					.hasNext();) {
+
+				// 将item内部的每个子元素补齐
+				_key = it.next();
+				_x = XPath.newInstance(transformParas.get(_key));
+				_item.setValue(_key, _x.valueOf(e));
+
+			}
+			items.add(_item);
 		}
 
 		// 将结果放入结果映射集
-		Result rlt = new Result(Result.TYPE_LIST);
-		rlt.SetResultList(items);
-		results.put(en.getId(), rlt);
+		rlt.SetResultList(items);		
 	}
 
 }
