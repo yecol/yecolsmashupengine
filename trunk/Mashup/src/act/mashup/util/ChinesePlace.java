@@ -12,6 +12,7 @@ public class ChinesePlace {
 	private static final ChinesePlace instance = new ChinesePlace();
 
 	private ChinesePlace() {
+		
 
 	}
 

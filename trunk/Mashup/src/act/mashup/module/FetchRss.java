@@ -99,7 +99,8 @@ public class FetchRss {
 	// 从参数数组中获得第一个参数作为Rss源地址传入
 	private void Prepare() throws MalformedURLException, ParserException {
 		String urlString = en.getParas().get("rssUrl");
-
+		
+        //从URL探测RSS源
 		System.out.println("begin to detect");
 		String line;
 		URL myUrl = new URL("http://kczy.zjut.edu.cn/xwyy");
@@ -117,6 +118,7 @@ public class FetchRss {
 		this.RssAddress = urlString;
 	}
 
+	//解析rss
 	private void ParseRss() throws IOException, IllegalArgumentException, FeedException {
 		if (items == null) {
 			URL _url = new URL(RssAddress);

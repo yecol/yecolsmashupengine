@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Result {
+	//结果数据结构
 
+	//静态值，表明结果类型
 	static public final Integer TYPE_LIST = 1;
 	static public final Integer TYPE_MAP = 2;
 
