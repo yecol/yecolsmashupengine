@@ -186,6 +186,8 @@ public class EngineManager {
 	public Document GetResult(Integer i) {
 		Document outDoc = new Document();
 		Element rootElement = new Element("root");
+		rootElement.setAttribute("figureid",String.valueOf(i) );
+		rootElement.setAttribute("timestamp",this.results.get(i).GetTimeStamp());
 		if (this.results.get(i).GetStatus() == false) {
 			rootElement.setAttribute("status", "false");
 			Element errormsg=new Element("errormsg");

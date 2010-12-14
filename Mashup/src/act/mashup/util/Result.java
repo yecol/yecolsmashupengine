@@ -26,6 +26,10 @@ public class Result {
 		return this.status;
 	}
 	
+	public String GetTimeStamp(){
+		return this.timeStamp.toString();
+	}
+	
 	public String GetErrorMsg(){
 		if(this.errorMsg==null){
 			return "·¢ÉúÎ´Öª´íÎó£¡";

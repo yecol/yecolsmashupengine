@@ -31,5 +31,6 @@
 			<attribute name="javadoc_location" value="file:/D:/Projs/Mashup/ext/ikanalyzer/doc3.2.5/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="ext/jaxen/jaxen-1.1.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
