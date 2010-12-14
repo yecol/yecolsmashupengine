@@ -66,7 +66,7 @@
 			<gf:Para name="itemRoot" type="String">
 			    /CATALOG/CD
 			</gf:Para>
-			<gf:Para name="user:yecolTitle" type="String">
+			<gf:Para name="yecolTitle" type="String">
 			    TITLE
 			</gf:Para>
 			<gf:Para name="yecolAir" type="String">
@@ -95,13 +95,24 @@
 				<gf:input>3</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>5</gf:output>
+				<gf:output>6</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-
-
-
-
-
+	
+	<em:figure gf:classid="Sort" gf:id="6">
+		<gf:LogicalAttribute>
+			<gf:Para name="sortKey" type="String">
+				title
+			</gf:Para>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>5</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>7</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
 </em:enginemodel>

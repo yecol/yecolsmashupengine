@@ -67,7 +67,7 @@ public class EngineAssembler extends HttpServlet {
 	        
 	        //out.println(emgr.GetResult(5).toString());
 	        XMLOutputter outputter = new XMLOutputter();   
-	        outputter.output(emgr.GetResult(1), out);   
+	        outputter.output(emgr.GetResult(6), out);   
 	        out.flush();   
 	        out.close();   
 			

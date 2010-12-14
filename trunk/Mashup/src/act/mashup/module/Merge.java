@@ -22,12 +22,15 @@ public class Merge {
 	private ArrayList<Integer> ins;
 	private ArrayList<Item> items;
 	private Date timeStamp;
+	private Result rlt;
+
 
 	/**
 	 * Default constructor.
 	 */
 	public Merge() {
 		timeStamp = new Date();
+		rlt = new Result(Result.TYPE_LIST);
 		items=new ArrayList<Item>();
 	}
 
@@ -35,8 +38,14 @@ public class Merge {
 	public void run(EngineNode en, Map<Integer, Result> results) {
 		this.en = en;
 		this.results = results;
-		Prepare();
-		DoMerge();
+		try{
+		   Prepare();
+		   DoMerge();
+		}catch(Exception e){
+		   rlt.ErrorOccur("合并发生错误！");
+		}finally {
+			results.put(en.getId(), rlt);
+		}
 	}
 
 	// 私有方法
@@ -52,9 +61,7 @@ public class Merge {
 		for(Integer i:ins){
 			items.addAll(results.get(i).GetResultList());
 		}
-		Result rlt = new Result(Result.TYPE_LIST);
 		rlt.SetResultList(items);
-		results.put(en.getId(), rlt);
 	}
 
 	// 打印列表
