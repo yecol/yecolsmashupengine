@@ -34,6 +34,7 @@ public class Sort {
 			DoSort();
 		} catch (Exception e) {
 			rlt.ErrorOccur("排序发生错误！");
+			e.printStackTrace();
 		} finally {
 			results.put(en.getId(), rlt);
 		}
@@ -43,10 +44,10 @@ public class Sort {
 
 	// 获得参数，根据顺序排序或逆序排序新建比较器
 	private void Prepare() {
-		String sortKind = en.getParas().get("sortKind");
+		String sortKind = en.getParas().get("sortKind").trim();
 		String sortKey = en.getParas().get("sortKey");
 		//默认新建顺序比较器
-		if(sortKind.equals("Decrease")){
+		if(sortKind!=null&&sortKind.equals("Decrease")){
 		   comparator = new DecComparator(sortKey);
 		}else{
 		   comparator = new IncComparator(sortKey);

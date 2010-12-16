@@ -136,6 +136,7 @@ public class FetchRss {
 			for (SyndEntry entry : entries) {
 				_item = new Item();
 				_item.setValue("title", entry.getTitle());
+				if(!entry.getAuthor().trim().equals(""))
 				_item.setValue("author", entry.getAuthor());
 				_item.setValue("link", entry.getLink());
 				_item.setValue("publishDate",

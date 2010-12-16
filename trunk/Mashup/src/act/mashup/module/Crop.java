@@ -1,7 +1,6 @@
 package act.mashup.module;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 
 import act.mashup.util.EngineNode;
@@ -41,20 +40,17 @@ public class Crop {
 
 	// 私有方法
 
-	// 获得所有输入节点
+	// 获得输入节点和剪切参数
 	private void Prepare() {
 		in = en.getInputs().get(0);
-		cropLength = Integer.getInteger(en.getParas().get("cropLength"));
+		cropLength = Integer.parseInt(en.getParas().get("cropLength"));
 	}
 
 	// 进行裁减
-	// ××××××××××××××××××××××警告：指针合并××××××××××××××××××××××××××××××
 	private void DoCrop() {
 
-		items.addAll(results.get(in).GetResultList());
-		for (int i = 0; i < items.size(); i++) {
-			if (i >= cropLength)
-				items.remove(i);
+		for (int i = 0; i < cropLength; i++) {
+			items.add((Item) results.get(in).GetResultList().get(i));
 		}
 		rlt.SetResultList(items);
 	}

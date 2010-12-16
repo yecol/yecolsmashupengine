@@ -71,7 +71,7 @@ public class FetchGeoRss {
 		} catch (FeedException e) {
 			rlt.ErrorOccur("GeoRSS错误！");
 			e.printStackTrace();
-		}finally{
+		} finally {
 			results.put(en.getId(), rlt);
 		}
 	}
@@ -93,46 +93,44 @@ public class FetchGeoRss {
 
 	}
 
-	private void ParseRss() throws IOException, IllegalArgumentException, FeedException {
-		if (items == null)
-		{
-				URL _url = new URL(rssAddress);
+	private void ParseRss() throws IOException, IllegalArgumentException,
+			FeedException {
+		if (items == null) {
+			URL _url = new URL(rssAddress);
 
-				// 读取Rss源
-				XmlReader _reader = new XmlReader(_url);
-				SyndFeedInput _input = new SyndFeedInput();
-				items = new ArrayList<Item>();
-				SyndFeed _feed = _input.build(_reader);
+			// 读取Rss源
+			XmlReader _reader = new XmlReader(_url);
+			SyndFeedInput _input = new SyndFeedInput();
+			items = new ArrayList<Item>();
+			SyndFeed _feed = _input.build(_reader);
 
-				// 得到Rss源中的每一个条目
-				entries = _feed.getEntries();
+			// 得到Rss源中的每一个条目
+			entries = _feed.getEntries();
 
-				// 将每个条目转化为Engine的内部格式
-				Item _item;
-				for (SyndEntry entry : entries) {
-					GeoRSSModule geoRSSModule = GeoRSSUtils.getGeoRSS(entry);
+			// 将每个条目转化为Engine的内部格式
+			Item _item;
+			for (SyndEntry entry : entries) {
+				GeoRSSModule geoRSSModule = GeoRSSUtils.getGeoRSS(entry);
 
-					_item = new Item();
-					_item.setValue("title", entry.getTitle());
+				_item = new Item();
+				_item.setValue("title", entry.getTitle());
+				if (!entry.getAuthor().trim().equals(""))
 					_item.setValue("author", entry.getAuthor());
-					_item.setValue("link", entry.getLink());
-					_item.setValue(
-							"publishDate",
-							entry.getPublishedDate() == null ? timeStamp
-									.toString() : entry.getPublishedDate()
-									.toString());
-					_item.setValue("description", entry.getDescription()
-							.getValue());
-					_item.setValue("lat", Double.toString(geoRSSModule
-							.getPosition().getLatitude()));
-					_item.setValue("Lon", Double.toString(geoRSSModule
-							.getPosition().getLongitude()));
-					items.add(_item);
-				}
-			} 
-		// 将结果放入结果映射集	
+				_item.setValue("link", entry.getLink());
+				_item.setValue("publishDate",
+						entry.getPublishedDate() == null ? timeStamp.toString()
+								: entry.getPublishedDate().toString());
+				_item.setValue("description", entry.getDescription().getValue());
+				_item.setValue("lat", Double.toString(geoRSSModule
+						.getPosition().getLatitude()));
+				_item.setValue("Lon", Double.toString(geoRSSModule
+						.getPosition().getLongitude()));
+				items.add(_item);
+			}
+		}
+		// 将结果放入结果映射集
 		rlt.SetResultList(items);
-		
+
 	}
 
 	// 打印列表
