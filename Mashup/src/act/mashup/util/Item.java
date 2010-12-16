@@ -21,6 +21,15 @@ public class Item {
 		return KVMap.get(key);		
 	}
 	
+	public boolean RenameKey(String oldKey,String newKey){
+		if(KVMap.containsKey(oldKey)&&!KVMap.containsKey(newKey)){
+			KVMap.put(newKey, KVMap.get(oldKey));
+			KVMap.remove(oldKey);
+			return true;
+		}
+		else return false;
+	}
+	
 	public void setValue(String key,String value){
 		KVMap.put(key, value);
 	}

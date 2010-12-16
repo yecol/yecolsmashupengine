@@ -19,25 +19,6 @@
 		</gf:interfaces>
 	</em:figure>
 
-	<em:figure gf:classid="FetchGeoRss" gf:id="2">
-		<gf:LogicalAttribute>
-			<gf:Para name="rssUrl" type="String">
-				http://images.apple.com/main/rss/hotnews/hotnews.rss
-			</gf:Para>
-			<gf:Para name="addUngeoItems" type="String">
-			    1
-			</gf:Para>
-		</gf:LogicalAttribute>
-		<gf:interfaces>
-			<gf:inputs>
-				<gf:input>0</gf:input>
-			</gf:inputs>
-			<gf:outputs>
-				<gf:output>5</gf:output>
-			</gf:outputs>
-		</gf:interfaces>
-	</em:figure>
-
 	<em:figure gf:classid="FetchGeoRss" gf:id="3">
 		<gf:LogicalAttribute>
 			<gf:Para name="rssUrl" type="String">
@@ -66,19 +47,36 @@
 			<gf:Para name="itemRoot" type="String">
 			    /CATALOG/CD
 			</gf:Para>
-			<gf:Para name="yecolTitle" type="String">
+			<gf:Para name="cdtitle" type="String">
 			    TITLE
 			</gf:Para>
-			<gf:Para name="yecolAir" type="String">
+			<gf:Para name="artist" type="String">
 			    ARTIST
 			</gf:Para>
-			<gf:Para name="yecolMoney" type="String">
+			<gf:Para name="price" type="String">
 			    PRICE
 			</gf:Para>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
 				<gf:input>0</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>7</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+	
+		
+	<em:figure gf:classid="Rename" gf:id="7">
+		<gf:LogicalAttribute>
+			<gf:Para name="cdtitle" type="String">
+				title
+			</gf:Para>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>4</gf:input>
 			</gf:inputs>
 			<gf:outputs>
 				<gf:output>5</gf:output>
@@ -91,8 +89,8 @@
 		<gf:interfaces>
 			<gf:inputs>
 				<gf:input>1</gf:input>
-				<gf:input>2</gf:input>
 				<gf:input>3</gf:input>
+				<gf:input>7</gf:input>
 			</gf:inputs>
 			<gf:outputs>
 				<gf:output>6</gf:output>
@@ -102,6 +100,9 @@
 	
 	<em:figure gf:classid="Sort" gf:id="6">
 		<gf:LogicalAttribute>
+		    <gf:Para name="sortKind" type="String">
+				Decrease
+			</gf:Para>
 			<gf:Para name="sortKey" type="String">
 				title
 			</gf:Para>
@@ -111,8 +112,27 @@
 				<gf:input>5</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>7</gf:output>
+				<gf:output>8</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
+
+	
+	<em:figure gf:classid="Crop" gf:id="8">
+		<gf:LogicalAttribute>
+			<gf:Para name="cropLength" type="String">
+				10
+			</gf:Para>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>6</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>9</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+	
+	
 </em:enginemodel>
