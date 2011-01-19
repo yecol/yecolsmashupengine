@@ -151,6 +151,7 @@ public class TransformXml {
 				// 将item内部的每个子元素补齐
 				_key = it.next();
 				_x = XPath.newInstance(transformParas.get(_key));
+				//System.out.println("_key="+_key+"_value="+transformParas.get(_key)+"_xv="+_x.valueOf(e));
 				_item.setValue(_key, _x.valueOf(e));
 
 			}

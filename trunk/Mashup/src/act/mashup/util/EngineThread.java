@@ -85,7 +85,12 @@ public class EngineThread extends Thread {
 	}
 	
 	public void updateStatus(Map<Integer,Boolean> satisfyStatus, Map<Integer, Boolean> doneStatus){
-		satisfyStatus.put(this.en.getId(), true);
+		/*
+		 * for(Integer i: en.getOutputs()){
+			satisfyStatus.put(i, true);
+		}
+		satisfyStatus.put(this.en.getOutputs(), true);
+		*/
 		doneStatus.put(this.en.getId(), true);
 		Iterator<Integer> iterator = en.getOutputs().iterator();
 		while(iterator.hasNext())
