@@ -66,13 +66,13 @@ public class FetchGeoRss {
 		try {
 			ParseRss();
 		} catch (IllegalArgumentException e) {
-			rlt.ErrorOccur("获取GeoRSS参数错误！");
+			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN1 "+this.rssAddress);
 			e.printStackTrace();
 		} catch (IOException e) {
-			rlt.ErrorOccur("获取GeoRSS失败！");
+			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN2 "+this.rssAddress);
 			e.printStackTrace();
 		} catch (FeedException e) {
-			rlt.ErrorOccur("GeoRSS错误！");
+			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN3 "+this.rssAddress);
 			e.printStackTrace();
 		} finally {
 			outputs = en.getOutputs();

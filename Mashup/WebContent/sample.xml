@@ -14,7 +14,7 @@
 				<gf:input>0</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>5</gf:output>
+				<gf:output>10</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
@@ -31,10 +31,9 @@
 		<gf:interfaces>
 			<gf:inputs>
 				<gf:input>0</gf:input>
-				<gf:input>2</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>5</gf:output>
+				<gf:output>11</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
@@ -62,7 +61,7 @@
 				<gf:input>0</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>7</gf:output>
+				<gf:output>12</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
@@ -76,10 +75,10 @@
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
-				<gf:input>4</gf:input>
+				<gf:input>12</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>5</gf:output>
+				<gf:output>13</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
@@ -88,17 +87,17 @@
 		<gf:LogicalAttribute />
 		<gf:interfaces>
 			<gf:inputs>
-				<gf:input>1</gf:input>
-				<gf:input>3</gf:input>
-				<gf:input>7</gf:input>
+				<gf:input>10</gf:input>
+				<gf:input>11</gf:input>
+				<gf:input>13</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>6</gf:output>
+				<gf:output>14</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
 	
-	<em:figure gf:classid="Sort" gf:id="6">
+	<em:figure gf:classid="Sort" gf:id="20">
 		<gf:LogicalAttribute>
 		    <gf:Para name="sortKind" type="String">
 				Decrease
@@ -109,15 +108,14 @@
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
-				<gf:input>5</gf:input>
+				<gf:input>14</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>8</gf:output>
+				<gf:output>15</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
 
-	
 	<em:figure gf:classid="Crop" gf:id="8">
 		<gf:LogicalAttribute>
 			<gf:Para name="cropLength" type="String">
@@ -126,13 +124,11 @@
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
-				<gf:input>6</gf:input>
+				<gf:input>15</gf:input>
 			</gf:inputs>
 			<gf:outputs>
 				<gf:output>9</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	
-	
 </em:enginemodel>

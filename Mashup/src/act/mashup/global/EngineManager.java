@@ -95,7 +95,7 @@ public class EngineManager {
 				// 获得属性
 				classId = figure.getAttributeValue("classid", gf);
 				id = Integer.parseInt(figure.getAttributeValue("id", gf));
-				satisfyStatus.put(id, false);
+				//satisfyStatus.put(id, false);
 				doneStatus.put(id, false);
 
 				// 获得参数
@@ -124,7 +124,7 @@ public class EngineManager {
 				outputs = new ArrayList<Integer>();
 				for (Iterator it = ioputs.iterator(); it.hasNext();) {
 					ioput = (Element) it.next();
-					outputs.add(Integer.parseInt(ioput.getText()));
+					outputs.add(Integer.parseInt(ioput.getText()));					
 					dataFlows.add(Integer.parseInt(ioput.getText()));
 					satisfyStatus.put(Integer.parseInt(ioput.getText()), false);
 				}
