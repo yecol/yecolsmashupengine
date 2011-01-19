@@ -35,6 +35,7 @@ public class EngineManager {
 	public Map<Integer, Boolean> doneStatus;
 	private ArrayList<EngineNode> engineNodes;
 	public Map<Integer, Result> results;
+	public ArrayList<Integer> dataFlows;
 
 	// 私有临时变量
 	private ArrayList<EngineNode> satisfyingNodes;
@@ -52,7 +53,7 @@ public class EngineManager {
 		engineNodes = new ArrayList<EngineNode>();
 		satisfyingNodes = new ArrayList<EngineNode>();
 		results = new HashMap<Integer, Result>();
-
+		dataFlows = new ArrayList<Integer>();
 	}
 
 	// 从XML格式参数构造执行数组
@@ -124,6 +125,8 @@ public class EngineManager {
 				for (Iterator it = ioputs.iterator(); it.hasNext();) {
 					ioput = (Element) it.next();
 					outputs.add(Integer.parseInt(ioput.getText()));
+					dataFlows.add(Integer.parseInt(ioput.getText()));
+					satisfyStatus.put(Integer.parseInt(ioput.getText()), false);
 				}
 
 				// 对象化
@@ -180,6 +183,19 @@ public class EngineManager {
 
 		System.out.println(results.toString());
 		System.out.println("ALL MODULES EXECUTE OVER");
+	}
+	
+	public Document GetResult()
+	{
+		Document outDoc = new Document();
+		Element rootsElement = new Element("roots");
+		Iterator<Integer> iterator = dataFlows.iterator();
+		while(iterator.hasNext())
+		{
+			rootsElement.addContent(GetResult(iterator.next()).detachRootElement());
+		}
+		outDoc.setRootElement(rootsElement);
+		return outDoc;
 	}
 
 	// 从result中生成XML

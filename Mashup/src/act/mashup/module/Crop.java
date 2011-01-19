@@ -1,6 +1,7 @@
 package act.mashup.module;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 import act.mashup.util.EngineNode;
@@ -25,6 +26,8 @@ public class Crop {
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
+		ArrayList<Integer> outputs;
+		Iterator<Integer> iterator;
 		this.en = en;
 		this.results = results;
 		try {
@@ -34,7 +37,12 @@ public class Crop {
 			rlt.ErrorOccur("剪切发生错误！");
 			e.printStackTrace();
 		} finally {
-			results.put(en.getId(), rlt);
+			outputs = en.getOutputs();
+			iterator = outputs.iterator();
+			while(iterator.hasNext())
+			{
+				results.put(iterator.next(), rlt);
+			}
 		}
 	}
 
