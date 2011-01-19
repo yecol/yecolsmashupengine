@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +58,8 @@ public class FetchGeoRss {
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
+		ArrayList<Integer> outputs;
+		Iterator<Integer> iterator;
 		this.en = en;
 		this.results = results;
 		Prepare();
@@ -72,7 +75,12 @@ public class FetchGeoRss {
 			rlt.ErrorOccur("GeoRSS错误！");
 			e.printStackTrace();
 		} finally {
-			results.put(en.getId(), rlt);
+			outputs = en.getOutputs();
+			iterator = outputs.iterator();
+			while(iterator.hasNext())
+			{
+				results.put(iterator.next(), rlt);
+			}
 		}
 	}
 

@@ -64,6 +64,10 @@ public class EngineNode {
 	public ArrayList<Integer> getInputs(){
 		return this.inputs;
 	}
+	
+	public ArrayList<Integer> getOutputs(){
+		return this.outputs;
+	}
 
 	// 验证输入是否满足特定格式，不符合时抛出异常待处理
 	private boolean CheckLogicalAttribute() {

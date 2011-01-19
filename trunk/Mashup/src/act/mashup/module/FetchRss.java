@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,8 @@ public class FetchRss {
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
+		ArrayList<Integer> outputs;
+		Iterator<Integer> iterator;
 		this.en = en;
 		this.results = results;
 		try {
@@ -89,7 +92,13 @@ public class FetchRss {
 		} finally {
 			System.out.println("yecol runs here");
 			System.out.println(rlt.toString());
-			results.put(en.getId(), rlt);
+			
+			outputs = en.getOutputs();
+			iterator = outputs.iterator();
+			while(iterator.hasNext())
+			{
+				results.put(iterator.next(), rlt);
+			}
 		}
 
 	}

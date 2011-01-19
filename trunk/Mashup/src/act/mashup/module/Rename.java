@@ -27,6 +27,8 @@ public class Rename {
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
+		ArrayList<Integer> outputs;
+		Iterator<Integer> iterator;
 		this.en = en;
 		this.results = results;
 		try {
@@ -36,7 +38,12 @@ public class Rename {
 			rlt.ErrorOccur("重命名发生错误！");
 			e.printStackTrace();
 		} finally {
-			results.put(en.getId(), rlt);
+			outputs = en.getOutputs();
+			iterator = outputs.iterator();
+			while(iterator.hasNext())
+			{
+				results.put(iterator.next(), rlt);
+			}
 		}
 	}
 

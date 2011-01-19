@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,8 @@ public class Sort {
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
+		ArrayList<Integer> outputs;
+		Iterator<Integer> iterator;
 		this.en = en;
 		this.results = results;
 		try {
@@ -36,7 +39,12 @@ public class Sort {
 			rlt.ErrorOccur("排序发生错误！");
 			e.printStackTrace();
 		} finally {
-			results.put(en.getId(), rlt);
+			outputs = en.getOutputs();
+			iterator = outputs.iterator();
+			while(iterator.hasNext())
+			{
+				results.put(iterator.next(), rlt);
+			}
 		}
 	}
 

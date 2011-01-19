@@ -3,6 +3,7 @@ package act.mashup.module;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,8 @@ public class Merge {
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
+		ArrayList<Integer> outputs;
+		Iterator<Integer> iterator;
 		this.en = en;
 		this.results = results;
 		try{
@@ -44,7 +47,12 @@ public class Merge {
 		}catch(Exception e){
 		   rlt.ErrorOccur("合并发生错误！");
 		}finally {
-			results.put(en.getId(), rlt);
+			outputs = en.getOutputs();
+			iterator = outputs.iterator();
+			while(iterator.hasNext())
+			{
+				results.put(iterator.next(), rlt);
+			}
 		}
 	}
 

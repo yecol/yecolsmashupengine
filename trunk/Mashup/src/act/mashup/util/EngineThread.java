@@ -3,6 +3,7 @@ package act.mashup.util;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -86,6 +87,11 @@ public class EngineThread extends Thread {
 	public void updateStatus(Map<Integer,Boolean> satisfyStatus, Map<Integer, Boolean> doneStatus){
 		satisfyStatus.put(this.en.getId(), true);
 		doneStatus.put(this.en.getId(), true);
+		Iterator<Integer> iterator = en.getOutputs().iterator();
+		while(iterator.hasNext())
+		{
+			satisfyStatus.put(iterator.next(), true);
+		}
 	}
 
 }
