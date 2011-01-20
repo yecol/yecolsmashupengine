@@ -1,5 +1,6 @@
 package act.mashup.module;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -7,6 +8,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import act.mashup.util.EngineNode;
@@ -69,6 +71,7 @@ public class Sort {
 		Collections.sort(temp, comparator);
 		rlt.SetResultList(temp);
 	}
+	
 
 	//Ë³Ðò±È½ÏÆ÷Àà
 	private class IncComparator implements Comparator {
@@ -83,7 +86,10 @@ public class Sort {
 			// TODO Auto-generated method stub
 			Item i1 = (Item) o1;
 			Item i2 = (Item) o2;
-			return i1.getValue(sortKey).compareTo(i2.getValue(sortKey));
+			Collator collator=Collator.getInstance(Locale.CHINA);
+			return collator.compare(i1.getValue(sortKey), i2.getValue(sortKey));
+			
+			//return i1.getValue(sortKey).compareTo(i2.getValue(sortKey));
 		}
 	}
 
@@ -100,7 +106,11 @@ public class Sort {
 			// TODO Auto-generated method stub
 			Item i1 = (Item) o1;
 			Item i2 = (Item) o2;
-			return -i1.getValue(sortKey).compareTo(i2.getValue(sortKey));
+
+			Collator collator=Collator.getInstance(Locale.CHINA);
+			return -collator.compare(i1.getValue(sortKey), i2.getValue(sortKey));
+			
+			//return -i1.getValue(sortKey).compareTo(i2.getValue(sortKey));
 		}
 	}
 
