@@ -39,7 +39,7 @@ public class EngineNode {
 	}
 
 	// 返回满足与否，并在每次查询满足与否前重新检测
-	public boolean isSatisfy(Map<Integer, Boolean> status, Map<Integer, Boolean> doneStatus) {
+	public boolean isSatisfy(Map<Integer, Integer> status, Map<Integer, Boolean> doneStatus) {
 		if(doneStatus.get(this.id)==true)
 			return false;
 		else{
@@ -76,7 +76,7 @@ public class EngineNode {
 	}
 
 	// 重新检测是否满足运行条件
-	private void CheckSatisfy(Map<Integer, Boolean> stateArray) {
+	private void CheckSatisfy(Map<Integer, Integer> stateArray) {
 		// 如果已经满足则返回
 		System.out.println(stateArray.toString());
 		if (satisfy == true)
@@ -84,7 +84,7 @@ public class EngineNode {
 		else {
 			boolean singleSatisfy = true;
 			for (Integer i : this.inputs) {
-				if (stateArray.get(i) == false) {
+				if (stateArray.get(i) == 0) {
 					singleSatisfy = false;
 					break;
 				}
