@@ -78,36 +78,12 @@ public class EngineAssembler extends HttpServlet {
 	        else
 	        {
 	        	outputter.output(emgr.GetResult(), out);
-	        }
-	        
-	        
-	        
+	        }     
 	         
 	        out.flush();   
 	        out.close();   
 			
-		
-		/*try {
-			InitialContext ctx=new InitialContext();
-			
-			//在session中查找或者设置一个新的桩
-			HttpSession session=request.getSession(true);
-			EngineManagerLocal emgr=(EngineManagerLocal)session.getAttribute("engineManager");
-			if(emgr==null){
-				emgr=(EngineManagerLocal)ctx.lookup("EngineManager/local");
-				session.setAttribute("engineManager", emgr);
-			}
-			
-			emgr.BuildEngine(request.getParameter("xml"));
-			
-			
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		
-		
+
 		
 	}
 

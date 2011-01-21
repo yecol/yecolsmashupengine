@@ -59,8 +59,13 @@ public class Merge {
 	// 私有方法
 
 	//获得所有输入节点
-	private void Prepare() {
+	private void Prepare() {		
 		ins = en.getInputs();
+		for(Integer index:ins){
+			if(this.results.get(index).GetStatus()==2){
+				ins.remove(index);
+			}
+		}
 	}
 
 	//进行合并

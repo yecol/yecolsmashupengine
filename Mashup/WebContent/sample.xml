@@ -6,19 +6,17 @@
 	<em:figure gf:classid="FetchRss" gf:id="1">
 		<gf:LogicalAttribute>
 			<gf:Para name="rssUrl" type="String">
-				http://www.angos.cn/buluoge/feed.asp
+				http://rss.sina.com.cn/news/china/focus15.xml
 			</gf:Para>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
-			<gf:inputs>
-				<gf:input>0</gf:input>
-			</gf:inputs>
+			<gf:inputs/>
 			<gf:outputs>
 				<gf:output>10</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-
+                                              
 	<em:figure gf:classid="FetchGeoRss" gf:id="3">
 		<gf:LogicalAttribute>
 			<gf:Para name="rssUrl" type="String">
@@ -29,9 +27,7 @@
 			</gf:Para>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
-			<gf:inputs>
-				<gf:input>0</gf:input>
-			</gf:inputs>
+			<gf:inputs/>
 			<gf:outputs>
 				<gf:output>11</gf:output>
 			</gf:outputs>
@@ -57,9 +53,7 @@
 			</gf:Para>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
-			<gf:inputs>
-				<gf:input>0</gf:input>
-			</gf:inputs>
+			<gf:inputs/>
 			<gf:outputs>
 				<gf:output>12</gf:output>
 			</gf:outputs>

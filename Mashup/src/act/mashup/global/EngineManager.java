@@ -31,7 +31,7 @@ public class EngineManager {
 	 *  
 	 */
 	private static final long serialVersionUID = 1L;
-	public Map<Integer, Boolean> satisfyStatus;
+	public Map<Integer, Integer> satisfyStatus;
 	public Map<Integer, Boolean> doneStatus;
 	private ArrayList<EngineNode> engineNodes;
 	public Map<Integer, Result> results;
@@ -47,9 +47,9 @@ public class EngineManager {
 	 */
 	public EngineManager() {
 		// TODO Auto-generated constructor stub
-		satisfyStatus = new HashMap<Integer, Boolean>();
+		satisfyStatus = new HashMap<Integer, Integer>();
 		doneStatus = new HashMap<Integer, Boolean>();
-		satisfyStatus.put(0, true);// 初始条件
+		satisfyStatus.put(0, 1);// 初始条件
 		engineNodes = new ArrayList<EngineNode>();
 		satisfyingNodes = new ArrayList<EngineNode>();
 		results = new HashMap<Integer, Result>();
@@ -95,7 +95,7 @@ public class EngineManager {
 				// 获得属性
 				classId = figure.getAttributeValue("classid", gf);
 				id = Integer.parseInt(figure.getAttributeValue("id", gf));
-				//satisfyStatus.put(id, false);
+				// satisfyStatus.put(id, false);
 				doneStatus.put(id, false);
 
 				// 获得参数
@@ -124,9 +124,9 @@ public class EngineManager {
 				outputs = new ArrayList<Integer>();
 				for (Iterator it = ioputs.iterator(); it.hasNext();) {
 					ioput = (Element) it.next();
-					outputs.add(Integer.parseInt(ioput.getText()));					
+					outputs.add(Integer.parseInt(ioput.getText()));
 					dataFlows.add(Integer.parseInt(ioput.getText()));
-					satisfyStatus.put(Integer.parseInt(ioput.getText()), false);
+					satisfyStatus.put(Integer.parseInt(ioput.getText()), 0);
 				}
 
 				// 对象化
@@ -171,7 +171,8 @@ public class EngineManager {
 			for (EngineThread t : threads) {
 				try {
 					t.join();
-					t.updateStatus(satisfyStatus, doneStatus);
+					
+					t.updateStatus(satisfyStatus,doneStatus);
 
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -184,15 +185,14 @@ public class EngineManager {
 		System.out.println(results.toString());
 		System.out.println("ALL MODULES EXECUTE OVER");
 	}
-	
-	public Document GetResult()
-	{
+
+	public Document GetResult() {
 		Document outDoc = new Document();
 		Element rootsElement = new Element("roots");
 		Iterator<Integer> iterator = dataFlows.iterator();
-		while(iterator.hasNext())
-		{
-			rootsElement.addContent(GetResult(iterator.next()).detachRootElement());
+		while (iterator.hasNext()) {
+			rootsElement.addContent(GetResult(iterator.next())
+					.detachRootElement());
 		}
 		outDoc.setRootElement(rootsElement);
 		return outDoc;
@@ -202,14 +202,25 @@ public class EngineManager {
 	public Document GetResult(Integer i) {
 		Document outDoc = new Document();
 		Element rootElement = new Element("root");
-		rootElement.setAttribute("figureid",String.valueOf(i) );
-		rootElement.setAttribute("timestamp",this.results.get(i).GetTimeStamp());
-		if (this.results.get(i).GetStatus() == false) {
+		rootElement.setAttribute("figureid", String.valueOf(i));
+		rootElement.setAttribute("timestamp", this.results.get(i)
+				.GetTimeStamp());
+		//有错误
+		if (this.results.get(i).GetStatus() == 0) {
 			rootElement.setAttribute("status", "false");
-			Element errormsg=new Element("errormsg");
+			Element errormsg = new Element("errormsg");
 			errormsg.setText(this.results.get(i).GetErrorMsg());
 			rootElement.addContent(errormsg);
-		} else {
+		}
+		//局部有错
+		else if (this.results.get(i).GetStatus() == 2) {
+			rootElement.setAttribute("status", "false");
+			Element errormsg = new Element("errormsg");
+			errormsg.setText(this.results.get(i).GetErrorMsg());
+			rootElement.addContent(errormsg);
+		}
+		//完全正确
+		else {
 			rootElement.setAttribute("status", "true");
 			List<Item> _itemList = this.results.get(i).GetResultList();
 			Element _el = null;

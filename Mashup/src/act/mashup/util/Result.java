@@ -11,7 +11,7 @@ public class Result {
 	static public final Integer TYPE_LIST = 1;
 	static public final Integer TYPE_MAP = 2;
 
-	private boolean status;
+	private Integer status;
 	private Date timeStamp;
 	private Integer type;
 	private String errorMsg;
@@ -19,12 +19,12 @@ public class Result {
 	private Map resultsMap;
 
 	public Result(Integer type) {
-		this.status = true;
+		this.status = 1;
 		this.timeStamp = new Date();
 		this.type = type;
 	}
 	
-	public boolean GetStatus(){
+	public Integer GetStatus(){
 		return this.status;
 	}
 	
@@ -40,7 +40,7 @@ public class Result {
 	}
 
 	public void ErrorOccur(String errorMsg) {
-		this.status = false;
+		this.status = 2;
 		this.errorMsg = errorMsg;
 	}
 

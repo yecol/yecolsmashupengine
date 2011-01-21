@@ -12,7 +12,7 @@ public class EngineThread extends Thread {
 	private Map<Integer, Result> results;
 	private EngineNode en;
 
-	public EngineThread(EngineNode en,Map<Integer, Result> results) {
+	public EngineThread(EngineNode en, Map<Integer, Result> results) {
 		super();
 		this.results = results;
 		this.en = en;
@@ -22,35 +22,22 @@ public class EngineThread extends Thread {
 	public void run() {
 		// TODO Auto-generated method stub
 		// String jndiName=nameString+"/local";
-		//获得模块名
+		// 获得模块名
 		String interfaceName = "act.mashup.module." + en.getClassId();
-		
-		//ArrayList<String> paras = en.getParas();
-		//Integer paraSize = paras.size();
-		
+
+		// ArrayList<String> paras = en.getParas();
+		// Integer paraSize = paras.size();
+
 		try {
-			
-			//反射构造类的实例
+
+			// 反射构造类的实例
 			Class c = Class.forName(interfaceName);
 			Object obj = c.newInstance();
-		
-			/*
-			//根据传入参数的个数进行传参，运行的准备阶段
-			if(paraSize==0){
-				Method prepareMethod = c.getDeclaredMethod("Prepare");
-				prepareMethod.invoke(obj);
-			}else if(paraSize==1){
-				Method prepareMethod = c.getDeclaredMethod("Prepare",String.class);
-				prepareMethod.invoke(obj,paras.get(0));
-			}
-			*/
-			
-			//运行
-			Method runMethod = c.getDeclaredMethod("run",EngineNode.class,Map.class);
-			runMethod.invoke(obj, en,results);
-			//List resultList=(List)runMethod.invoke(obj);
-			//results.put(en.getId(),resultList);
-			//System.out.println(resultList.toString());
+
+			// 运行
+			Method runMethod = c.getDeclaredMethod("run", EngineNode.class,
+					Map.class);
+			runMethod.invoke(obj, en, results);
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -83,20 +70,28 @@ public class EngineThread extends Thread {
 
 		System.out.println("SINGLE MODULE EXECUTE OVER");
 	}
-	
-	public void updateStatus(Map<Integer,Boolean> satisfyStatus, Map<Integer, Boolean> doneStatus){
+
+	public void updateStatus(Map<Integer, Integer> satisfyStatus,
+			Map<Integer, Boolean> doneStatus) {
 		/*
-		 * for(Integer i: en.getOutputs()){
-			satisfyStatus.put(i, true);
-		}
-		satisfyStatus.put(this.en.getOutputs(), true);
-		*/
+		 * for(Integer i: en.getOutputs()){ satisfyStatus.put(i, true); }
+		 * satisfyStatus.put(this.en.getOutputs(), true);
+		 */
 		doneStatus.put(this.en.getId(), true);
+
+		System.out.println("test results:"+this.results.toString());
+		
 		Iterator<Integer> iterator = en.getOutputs().iterator();
-		while(iterator.hasNext())
-		{
-			satisfyStatus.put(iterator.next(), true);
+		while (iterator.hasNext()) {
+			Integer curIndex = iterator.next();
+			// 完全成功时的状态更新(Succeed)
+			if (this.results.get(curIndex).GetStatus() == 1)
+				satisfyStatus.put(curIndex, 1);
+			// 部分成功时的更新(Particial Succeed)
+			else if (this.results.get(curIndex).GetStatus() == 2)
+				satisfyStatus.put(curIndex, 2);
 		}
+
 	}
 
 }
