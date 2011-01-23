@@ -1,5 +1,6 @@
 package act.mashup.module;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -50,9 +51,11 @@ public class Rename {
 	// 私有方法
 
 	// 获得所有输入节点
-	private void Prepare() {
+	private void Prepare() throws IOException {
 		in = en.getInputs().get(0);
 		renames = en.getParas();
+		if(in==null||in==0||renames.isEmpty()||renames.size()==0)
+			throw new IOException();
 	}
 
 	// 进行重命名

@@ -1,5 +1,6 @@
 package act.mashup.module;
 
+import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,9 +54,11 @@ public class Sort {
 	// 私有方法
 
 	// 获得参数，根据顺序排序或逆序排序新建比较器
-	private void Prepare() {
+	private void Prepare() throws IOException {
 		String sortKind = en.getParas().get("sortKind").trim();
 		String sortKey = en.getParas().get("sortKey");
+		if(sortKey==null||sortKey.length()==0)
+			throw new IOException();
 		//默认新建顺序比较器
 		if(sortKind!=null&&sortKind.equals("Decrease")){
 		   comparator = new DecComparator(sortKey);

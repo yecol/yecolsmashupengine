@@ -92,11 +92,10 @@ public class FetchRss {
 		} finally {
 			System.out.println("yecol runs here");
 			System.out.println(rlt.toString());
-			
+
 			outputs = en.getOutputs();
 			iterator = outputs.iterator();
-			while(iterator.hasNext())
-			{
+			while (iterator.hasNext()) {
 				results.put(iterator.next(), rlt);
 			}
 		}
@@ -108,27 +107,27 @@ public class FetchRss {
 	// 从参数数组中获得第一个参数作为Rss源地址传入
 	private void Prepare() throws MalformedURLException, ParserException {
 		String urlString = en.getParas().get("rssUrl");
-		
-        //从URL探测RSS源
-		System.out.println("begin to detect");
-		String line;
-		URL myUrl = new URL("http://kczy.zjut.edu.cn/xwyy");
-
-		Parser parser = new Parser("http://kczy.zjut.edu.cn/xwyy");
-		NodeList list = new NodeList();
-		NodeFilter filter = new AndFilter(new TagNameFilter("link"),
-				new HasAttributeFilter("type", "application/rss+xml"));
-		for (NodeIterator e = parser.elements(); e.hasMoreNodes();) {
-			e.nextNode().collectInto(list, filter);
-		}
-
-		System.out.println(list.elementAt(0).toPlainTextString());
-
-		this.RssAddress = urlString;
+		/*
+		 * //从URL探测RSS源 System.out.println("begin to detect"); String line; URL
+		 * myUrl = new URL("http://kczy.zjut.edu.cn/xwyy");
+		 * 
+		 * Parser parser = new Parser("http://kczy.zjut.edu.cn/xwyy"); NodeList
+		 * list = new NodeList(); NodeFilter filter = new AndFilter(new
+		 * TagNameFilter("link"), new HasAttributeFilter("type",
+		 * "application/rss+xml")); for (NodeIterator e = parser.elements();
+		 * e.hasMoreNodes();) { e.nextNode().collectInto(list, filter); }
+		 * 
+		 * System.out.println(list.elementAt(0).toPlainTextString());
+		 */
+		if (urlString.isEmpty() || urlString.length() == 0)
+			throw new MalformedURLException();
+		else
+			this.RssAddress = urlString;
 	}
 
-	//解析rss
-	private void ParseRss() throws IOException, IllegalArgumentException, FeedException {
+	// 解析rss
+	private void ParseRss() throws IOException, IllegalArgumentException,
+			FeedException {
 		if (items == null) {
 			URL _url = new URL(RssAddress);
 			// 读取Rss源
@@ -145,8 +144,8 @@ public class FetchRss {
 			for (SyndEntry entry : entries) {
 				_item = new Item();
 				_item.setValue("title", entry.getTitle());
-				if(!entry.getAuthor().trim().equals(""))
-				_item.setValue("author", entry.getAuthor());
+				if (!entry.getAuthor().trim().equals(""))
+					_item.setValue("author", entry.getAuthor());
 				_item.setValue("link", entry.getLink());
 				_item.setValue("publishDate",
 						entry.getPublishedDate() == null ? timeStamp.toString()
