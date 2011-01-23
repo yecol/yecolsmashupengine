@@ -1,5 +1,6 @@
 package act.mashup.module;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -46,6 +47,7 @@ public class Merge {
 		   DoMerge();
 		}catch(Exception e){
 		   rlt.ErrorOccur("合并发生错误！");
+		   e.printStackTrace();
 		}finally {
 			outputs = en.getOutputs();
 			iterator = outputs.iterator();
@@ -59,13 +61,19 @@ public class Merge {
 	// 私有方法
 
 	//获得所有输入节点
-	private void Prepare() {		
+	private void Prepare() throws IOException {		
 		ins = en.getInputs();
-		for(Integer index:ins){
+		if(ins.size()==0)
+			throw new IOException();
+			
+		for(Iterator it=ins.iterator();it.hasNext();){
+			Integer index=(Integer)it.next();
 			if(this.results.get(index).GetStatus()==2){
-				ins.remove(index);
+				it.remove();
 			}
 		}
+		if(ins.size()==0)
+			throw new IOException();
 	}
 
 	//进行合并

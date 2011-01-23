@@ -62,23 +62,22 @@ public class FetchGeoRss {
 		Iterator<Integer> iterator;
 		this.en = en;
 		this.results = results;
-		Prepare();
 		try {
+			Prepare();
 			ParseRss();
 		} catch (IllegalArgumentException e) {
-			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN1 "+this.rssAddress);
+			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN1 " + this.rssAddress);
 			e.printStackTrace();
 		} catch (IOException e) {
-			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN2 "+this.rssAddress);
+			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN2 " + this.rssAddress);
 			e.printStackTrace();
 		} catch (FeedException e) {
-			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN3 "+this.rssAddress);
+			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN3 " + this.rssAddress);
 			e.printStackTrace();
 		} finally {
 			outputs = en.getOutputs();
 			iterator = outputs.iterator();
-			while(iterator.hasNext())
-			{
+			while (iterator.hasNext()) {
 				results.put(iterator.next(), rlt);
 			}
 		}
@@ -87,9 +86,12 @@ public class FetchGeoRss {
 	// 私有方法
 
 	// 从参数数组中获得参数传入
-	private void Prepare() {
+	private void Prepare() throws MalformedURLException {
 		// Rss源地址
 		String urlString = en.getParas().get("rssUrl");
+
+		if (urlString.isEmpty() || urlString.length() == 0)
+			throw new MalformedURLException();
 
 		// 决定如何再构造Url地址
 		String addUngeoItems = en.getParas().get("addUngeoItems");
