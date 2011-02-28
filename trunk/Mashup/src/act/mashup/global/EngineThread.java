@@ -1,4 +1,4 @@
-package act.mashup.util;
+package act.mashup.global;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

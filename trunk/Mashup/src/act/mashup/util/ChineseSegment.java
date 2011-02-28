@@ -7,17 +7,15 @@ import java.util.ArrayList;
 import org.wltea.analyzer.IKSegmentation;
 import org.wltea.analyzer.Lexeme;
 
-public class ChinesePlace {
+public class ChineseSegment {
 	//单例模式
-	private static final ChinesePlace instance = new ChinesePlace();
+	private static final ChineseSegment instance = new ChineseSegment();
 
-	private ChinesePlace() {
-		
-
+	private ChineseSegment() {
 	}
 
 	//获得单例
-	public static synchronized ChinesePlace getInstance() {
+	public static synchronized ChineseSegment getInstance() {
 		return instance;
 	}
 	
@@ -27,13 +25,14 @@ public class ChinesePlace {
 		try {
 			Lexeme l = null;
 			while ((l = ikSeg.next()) != null) {
-				if (l.getLexemeType() == 0)
-					System.out.println(l.getLexemeText());
+				if (l.getLexemeType() == 0){
+					//System.out.println(l.getLexemeText());
+				    places.add(l.getLexemeText());
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return places;
 	}
-
 }

@@ -1,4 +1,4 @@
-package act.mashup.util;
+package act.mashup.global;
 
 import java.util.HashMap;
 import java.util.Map;
