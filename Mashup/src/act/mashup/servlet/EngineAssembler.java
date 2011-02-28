@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import act.mashup.global.EngineManager;
@@ -53,7 +54,7 @@ public class EngineAssembler extends HttpServlet {
 			
 			response.setContentType("text/xml");
 			//指定响应类型
-			response.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("gb2312");
 	        PrintWriter out = response.getWriter();
 			//获得书写器
 	        
@@ -66,7 +67,10 @@ public class EngineAssembler extends HttpServlet {
 	        */
 	        
 	        //out.println(emgr.GetResult(5).toString());
-	        XMLOutputter outputter = new XMLOutputter();
+	        //XMLOutputter outputter = new XMLOutputter();
+	        Format format=Format.getCompactFormat();
+	        format.setEncoding("gb2312");
+	        XMLOutputter outputter = new XMLOutputter(format);
 	        
 	        String outputIdString = request.getParameter("outputId");
 	        int outputIdInt;
@@ -79,7 +83,7 @@ public class EngineAssembler extends HttpServlet {
 	        {
 	        	outputter.output(emgr.GetResult(), out);
 	        }     
-	         
+	        System.out.println("2312.version.");
 	        out.flush();   
 	        out.close();   
 			

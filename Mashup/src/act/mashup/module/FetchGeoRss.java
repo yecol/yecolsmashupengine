@@ -1,23 +1,20 @@
 package act.mashup.module;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import act.mashup.util.EngineNode;
-import act.mashup.util.Item;
-import act.mashup.util.Result;
+import act.mashup.global.EngineNode;
+import act.mashup.global.Item;
+import act.mashup.global.KV;
+import act.mashup.global.Result;
 
 import com.sun.syndication.feed.module.georss.GeoRSSModule;
 import com.sun.syndication.feed.module.georss.GeoRSSUtils;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
@@ -34,77 +31,42 @@ import com.sun.syndication.io.XmlReader;
  * 返回：内部数据结构Item的列表
  */
 
-public class FetchGeoRss {
-
-	private Map<Integer, Result> results;
-	private EngineNode en;
+public class FetchGeoRss extends AbstractModule {
 
 	private String rssAddress;
-	private List<Item> items;
 	private List<SyndEntry> entries;
-	private Date timeStamp;
-	private Result rlt;
-
-	private final String geoUrlPrefixWithUngeo = "http://ws.geonames.org/rssToGeoRSS?geoRSS=simple&addUngeocodedItems=true&feedUrl=";
-	private final String geoUrlPrefixWithoutUngeo = "http://ws.geonames.org/rssToGeoRSS?geoRSS=simple&addUngeocodedItems=false&feedUrl=";
-
-	/**
-	 * Default constructor.
-	 */
-	public FetchGeoRss() {
-		timeStamp = new Date();
-		rlt = new Result(Result.TYPE_LIST);
-	}
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
-		ArrayList<Integer> outputs;
-		Iterator<Integer> iterator;
-		this.en = en;
-		this.results = results;
-		try {
-			Prepare();
-			ParseRss();
-		} catch (IllegalArgumentException e) {
-			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN1 " + this.rssAddress);
-			e.printStackTrace();
-		} catch (IOException e) {
-			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN2 " + this.rssAddress);
-			e.printStackTrace();
-		} catch (FeedException e) {
-			rlt.ErrorOccur("获取GeoRSS失败！FGRSEN3 " + this.rssAddress);
-			e.printStackTrace();
-		} finally {
-			outputs = en.getOutputs();
-			iterator = outputs.iterator();
-			while (iterator.hasNext()) {
-				results.put(iterator.next(), rlt);
-			}
+		super.run(en, results);
+	}
+
+	// 打印列表
+	private void PrintItems() {
+		for (Item i : items) {
+			System.out.println(i.toString());
 		}
 	}
 
-	// 私有方法
-
-	// 从参数数组中获得参数传入
-	private void Prepare() throws MalformedURLException {
-		// Rss源地址
-		String urlString = en.getParas().get("rssUrl");
+	@Override
+	protected void Prepare() throws Exception {
+		String urlString = en.getParas().getChildTextTrim("url", KV.gf);
 
 		if (urlString.isEmpty() || urlString.length() == 0)
 			throw new MalformedURLException();
 
 		// 决定如何再构造Url地址
-		String addUngeoItems = en.getParas().get("addUngeoItems");
+		String addUngeoItems = en.getParas().getChildTextTrim("addUngeoItems", KV.gf);
 		if (addUngeoItems.equals("1")) {
-			this.rssAddress = geoUrlPrefixWithUngeo + urlString;
+			this.rssAddress = KV.geoUrlPrefixWithUngeo + urlString;
 		} else {
-			this.rssAddress = geoUrlPrefixWithoutUngeo + urlString;
+			this.rssAddress = KV.geoUrlPrefixWithoutUngeo + urlString;
 		}
 
 	}
 
-	private void ParseRss() throws IOException, IllegalArgumentException,
-			FeedException {
+	@Override
+	protected void Execute() throws Exception {
 		if (items == null) {
 			URL _url = new URL(rssAddress);
 
@@ -127,26 +89,15 @@ public class FetchGeoRss {
 				if (!entry.getAuthor().trim().equals(""))
 					_item.setValue("author", entry.getAuthor());
 				_item.setValue("link", entry.getLink());
-				_item.setValue("publishDate",
-						entry.getPublishedDate() == null ? timeStamp.toString()
-								: entry.getPublishedDate().toString());
+				_item.setValue("publishDate", entry.getPublishedDate() == null ? timeStamp.toString() : entry.getPublishedDate().toString());
 				_item.setValue("description", entry.getDescription().getValue());
-				_item.setValue("lat", Double.toString(geoRSSModule
-						.getPosition().getLatitude()));
-				_item.setValue("Lon", Double.toString(geoRSSModule
-						.getPosition().getLongitude()));
+				_item.setValue("lat", Double.toString(geoRSSModule.getPosition().getLatitude()));
+				_item.setValue("Lon", Double.toString(geoRSSModule.getPosition().getLongitude()));
 				items.add(_item);
 			}
 		}
 		// 将结果放入结果映射集
 		rlt.SetResultList(items);
 
-	}
-
-	// 打印列表
-	private void PrintItems() {
-		for (Item i : items) {
-			System.out.println(i.toString());
-		}
 	}
 }

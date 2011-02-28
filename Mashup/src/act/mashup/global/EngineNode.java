@@ -1,33 +1,20 @@
-/*
- * 	<em:figure gf:classid="RssFeed" gf:id="1">
-		<gf:LogicalAttribute>
-		</gf:LogicalAttribute>
-		<gf:interfaces>
-			<gf:inputs>
-				<gf:input>0</gf:input>
-			</gf:inputs>
-			<gf:outputs>
-				<gf:output>3</gf:output>
-			</gf:outputs>
-		</gf:interfaces>
-	</em:figure>
- */
-
-package act.mashup.util;
+package act.mashup.global;
 
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.jdom.Element;
+
 public class EngineNode {
 	private Integer id;
 	private String classId;
-	private Map<String,String> paras;
+	private Element paras;
 	private final ArrayList<Integer> inputs;
 	private final ArrayList<Integer> outputs;
 	private boolean satisfy;
 
 	// 构造方法
-	public EngineNode(Integer id, String classId, Map<String,String> paras,
+	public EngineNode(Integer id, String classId, Element paras,
 			ArrayList<Integer> inputs, ArrayList<Integer> outputs) {
 		super();
 		this.id = id;
@@ -56,7 +43,7 @@ public class EngineNode {
 		return this.classId;
 	}
 
-	public Map<String,String> getParas() {
+	public Element getParas() {
 		System.out.println("this is para in en:" + this.paras.toString());
 		return this.paras;
 	}
