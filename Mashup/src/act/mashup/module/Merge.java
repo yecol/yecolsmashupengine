@@ -8,9 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import act.mashup.util.EngineNode;
-import act.mashup.util.Item;
-import act.mashup.util.Result;
+import act.mashup.global.EngineNode;
+import act.mashup.global.Item;
+import act.mashup.global.Result;
 
 /**
  * <p>
@@ -18,74 +18,40 @@ import act.mashup.util.Result;
  * </P>
  * 参数：无</br> 返回：内部数据结构Item的列表</br>
  */
-public class Merge {
-	private Map<Integer, Result> results;
-	private EngineNode en;
+public class Merge extends AbstractModule {
+
 	private ArrayList<Integer> ins;
-	private ArrayList<Item> items;
-	private Date timeStamp;
-	private Result rlt;
-
-
-	/**
-	 * Default constructor.
-	 */
-	public Merge() {
-		timeStamp = new Date();
-		rlt = new Result(Result.TYPE_LIST);
-		items=new ArrayList<Item>();
-	}
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
-		ArrayList<Integer> outputs;
-		Iterator<Integer> iterator;
-		this.en = en;
-		this.results = results;
-		try{
-		   Prepare();
-		   DoMerge();
-		}catch(Exception e){
-		   rlt.ErrorOccur("合并发生错误！");
-		   e.printStackTrace();
-		}finally {
-			outputs = en.getOutputs();
-			iterator = outputs.iterator();
-			while(iterator.hasNext())
-			{
-				results.put(iterator.next(), rlt);
-			}
-		}
+		super.run(en, results);
 	}
 
-	// 私有方法
-
-	//获得所有输入节点
-	private void Prepare() throws IOException {		
+	@Override
+	protected void Prepare() throws Exception {
 		ins = en.getInputs();
-		if(ins.size()==0)
+		if (ins.size() == 0)
 			throw new IOException();
-			
-		for(Iterator it=ins.iterator();it.hasNext();){
-			Integer index=(Integer)it.next();
-			if(this.results.get(index).GetStatus()==2){
+		for (Iterator it = ins.iterator(); it.hasNext();) {
+			Integer index = (Integer) it.next();
+			if (this.results.get(index).GetStatus() == 2) {
 				it.remove();
 			}
 		}
-		if(ins.size()==0)
+		if (ins.size() == 0)
 			throw new IOException();
 	}
 
-	//进行合并
-	//××××××××××××××××××××××警告：指针合并××××××××××××××××××××××××××××××
-	private void DoMerge() {
-		for(Integer i:ins){
+	@Override
+	protected void Execute() throws Exception {
+		// ××××××××××××××××××××××警告：引用合并××××××××××××××××××××××××××××××
+		for (Integer i : ins) {
 			items.addAll(results.get(i).GetResultList());
 		}
 		rlt.SetResultList(items);
 	}
 
-	// 打印列表
+	
 	private void PrintItems() {
 		for (Item i : items) {
 			System.out.println(i.toString());

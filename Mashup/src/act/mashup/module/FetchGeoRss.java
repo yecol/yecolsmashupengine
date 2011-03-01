@@ -67,13 +67,12 @@ public class FetchGeoRss extends AbstractModule {
 
 	@Override
 	protected void Execute() throws Exception {
-		if (items == null) {
+		if (items.isEmpty()) {
 			URL _url = new URL(rssAddress);
 
 			// 读取Rss源
 			XmlReader _reader = new XmlReader(_url);
 			SyndFeedInput _input = new SyndFeedInput();
-			items = new ArrayList<Item>();
 			SyndFeed _feed = _input.build(_reader);
 
 			// 得到Rss源中的每一个条目

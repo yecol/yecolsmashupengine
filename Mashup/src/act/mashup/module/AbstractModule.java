@@ -11,7 +11,7 @@ import act.mashup.global.Item;
 import act.mashup.global.Result;
 
 public abstract class AbstractModule {
-	
+
 	protected Map<Integer, Result> results;
 	protected EngineNode en;
 	protected Date timeStamp;
@@ -24,9 +24,10 @@ public abstract class AbstractModule {
 	public AbstractModule() {
 		timeStamp = new Date();
 		rlt = new Result(Result.TYPE_LIST);
+		items = new ArrayList<Item>();
 	}
 
-	//供Engine调用的方法
+	// 供Engine调用的方法
 	public void run(EngineNode en, Map<Integer, Result> results) {
 		ArrayList<Integer> outputs;
 		Iterator<Integer> iterator;
@@ -53,9 +54,9 @@ public abstract class AbstractModule {
 
 	// 运行阶段
 	protected abstract void Execute() throws Exception;
-	
+
 	protected void ExtractArgs() {
-		
+
 	}
 
 }

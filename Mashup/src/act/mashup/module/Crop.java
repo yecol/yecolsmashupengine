@@ -1,66 +1,40 @@
 package act.mashup.module;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
-import act.mashup.util.EngineNode;
-import act.mashup.util.Item;
-import act.mashup.util.Result;
+import act.mashup.global.EngineNode;
+import act.mashup.global.Item;
+import act.mashup.global.KV;
+import act.mashup.global.Result;
 
-public class Crop {
-	private Map<Integer, Result> results;
-	private EngineNode en;
+public class Crop extends AbstractModule {
+
 	private Integer in;
 	private Integer cropLength;
-	private ArrayList<Item> items;
-	private Result rlt;
 
-	/**
-	 * Default constructor.
-	 */
-	public Crop() {
-		rlt = new Result(Result.TYPE_LIST);
-		items = new ArrayList<Item>();
-	}
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
-		ArrayList<Integer> outputs;
-		Iterator<Integer> iterator;
-		this.en = en;
-		this.results = results;
-		try {
-			Prepare();
-			DoCrop();
-		} catch (Exception e) {
-			rlt.ErrorOccur("剪切发生错误！");
-			e.printStackTrace();
-		} finally {
-			outputs = en.getOutputs();
-			iterator = outputs.iterator();
-			while(iterator.hasNext())
-			{
-				results.put(iterator.next(), rlt);
-			}
-		}
+		super.run(en, results);
 	}
 
-	// 私有方法
 
 	// 获得输入节点和剪切参数
-	private void Prepare() {
+	@Override
+	protected void Prepare() throws Exception {
 		in = en.getInputs().get(0);
-		cropLength = Integer.parseInt(en.getParas().get("cropLength"));
+		//获得参数
+		cropLength = Integer.parseInt(en.getParas().getChildTextTrim("cropLength",KV.gf));		
 	}
 
+	
 	// 进行裁减
-	private void DoCrop() {
-
+	@Override
+	protected void Execute() throws Exception {
 		for (int i = 0; i < cropLength; i++) {
 			items.add((Item) results.get(in).GetResultList().get(i));
 		}
-		rlt.SetResultList(items);
+		rlt.SetResultList(items);	
 	}
 
 }

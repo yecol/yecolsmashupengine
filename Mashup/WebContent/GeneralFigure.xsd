@@ -24,8 +24,7 @@
 	<xs:element name="LogicalAttribute">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="Para" minOccurs="0" maxOccurs="unbounded"
-					type="attribute" />
+				<xs:any minOccurs="0" maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -61,6 +60,41 @@
 	<xs:element name="x" type="xs:float" />
 	<xs:element name="y" type="xs:float" />
 	<xs:element name="configOpen" type="xs:boolean" />
+
+	<!-- Parameters -->
+	
+	<!-- FetchRSS&GeoRSS -->
+	<xs:element name="url" type="xs:string" />
+	<xs:element name="addUngeoItems" type="xs:boolean" />
+	
+	<!-- Rename -->	
+	<xs:element name="rename">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="oldName" type="xs:string" />
+				<xs:element name="newName" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Sort -->
+	<xs:element name="sortKind" type="xs:string" />
+	<xs:element name="sortKey" type="xs:string" />
+	
+	<!-- Crop -->
+	<xs:element name="cropLength" type="xs:integer" />
+	
+	<!-- FetchXML -->
+	<xs:element name="itemRoot" type="xs:string" />
+	<xs:element name="itemChildren">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="itemChild" type="xs:string" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
 
 
 	<xs:complexType name="attribute">
