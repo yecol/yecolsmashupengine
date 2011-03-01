@@ -34,4 +34,14 @@ public class ChineseSegment {
 		}
 		return segments;
 	}
+	
+	public void testSegment(){
+		String s="龙泉市八都镇定平安乡";
+		System.out.println(getSegments(s).toString());
+	}
+	
+	public static void main(String[] args){
+		ChineseSegment cs=ChineseSegment.getInstance();
+		cs.testSegment();
+	}
 }

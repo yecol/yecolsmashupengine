@@ -15,8 +15,8 @@ public final class KV {
 	public static final String geoUrlPrefixWithoutUngeo = "http://ws.geonames.org/rssToGeoRSS?geoRSS=simple&addUngeocodedItems=false&feedUrl=";
 
 	// Sogou Dictionary
-	public static final String sogouDictPath = "C:\\SogoulabDic.dic";
+	public static final String sogouDictPath = "/SogoulabDic.dic";
 
 	// Places Dictionary
-	public static final String placesDictPath = "C:\\PlacesDic.dic";
+	public static final String placesDictPath = "/PlacesDic.dic";
 }
