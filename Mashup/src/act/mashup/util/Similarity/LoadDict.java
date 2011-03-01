@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import act.mashup.global.KV;
+
 public class LoadDict {
 
 	Map<String, String> sogou = new HashMap<String, String>();
@@ -21,7 +23,7 @@ public class LoadDict {
 	private LoadDict() {
 		try {
 			//字典以及词频信息加载自搜狗互联网词库
-			File dict = new File("C:\\SogoulabDic.dic");
+			File dict = new File(KV.sogouDictPath);
 			FileInputStream fis = new FileInputStream(dict);
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			BufferedReader br = new BufferedReader(new InputStreamReader(fis));

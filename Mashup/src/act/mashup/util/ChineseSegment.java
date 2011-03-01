@@ -19,20 +19,19 @@ public class ChineseSegment {
 		return instance;
 	}
 	
-	public ArrayList<String> getPlaces(String string){
-		ArrayList<String> places=new ArrayList<String>();
+	public ArrayList<String> getSegments(String string){
+		ArrayList<String> segments=new ArrayList<String>();
 		IKSegmentation ikSeg = new IKSegmentation(new StringReader(string), true);
 		try {
 			Lexeme l = null;
 			while ((l = ikSeg.next()) != null) {
 				if (l.getLexemeType() == 0){
-					//System.out.println(l.getLexemeText());
-				    places.add(l.getLexemeText());
+				    segments.add(l.getLexemeText());
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return places;
+		return segments;
 	}
 }

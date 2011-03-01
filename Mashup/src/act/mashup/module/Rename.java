@@ -28,6 +28,7 @@ public class Rename extends AbstractModule {
 	protected void Prepare() throws Exception {
 		renames=new HashMap<String,String>();
 		in = en.getInputs().get(0);
+		items.addAll(results.get(in).GetResultList());
 		List renamesElements = en.getParas().getChildren("rename", KV.gf);
 		for (Object o : renamesElements) {
 			Element el = (Element) o;
@@ -40,7 +41,6 @@ public class Rename extends AbstractModule {
 	@Override
 	protected void Execute() throws Exception {
 		// ××××××××××××××××××××××警告：引用操作××××××××××××××××××××××××××××××
-		items.addAll(results.get(in).GetResultList());
 		String _oldname;
 		for (int i = 0; i < items.size(); i++) {
 			for (Iterator<String> it = renames.keySet().iterator(); it.hasNext();) {
