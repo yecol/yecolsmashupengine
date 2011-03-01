@@ -12,10 +12,25 @@
 		<gf:interfaces>
 			<gf:inputs />
 			<gf:outputs>
+				<gf:output>17</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+	
+	<em:figure gf:classid="ExtractGeo" gf:id="2">
+		<gf:LogicalAttribute>
+			<gf:addUngeoItems>0</gf:addUngeoItems>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>17</gf:input>
+			</gf:inputs>
+			<gf:outputs>
 				<gf:output>10</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
+	
 
 	<em:figure gf:classid="FetchGeoRss" gf:id="3">
 		<gf:LogicalAttribute>

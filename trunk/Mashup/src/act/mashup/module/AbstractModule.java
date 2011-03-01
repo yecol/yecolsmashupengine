@@ -55,8 +55,4 @@ public abstract class AbstractModule {
 	// ÔËÐÐ½×¶Î
 	protected abstract void Execute() throws Exception;
 
-	protected void ExtractArgs() {
-
-	}
-
 }

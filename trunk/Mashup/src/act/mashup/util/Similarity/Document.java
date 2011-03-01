@@ -22,7 +22,7 @@ public class Document {
 		MyWord = new HashMap<String, Word>();
 		int _length = strFile.length();
 		ChineseSegment cs = ChineseSegment.getInstance();
-		ArrayList<String> tempWord = cs.getPlaces(strFile);
+		ArrayList<String> tempWord = cs.getSegments(strFile);
 
 		double num;
 		double num2;
@@ -103,36 +103,7 @@ public class Document {
 		return (num / (d * num3));
 	}
 
-	/*
-	public double SimilitudeValueToDocumentUsingGeneralizedJaccardCoefficient(
-			Document Doc) {
-		double num = 0;
-		double d = 0;
-		double num3 = 0;
-		double num4 = 0;
-		Set<String> keySet = MyWord.keySet();
-		for (Iterator<String> it = keySet.iterator(); it.hasNext();) {
-			String str = it.next();
-			if (Doc.MyWord.containsKey(str)) {
-				// a
-				num += ((double) MyWord.get(str).getCharacterValue())
-						* ((double) Doc.MyWord.get(str).getCharacterValue()); // d1*c1
-				d += ((double) MyWord.get(str).getCharacterValue())
-						* ((double) MyWord.get(str).getCharacterValue()); // |d1|
-				num3 += ((double) Doc.MyWord.get(str).getCharacterValue())
-						* ((double) Doc.MyWord.get(str).getCharacterValue());// |c1|
-				num4 += 1;
-			}
-		}
-		if (((num4 / ((double) MyWord.size())) <= 0.05)
-				|| ((num4 / ((double) Doc.MyWord.size())) <= 0.05)) {
-			return 0;
-		}
 
-		return (num / (d + num3 - num));
-	}
-
-    */
 	private int _length;
 
 	public Word deleteWord(String key) {
