@@ -5,67 +5,63 @@
 
 	<em:figure gf:classid="FetchRss" gf:id="1">
 		<gf:LogicalAttribute>
-			<gf:Para name="rssUrl" type="String">
-				http://rss.sina.com.cn/news/china/focus15.xml
-			</gf:Para>
+			<gf:url>
+		         http://rss.sina.com.cn/news/marquee/ddt.xml
+		    </gf:url>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
-			<gf:inputs/>
+			<gf:inputs />
 			<gf:outputs>
 				<gf:output>10</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-                                              
+
 	<em:figure gf:classid="FetchGeoRss" gf:id="3">
 		<gf:LogicalAttribute>
-			<gf:Para name="rssUrl" type="String">
-				http://rss.news.yahoo.com/rss/china
-			</gf:Para>
-			<gf:Para name="addUngeoItems" type="String">
-			    0
-			</gf:Para>
+			<gf:url>
+		         http://rss.news.yahoo.com/rss/china
+		    </gf:url>
+			<gf:addUngeoItems>0</gf:addUngeoItems>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
-			<gf:inputs/>
+			<gf:inputs />
 			<gf:outputs>
 				<gf:output>11</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	
-	<em:figure gf:classid="TransformXml" gf:id="4">
+
+	<em:figure gf:classid="FetchXml" gf:id="4">
 		<gf:LogicalAttribute>
-			<gf:Para name="xmlUrl" type="String">
-				http://www.w3schools.com/xml/cd_catalog.xml
-			</gf:Para>
-			<gf:Para name="itemRoot" type="String">
-			    /CATALOG/CD
-			</gf:Para>
-			<gf:Para name="cdtitle" type="String">
-			    TITLE
-			</gf:Para>
-			<gf:Para name="artist" type="String">
-			    ARTIST
-			</gf:Para>
-			<gf:Para name="price" type="String">
-			    PRICE
-			</gf:Para>
+			<gf:url>http://www.w3schools.com/xml/cd_catalog.xml</gf:url>
+			<gf:itemRoot>/CATALOG/CD</gf:itemRoot>
+			<gf:itemChildren>
+				<gf:itemChild>TITLE</gf:itemChild>
+				<gf:itemChild>ARTIST</gf:itemChild>
+				<gf:itemChild>PRICE</gf:itemChild>
+			</gf:itemChildren>
+
 		</gf:LogicalAttribute>
 		<gf:interfaces>
-			<gf:inputs/>
+			<gf:inputs />
 			<gf:outputs>
 				<gf:output>12</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	
-		
+
+
 	<em:figure gf:classid="Rename" gf:id="7">
 		<gf:LogicalAttribute>
-			<gf:Para name="cdtitle" type="String">
-				title
-			</gf:Para>
+			<gf:rename>
+				<gf:oldName>
+				TITLE
+			</gf:oldName>
+				<gf:newName>
+			    mashTitle
+			</gf:newName>
+			</gf:rename>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
@@ -90,15 +86,15 @@
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	
+
 	<em:figure gf:classid="Sort" gf:id="20">
 		<gf:LogicalAttribute>
-		    <gf:Para name="sortKind" type="String">
+			<gf:sortKind>
 				Decrease
-			</gf:Para>
-			<gf:Para name="sortKey" type="String">
+		</gf:sortKind>
+			<gf:sortKey>
 				title
-			</gf:Para>
+		</gf:sortKey>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
@@ -112,9 +108,9 @@
 
 	<em:figure gf:classid="Crop" gf:id="8">
 		<gf:LogicalAttribute>
-			<gf:Para name="cropLength" type="String">
+			<gf:cropLength>
 				10
-			</gf:Para>
+			</gf:cropLength>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
