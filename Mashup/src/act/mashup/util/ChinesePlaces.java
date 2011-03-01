@@ -44,7 +44,7 @@ public class ChinesePlaces {
 	public static void main(String[] args){
 		ChinesePlaces cp=ChinesePlaces.getInstance();
 		System.out.println("over");
-		System.out.println(cp.FindPlace("龙泉市"));
+		System.out.println(cp.FindPlace("北京航空航天大学"));
 		System.out.println(cp.FindPlace("莱茵花园"));
 	}
 

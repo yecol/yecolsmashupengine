@@ -38,25 +38,27 @@ public class ExtractGeo extends AbstractModule {
 	@Override
 	protected void Execute() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("new version");
-		for(int index=0;index<items.size();index++){
-			string=items.get(index).getValue("title");
+		cs.testSegment();
+		for(Iterator it=items.iterator();it.hasNext();){
+			Item item=(Item)it.next();
+			string=item.getValue("title");
 			segments=cs.getSegments(string);
+			//System.out.println(segments.toString());
 			String place=ExtractGeoInformation(segments);
 			if(place==null){
-				string=items.get(index).getValue("description");
+				string=item.getValue("description");
 				segments=cs.getSegments(string);
+				//System.out.println(segments.toString());
 				place=ExtractGeoInformation(segments);
 			}
 			if(place!=null&&place.length()!=0){
-				items.get(index).setValue("place", place);
-				System.out.println(place);
+				item.setValue("place", place);
 			}
 			else if(addUngeoItems.equals("0")){
-				//it.remove();		
+				it.remove();	
 			}		
 		}
-		System.out.println("this is ok:size="+items.size());
+		//System.out.println("this is ok:size="+items.size());
 		rlt.SetResultList(items);
 
 	}
