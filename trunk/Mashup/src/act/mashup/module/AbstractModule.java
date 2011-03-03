@@ -14,7 +14,7 @@ public abstract class AbstractModule {
 
 	protected Map<Integer, Result> results;
 	protected EngineNode en;
-	protected Date timeStamp;
+	protected Date timeStamp,debugTime;
 	protected List<Item> items;
 	protected Result rlt;
 
@@ -36,6 +36,8 @@ public abstract class AbstractModule {
 		try {
 			Prepare();
 			Execute();
+			debugTime=new Date();
+			System.out.println("This Module has runned "+(debugTime.getTime()-timeStamp.getTime())+"ms.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			rlt.ErrorOccur(e.getMessage());

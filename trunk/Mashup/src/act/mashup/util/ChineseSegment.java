@@ -34,6 +34,9 @@ public class ChineseSegment {
 		}
 		return segments;
 	}
+	public ArrayList<String> getSegments(StringBuffer stringBuffer){
+		return getSegments(stringBuffer.toString());
+	}
 	
 	public void testSegment(){
 		String s="龙泉市八都镇定平安乡";

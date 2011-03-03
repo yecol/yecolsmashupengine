@@ -2,6 +2,9 @@ package act.mashup.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -14,10 +17,14 @@ public class ChinesePlaces {
 	private Set<String> placesSet;
 
 	private ChinesePlaces() {
-		placesSet=new HashSet<String>();
-		File dict = new File(KV.placesDictPath);
-		Scanner scanner;
 		try {
+		placesSet=new HashSet<String>();
+		String dictPathStr=getClass().getResource("/").toString()+KV.placesDictPath;
+		URL dictPath=new URL(dictPathStr);
+		//System.out.println("RESOURCES:"+getClass().getResource("/").toString());
+		File dict = new File(dictPath.toURI());
+		//File dict = new File(KV.placesDictPath);
+		Scanner scanner;
 			scanner = new Scanner(dict,"utf-8");
 			int i=0;
 			while(scanner.hasNext()){
@@ -26,6 +33,12 @@ public class ChinesePlaces {
 			}
 			System.out.println("size"+i);
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
