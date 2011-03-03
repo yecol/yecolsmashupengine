@@ -19,4 +19,7 @@ public final class KV {
 
 	// Places Dictionary
 	public static final String placesDictPath = "/PlacesDic.dic";
+	
+	// Similarity Thrashhold 
+	public static final double similarityThrashhold=0.6;
 }

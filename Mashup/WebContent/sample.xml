@@ -19,7 +19,7 @@
 	
 	<em:figure gf:classid="ExtractGeo" gf:id="2">
 		<gf:LogicalAttribute>
-			<gf:addUngeoItems>0</gf:addUngeoItems>
+			<gf:addUngeoItems>1</gf:addUngeoItems>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
@@ -32,10 +32,10 @@
 	</em:figure>
 	
 
-	<em:figure gf:classid="FetchGeoRss" gf:id="3">
+	<em:figure gf:classid="FetchRss" gf:id="3">
 		<gf:LogicalAttribute>
 			<gf:url>
-		         http://rss.news.yahoo.com/rss/china
+		         http://rss.news.sohu.com/rss/focus.xml
 		    </gf:url>
 			<gf:addUngeoItems>0</gf:addUngeoItems>
 		</gf:LogicalAttribute>

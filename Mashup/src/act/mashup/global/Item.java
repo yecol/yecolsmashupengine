@@ -7,9 +7,10 @@ import java.util.Set;
 public class Item {
 
 	private Map<String,String> KVMap;
+	private int rank;
 	
 	public Item() {
-		super();
+		rank=0;
 		KVMap=new HashMap<String,String>();
 	}
 	
@@ -36,6 +37,14 @@ public class Item {
 	
 	public String toString(){
 		return KVMap.toString();		
+	}
+	
+	public void addRank(){
+		this.rank++;
+	}
+	
+	public int getRank(){
+		return this.rank;
 	}
 
 }
