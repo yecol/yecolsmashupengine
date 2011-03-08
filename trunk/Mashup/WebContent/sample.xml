@@ -77,7 +77,7 @@
 				TITLE
 			</gf:oldName>
 				<gf:newName>
-			    mashTitle
+			    title
 			</gf:newName>
 			</gf:rename>
 		</gf:LogicalAttribute>
@@ -110,12 +110,6 @@
 			<gf:sort>
 				<gf:sortKey>
 				title
-	        	</gf:sortKey>
-				<gf:sortKind>1</gf:sortKind>
-			</gf:sort>
-			<gf:sort>
-				<gf:sortKey>
-				author
 	        	</gf:sortKey>
 				<gf:sortKind>1</gf:sortKind>
 			</gf:sort>
