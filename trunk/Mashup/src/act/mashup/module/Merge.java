@@ -12,6 +12,7 @@ import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
+import act.mashup.util.Similarity.SimilarityDetector;
 import act.mashup.util.Similarity.Text;
 
 /**
@@ -27,7 +28,6 @@ public class Merge extends AbstractModule {
 	private ArrayList<Item> curItems;
 	private Item item1;
 	private Item item2;
-	private ArrayList<ArrayList<Item>> otherResults;
 	private Text tarText;
 	private Text refText;
 
@@ -39,7 +39,7 @@ public class Merge extends AbstractModule {
 	@Override
 	protected void Prepare() throws Exception {
 		curItems = new ArrayList<Item>();
-		otherResults = new ArrayList<ArrayList<Item>>();
+		//otherResults = new ArrayList<ArrayList<Item>>();
 		ins = en.getInputs();
 		if (ins.size() == 0)
 			throw new IOException();
@@ -54,13 +54,19 @@ public class Merge extends AbstractModule {
 
 		for (Integer i : ins) {
 			ArrayList al = (ArrayList<Item>) results.get(i).GetResultList();
-			otherResults.add((ArrayList<Item>) al.clone());
+			curItems.addAll((ArrayList<Item>) al.clone());
+			System.out.println("curItem.size="+curItems.size());
 		}
 	}
 
 	@Override
 	protected void Execute() throws Exception {
+		
+		SimilarityDetector sd=new SimilarityDetector(curItems);
+		sd.Detect();
+		
 		// ××××××××××××××××××××××警告：引用合并××××××××××××××××××××××××××××××
+		/*
 		int size = otherResults.size();
 		int count = 0;
 		for (int i = 0; i < size; i++) {
@@ -91,7 +97,8 @@ public class Merge extends AbstractModule {
 
 		}
 		System.out.println(count);
-		rlt.SetResultList(items);
+		*/
+		rlt.SetResultList(curItems);
 	}
 
 	private void PrintItems() {
