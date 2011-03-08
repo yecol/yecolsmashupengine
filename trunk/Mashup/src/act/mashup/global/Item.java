@@ -7,7 +7,7 @@ import java.util.Set;
 public class Item implements Comparable {
 
 	private Map<String, String> KVMap;
-	private int rank;
+	private Integer rank;
 
 	public Item() {
 		rank = 0;
@@ -45,6 +45,10 @@ public class Item implements Comparable {
 
 	public int getRank() {
 		return this.rank;
+	}
+	
+	public void rankToMap(){
+		this.KVMap.put("rank", this.rank.toString());
 	}
 
 	@Override
