@@ -16,7 +16,7 @@
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	
+
 	<em:figure gf:classid="ExtractGeo" gf:id="2">
 		<gf:LogicalAttribute>
 			<gf:addUngeoItems>1</gf:addUngeoItems>
@@ -30,11 +30,14 @@
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	
+
 
 	<em:figure gf:classid="FetchRss" gf:id="3">
 		<gf:LogicalAttribute>
 			<gf:url>
+		         http://rss.news.sohu.com/rss/focus.xml
+		    </gf:url>
+		    <gf:url>
 		         http://rss.news.sohu.com/rss/focus.xml
 		    </gf:url>
 			<gf:addUngeoItems>0</gf:addUngeoItems>
@@ -104,12 +107,18 @@
 
 	<em:figure gf:classid="Sort" gf:id="20">
 		<gf:LogicalAttribute>
-			<gf:sortKind>
-				Decrease
-		</gf:sortKind>
-			<gf:sortKey>
+			<gf:sort>
+				<gf:sortKey>
 				title
-		</gf:sortKey>
+	        	</gf:sortKey>
+				<gf:sortKind>1</gf:sortKind>
+			</gf:sort>
+			<gf:sort>
+				<gf:sortKey>
+				author
+	        	</gf:sortKey>
+				<gf:sortKind>1</gf:sortKind>
+			</gf:sort>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
@@ -123,9 +132,7 @@
 
 	<em:figure gf:classid="Crop" gf:id="8">
 		<gf:LogicalAttribute>
-			<gf:cropLength>
-				10
-			</gf:cropLength>
+			<gf:cropLength>10</gf:cropLength>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>

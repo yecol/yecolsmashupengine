@@ -55,6 +55,9 @@ public class LoadDict {
 				this.sogou.put(textArray[0], textArray[1]);
 			}
 			System.out.println(this.sogou.size());
+			br.close();
+			bis.close();
+			fis.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

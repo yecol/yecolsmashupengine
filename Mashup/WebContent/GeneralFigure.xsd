@@ -62,12 +62,12 @@
 	<xs:element name="configOpen" type="xs:boolean" />
 
 	<!-- Parameters -->
-	
+
 	<!-- FetchRSS&GeoRSS -->
 	<xs:element name="url" type="xs:string" />
 	<xs:element name="addUngeoItems" type="xs:boolean" />
-	
-	<!-- Rename -->	
+
+	<!-- Rename -->
 	<xs:element name="rename">
 		<xs:complexType>
 			<xs:sequence>
@@ -76,20 +76,26 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<!-- Sort -->
-	<xs:element name="sortKind" type="xs:string" />
-	<xs:element name="sortKey" type="xs:string" />
-	
+	<xs:element name="sort">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sortKey" type="xs:string" />
+				<xs:element name="sortKind" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
 	<!-- Crop -->
 	<xs:element name="cropLength" type="xs:integer" />
-	
+
 	<!-- FetchXML -->
 	<xs:element name="itemRoot" type="xs:string" />
 	<xs:element name="itemChildren">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="itemChild" type="xs:string" maxOccurs="unbounded"/>
+				<xs:element name="itemChild" type="xs:string" maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
