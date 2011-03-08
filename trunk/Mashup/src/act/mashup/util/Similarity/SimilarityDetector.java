@@ -37,16 +37,22 @@ public class SimilarityDetector {
 							flags.set(b, 1);
 							items.get(a).addRank();
 						}
-						// System.out.println("c=" + c + " a=" + a + " b=" + b +
-						// "title:" + curItem.getValue("title") + " v.s " +
+						// System.out.println(" a=" + a + " b=" + b + "title:" +
+						// curItem.getValue("title") + " v.s " +
 						// refItem.getValue("title") + " v="
 						// + curText.ComputeSimilarity(refText));
 					}
 				}
 			}
-			for (Integer i : flags) {
-				if (i == 1)
-					items.remove(i);
+			Iterator fIt = flags.iterator();
+			Iterator iIt = items.iterator();
+			for (; fIt.hasNext();) {
+				Integer i = (Integer) fIt.next();
+				iIt.next();
+				if (i == 1) {
+					fIt.remove();
+					iIt.remove();
+				}
 			}
 		}
 	}
