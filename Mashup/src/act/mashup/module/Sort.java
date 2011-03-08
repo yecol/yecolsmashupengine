@@ -54,7 +54,8 @@ public class Sort extends AbstractModule {
 	protected void Execute() throws Exception {
 		in = en.getInputs().get(0);
 		List temp = results.get(in).GetResultList();
-		Collections.sort(temp, comparator);
+		if (sortLength != 0)
+			Collections.sort(temp, comparator);
 		rlt.SetResultList(temp);
 	}
 
