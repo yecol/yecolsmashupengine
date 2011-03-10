@@ -30,7 +30,6 @@ public class FetchRss extends AbstractModule {
 		List els = en.getParas().getChildren("url", KV.gf);
 		for (int i = 0; i < els.size(); i++) {
 			Element e=(Element) els.get(i);
-			//System.out.println("hello test"+e.getValue());
 			RssAddresses.add(e.getValue().trim());
 		}
 		if (RssAddresses.isEmpty())

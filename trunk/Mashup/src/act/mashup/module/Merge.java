@@ -9,6 +9,7 @@ import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
+import act.mashup.util.Log;
 import act.mashup.util.Similarity.Text;
 
 /**
@@ -27,6 +28,7 @@ public class Merge extends AbstractModule {
 	private ArrayList<ArrayList<Item>> otherResults;
 	private Text tarText;
 	private Text refText;
+	private ArrayList al;
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
@@ -50,7 +52,7 @@ public class Merge extends AbstractModule {
 			throw new IOException();
 
 		for (Integer i : ins) {
-			ArrayList al = (ArrayList<Item>) results.get(i).GetResultList();
+			al = (ArrayList<Item>) results.get(i).GetResultList();
 			otherResults.add((ArrayList<Item>) al.clone());
 		}
 	}
@@ -68,34 +70,34 @@ public class Merge extends AbstractModule {
 					item1 = (Item) itOfCurItems.next();
 					tarText = new Text(item1.getValue("title") + item1.getValue("description"));
 					for (int j = i + 1; j < size; j++) {
-					    int temp2 = 0;
+						int temp2 = 0;
 						for (Iterator itOfOtherRlts = otherResults.get(j).iterator(); itOfOtherRlts.hasNext(); temp2++) {
 							item2 = (Item) itOfOtherRlts.next();
 							refText = new Text(item2.getValue("title") + item2.getValue("description"));
 							double similarity = tarText.ComputeSimilarity(refText);
-							//System.out.println("i=" + i + " j=" + j + " temp1=" + temp1 + " temp2=" + temp2 + " simi=" + similarity);
+							Log.logger.debug("i=" + i + " j=" + j + " temp1=" + temp1 + " temp2=" + temp2 + " simi=" + similarity);
 							count++;
-							if (similarity > KV.similarityThrashhold){
+							if (similarity > KV.similarityThrashhold) {
 								itOfOtherRlts.remove();
 								item1.addRank();
 							}
-						}	
+						}
 					}
-					System.out.println("Added i=" + i + " j=" +  " temp1=" + temp1 + " rank="+item1.getRank());
+					Log.logger.debug("Added i=" + i + " j=" + " temp1=" + temp1 + " rank=" + item1.getRank());
 					item1.rankToMap();
 					items.add(item1);
+				}
+			} else {
+				curItems = (ArrayList<Item>) otherResults.get(i).clone();
+				for (Item item : curItems) {
+					item.rankToMap();
+					items.add(item);
 				}
 			}
 
 		}
-		System.out.println(count);
+		Log.logger.debug("Compare " + count + " times.");
 		rlt.SetResultList(items);
-	}
-
-	private void PrintItems() {
-		for (Item i : items) {
-			System.out.println(i.toString());
-		}
 	}
 
 }

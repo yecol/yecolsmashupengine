@@ -44,7 +44,7 @@ public class EngineNode {
 	}
 
 	public Element getParas() {
-		System.out.println("this is para in en:" + this.paras.toString());
+		//System.out.println("this is para in en:" + this.paras.toString());
 		return this.paras;
 	}
 	
@@ -65,7 +65,7 @@ public class EngineNode {
 	// 重新检测是否满足运行条件
 	private void CheckSatisfy(Map<Integer, Integer> stateArray) {
 		// 如果已经满足则返回
-		System.out.println(stateArray.toString());
+		//System.out.println(stateArray.toString());
 		if (satisfy == true)
 			return;
 		else {

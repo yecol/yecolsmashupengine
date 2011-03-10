@@ -81,7 +81,6 @@ public class Sort extends AbstractModule {
 			int i = 0;
 			Collator collator = Collator.getInstance(Locale.CHINA);
 			while (collator.compare(i1.getValue(keys.get(i)), i2.getValue(keys.get(i))) == 0 && i < sortLength - 1) {
-				// System.out.println("compare here i="+i+",sortkey="+keys.get(i)+",value="+i1.getValue(keys.get(i))+" V.S "+i2.getValue(keys.get(i)));
 				i++;
 
 			}

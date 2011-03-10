@@ -15,6 +15,8 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.InputSource;
 
+import act.mashup.util.Log;
+
 /**
  * Session Bean implementation class EngineManager
  */
@@ -72,18 +74,17 @@ public class EngineManager {
 		try {
 			Document doc = sb.build(source);
 			Element rootElement = doc.getRootElement();
-			System.out.println("parse begin");
-			System.out.println(rootElement.toString());
+			Log.logger.debug("Parse begin");
+			Log.logger.debug("Root Element is "+rootElement.toString());
 			List figures = rootElement.getChildren("figure", KV.em);
 			// 对每一个figure进行对象化操作
 			for (Iterator iter = figures.iterator(); iter.hasNext();) {
 				figure = (Element) iter.next();
-				System.out.println(figure.toString());
+				Log.logger.debug("Figure: "+figure.toString());
 
 				// 获得属性
 				classId = figure.getAttributeValue("classid", KV.gf);
 				id = Integer.parseInt(figure.getAttributeValue("id", KV.gf));
-				// satisfyStatus.put(id, false);
 				doneStatus.put(id, false);
 
 				// 获得参数
@@ -122,16 +123,16 @@ public class EngineManager {
 
 		} catch (JDOMException e) {
 			// TODO Auto-generated catch block
-			System.out.println("==========YecolsError0003==========");
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("==========YecolsError0004==========");
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		}
+		/*
 		for (EngineNode en : engineNodes) {
 			System.out.println("enTest:" + en.toString());
 		}
+		*/
 
 		RunSequence();
 
@@ -167,8 +168,8 @@ public class EngineManager {
 
 		}
 
-		System.out.println(results.toString());
-		System.out.println("ALL MODULES EXECUTE OVER");
+		//System.out.println(results.toString());
+		Log.logger.info("ALL MODULES EXECUTE OVER");
 	}
 
 	public Document GetResult() {

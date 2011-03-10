@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.Result;
+import act.mashup.util.Log;
 
 public abstract class AbstractModule {
 
@@ -37,9 +39,9 @@ public abstract class AbstractModule {
 			Prepare();
 			Execute();
 			debugTime=new Date();
-			System.out.println("This Module has runned "+(debugTime.getTime()-timeStamp.getTime())+"ms.");
+			Log.logger.info("This module has runned "+(debugTime.getTime()-timeStamp.getTime())+"ms.");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.logger.fatal(e);
 			rlt.ErrorOccur(e.getMessage());
 		} finally {
 			outputs = en.getOutputs();
