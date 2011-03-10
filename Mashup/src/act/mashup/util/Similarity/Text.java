@@ -14,7 +14,7 @@ import act.mashup.util.ChineseSegment;
 public class Text {
 	LoadDict LD = LoadDict.getDict();
 	private Map<String, Word> MyWord;
-	
+
 	private int _length;
 
 	public Text() {
@@ -32,26 +32,26 @@ public class Text {
 		long Dw = 0;
 
 		// 确保文件
-		// Pattern p= Pattern.compile("[\u4e00-\u9fa5]");
+		//Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
 		for (String str : tempWord) {
 			if (!MyWord.containsKey(str)) {
-				// Matcher m=p.matcher(str);
-				// if (m.matches())
-				// {
-				// System.out.println("RegexOK");
-				Word word = new Word(str);
-				word.setWordFrequency(1);
-				addWord(word);
-				// }
+				//Matcher m = p.matcher(str);
+				//if (m.matches()) {
+					//System.out.print(str+" ");
+					Word word = new Word(str);
+					word.setWordFrequency(1);
+					addWord(word);
+				//}
 			} else {
 				Word word = getWordByKey(str);
 				word.addWordFrequency();
 			}
 		}
+		//System.out.print("\n");
 
 		// System.out.println("this is MywordSet:"+MyWord.toString());
 
-		// 
+		//
 		List<String> NoNeedWord = new ArrayList<String>();
 		Set<String> keySet = MyWord.keySet();
 		for (Iterator<String> it = keySet.iterator(); it.hasNext();) {
@@ -68,11 +68,12 @@ public class Text {
 				NoNeedWord.add(keystr);
 			}
 		}
-		// 
+		//
 		for (String str : NoNeedWord) {
 			deleteWord(str);
 		}
 	}
+
 	public double ComputeSimilarity(Text Doc) {
 		double num = 0;
 		double d = 0;
@@ -98,7 +99,6 @@ public class Text {
 		num3 = Math.sqrt(num3);
 		return (num / (d * num3));
 	}
-
 
 	public Word deleteWord(String key) {
 		return MyWord.remove(key);
@@ -133,7 +133,7 @@ public class Text {
 		Text doc2 = new Text("摩根大通欲以4.5亿美元收购社交网站Twitter10%股权");
 		Text doc3 = new Text("摩根大通拟投资Twitter 估值达40亿美元");
 		Text doc4 = new Text("摩通拟4.5亿美元入股Twitter");
-		Text doc5 = new Text("苹果发布新的Macbook系列产品。");
+		Text doc5 = new Text("<a href='http://news.sohu.com/20081205/n261029381.shtml'><img src='http://photocdn.sohu.com/20081205/Img261042622_ss.jpg' style='border: 1px solid #000000;'/></a>12月4日，美国总统布什及夫人劳拉在华盛顿白宫参加国家圣诞树亮灯仪式。布什夫妇携手出场，他们在白宫度过8年的幸福时光。12月4日，位于美国华盛顿白宫前的国家圣诞树被点亮。白宫主圣诞树高约5.5米，上面悬挂来自全美各地艺术家制作的369件饰物。布什在点亮仪式上亲吻一位小女孩中国日报网环球在线消息：据美...");
 		ArrayList<Text> docList = new ArrayList<Text>();
 		docList.add(doc1);
 		docList.add(doc2);

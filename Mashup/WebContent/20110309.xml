@@ -1,0 +1,43 @@
+<em:enginemodel
+	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd "
+	xmlns:em="http://www.example.org/EngineModel" xmlns:gf="http://www.example.org/GeneralFigure"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<em:figure gf:classid="FetchRss" gf:id="2">
+		<gf:LogicalAttribute>
+			<gf:url> http://news.qq.com/newsgn/rss_newsgn.xml</gf:url>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>0</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>13</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+	<em:figure gf:classid="FetchRss" gf:id="4">
+		<gf:LogicalAttribute>
+			<gf:url>http://rss.sina.com.cn/news/china/focus15.xml</gf:url>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>0</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>14</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+	<em:figure gf:classid="Merge" gf:id="6">
+		<gf:LogicalAttribute />
+		<gf:interfaces>
+			<gf:inputs>
+				<gf:input>13</gf:input>
+				<gf:input>14</gf:input>
+			</gf:inputs>
+			<gf:outputs>
+				<gf:output>17</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+</em:enginemodel>

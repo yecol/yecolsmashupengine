@@ -15,6 +15,7 @@ import java.util.Map;
 
 import act.mashup.global.KV;
 import act.mashup.util.ChineseSegment;
+import act.mashup.util.Log;
 
 public class LoadDict {
 
@@ -54,21 +55,16 @@ public class LoadDict {
 				// »°¥ ∆µ–≈œ¢
 				this.sogou.put(textArray[0], textArray[1]);
 			}
-			System.out.println(this.sogou.size());
+			Log.logger.debug("Sougou Dict Loaded. size="+this.sogou.size());
 			br.close();
 			bis.close();
 			fis.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			//close
+			Log.logger.fatal(e);
 		}
 	}
 

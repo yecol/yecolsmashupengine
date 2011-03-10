@@ -43,7 +43,7 @@ public class EngineAssembler extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("yes.posted.");
+		//System.out.println("yes.posted.");
 		
 			
 			//在session中查找或者设置一个新的桩
@@ -83,7 +83,7 @@ public class EngineAssembler extends HttpServlet {
 	        {
 	        	outputter.output(emgr.GetResult(), out);
 	        }     
-	        System.out.println("2312.version.");
+	       // System.out.println("2312.version.");
 	        out.flush();   
 	        out.close();   
 			

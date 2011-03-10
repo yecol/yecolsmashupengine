@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import act.mashup.util.Log;
+
 public class EngineThread extends Thread {
 
 	private Map<Integer, Result> results;
@@ -25,9 +27,6 @@ public class EngineThread extends Thread {
 		// 获得模块名
 		String interfaceName = "act.mashup.module." + en.getClassId();
 
-		// ArrayList<String> paras = en.getParas();
-		// Integer paraSize = paras.size();
-
 		try {
 
 			// 反射构造类的实例
@@ -35,52 +34,39 @@ public class EngineThread extends Thread {
 			Object obj = c.newInstance();
 
 			// 运行
-			Method runMethod = c.getDeclaredMethod("run", EngineNode.class,
-					Map.class);
+			Method runMethod = c.getDeclaredMethod("run", EngineNode.class, Map.class);
 			runMethod.invoke(obj, en, results);
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("==========YecolsError0001==========");
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			System.out.println("==========YecolsError0006==========");
+			Log.logger.fatal(e);
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			System.out.println("==========YecolsError0002==========");
+			Log.logger.fatal(e);
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			System.out.println("==========YecolsError0007==========");
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			System.out.println("==========YecolsError0009==========");
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			System.out.println("==========YecolsError0010==========");
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		}
 
-		System.out.println("SINGLE MODULE EXECUTE OVER");
+		Log.logger.info("Sigle module " + en.getClassId() + " executed.");
 	}
 
-	public void updateStatus(Map<Integer, Integer> satisfyStatus,
-			Map<Integer, Boolean> doneStatus) {
+	public void updateStatus(Map<Integer, Integer> satisfyStatus, Map<Integer, Boolean> doneStatus) {
 		/*
 		 * for(Integer i: en.getOutputs()){ satisfyStatus.put(i, true); }
 		 * satisfyStatus.put(this.en.getOutputs(), true);
 		 */
 		doneStatus.put(this.en.getId(), true);
 
-		System.out.println("test results:"+this.results.toString());
-		
+		//System.out.println("test results:" + this.results.toString());
+
 		Iterator<Integer> iterator = en.getOutputs().iterator();
 		while (iterator.hasNext()) {
 			Integer curIndex = iterator.next();

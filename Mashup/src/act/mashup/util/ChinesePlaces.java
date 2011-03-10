@@ -31,15 +31,13 @@ public class ChinesePlaces {
 				placesSet.add(scanner.next());
 				i++;
 			}
-			System.out.println("size"+i);
+			Log.logger.debug("Placees Dict loaded. Size="+i);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.logger.fatal(e);
 		}
 		
 	}
