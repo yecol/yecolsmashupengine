@@ -16,7 +16,7 @@ import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
 
-public class Sort extends AbstractModule {
+public class Sort extends AbstractListModule {
 
 	private Comparator comparator;
 	private Integer sortLength;

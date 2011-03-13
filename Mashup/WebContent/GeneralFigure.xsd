@@ -89,6 +89,7 @@
 
 	<!-- Crop -->
 	<xs:element name="cropLength" type="xs:integer" />
+	<xs:element name="removeDuplications" type="xs:boolean" />
 
 	<!-- FetchXML -->
 	<xs:element name="itemRoot" type="xs:string" />

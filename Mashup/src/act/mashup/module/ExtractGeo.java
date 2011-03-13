@@ -11,7 +11,7 @@ import act.mashup.global.Result;
 import act.mashup.util.ChinesePlaces;
 import act.mashup.util.ChineseSegment;
 
-public class ExtractGeo extends AbstractModule {
+public class ExtractGeo extends AbstractListModule {
 	
 	private Integer in;
 	private ChineseSegment cs;

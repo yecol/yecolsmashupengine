@@ -7,7 +7,7 @@ import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
 
-public class Crop extends AbstractModule {
+public class Crop extends AbstractListModule {
 
 	private Integer in;
 	private Integer cropLength;

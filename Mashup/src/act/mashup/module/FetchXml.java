@@ -29,7 +29,7 @@ import act.mashup.global.Result;
  * 返回：内部数据结构Item的列表
  */
 
-public class FetchXml extends AbstractModule {
+public class FetchXml extends AbstractListModule {
 
 	private String urlString;
 	private String itemRoot;

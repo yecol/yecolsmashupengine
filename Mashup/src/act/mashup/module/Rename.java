@@ -14,7 +14,7 @@ import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
 
-public class Rename extends AbstractModule {
+public class Rename extends AbstractListModule {
 
 	private Integer in;
 	private Map<String, String> renames;

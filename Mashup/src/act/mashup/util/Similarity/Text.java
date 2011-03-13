@@ -6,10 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import act.mashup.util.ChineseSegment;
+import act.mashup.util.Log;
 
 public class Text {
 	LoadDict LD = LoadDict.getDict();
@@ -72,6 +71,8 @@ public class Text {
 		for (String str : NoNeedWord) {
 			deleteWord(str);
 		}
+		
+		
 	}
 
 	public double ComputeSimilarity(Text Doc) {
@@ -80,8 +81,10 @@ public class Text {
 		double num3 = 0;
 		double num4 = 0;
 		Set<String> keySet = MyWord.keySet();
+		//String debugInfo="";
 		for (Iterator<String> it = keySet.iterator(); it.hasNext();) {
 			String str = it.next();
+			//debugInfo=debugInfo+","+str;
 			if (Doc.MyWord.containsKey(str)) {
 				// a
 				num += ((double) MyWord.get(str).getCharacterValue()) * ((double) Doc.MyWord.get(str).getCharacterValue()); // d1*c1
@@ -97,8 +100,39 @@ public class Text {
 
 		d = Math.sqrt(d);
 		num3 = Math.sqrt(num3);
+		//Log.logger.debug(debugInfo);
 		return (num / (d * num3));
 	}
+	
+	public double ComputeSimilarity2(
+			Text Doc) {
+		double num = 0;
+		double d = 0;
+		double num3 = 0;
+		double num4 = 0;
+		Set<String> keySet = MyWord.keySet();
+		for (Iterator<String> it = keySet.iterator(); it.hasNext();) {
+			String str = it.next();
+			if (Doc.MyWord.containsKey(str)) {
+				// a
+				num += ((double) MyWord.get(str).getCharacterValue())
+						* ((double) Doc.MyWord.get(str).getCharacterValue()); // d1*c1
+				d += ((double) MyWord.get(str).getCharacterValue())
+						* ((double) MyWord.get(str).getCharacterValue()); // |d1|
+				num3 += ((double) Doc.MyWord.get(str).getCharacterValue())
+						* ((double) Doc.MyWord.get(str).getCharacterValue());// |c1|
+				num4 += 1;
+			}
+		}
+		if (((num4 / ((double) MyWord.size())) <= 0.05)
+				|| ((num4 / ((double) Doc.MyWord.size())) <= 0.05)) {
+			return 0;
+		}
+
+		return (num / (d + num3 - num));
+	}
+
+	
 
 	public Word deleteWord(String key) {
 		return MyWord.remove(key);
@@ -143,7 +177,7 @@ public class Text {
 		for (int i = 0; i < 4; i++)
 			for (int j = i + 1; j < 5; j++) {
 				System.out.print("Compare " + (i + 1) + " " + (j + 1));
-				System.out.print(" Cos=" + docList.get(i).ComputeSimilarity(docList.get(j)) + "\n");
+				System.out.print(" Cos=" + docList.get(i).ComputeSimilarity2(docList.get(j)) + "\n");
 
 			}
 
