@@ -92,7 +92,9 @@
 	</em:figure>
 
 	<em:figure gf:classid="Merge" gf:id="5">
-		<gf:LogicalAttribute />
+		<gf:LogicalAttribute>
+		<gf:removeDuplications>1</gf:removeDuplications>
+		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
 				<gf:input>10</gf:input>

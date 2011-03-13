@@ -18,7 +18,7 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
-public class FetchRss extends AbstractModule {
+public class FetchRss extends AbstractListModule {
 
 	private ArrayList<String> RssAddresses;
 	private List<SyndEntry> entries;

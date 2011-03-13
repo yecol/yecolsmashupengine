@@ -12,7 +12,7 @@ import act.mashup.global.Item;
 import act.mashup.global.Result;
 import act.mashup.util.Log;
 
-public abstract class AbstractModule {
+public abstract class AbstractListModule {
 
 	protected Map<Integer, Result> results;
 	protected EngineNode en;
@@ -23,7 +23,7 @@ public abstract class AbstractModule {
 	/**
 	 * Default constructor.
 	 */
-	public AbstractModule() {
+	public AbstractListModule() {
 		timeStamp = new Date();
 		rlt = new Result(Result.TYPE_LIST);
 		items = new ArrayList<Item>();

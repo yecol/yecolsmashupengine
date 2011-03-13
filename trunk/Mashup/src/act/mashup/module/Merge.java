@@ -2,6 +2,7 @@ package act.mashup.module;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
 import act.mashup.util.Log;
+import act.mashup.util.Similarity.SimilarityDetector;
 import act.mashup.util.Similarity.Text;
 
 /**
@@ -18,9 +20,10 @@ import act.mashup.util.Similarity.Text;
  * </P>
  * 参数：无</br> 返回：内部数据结构Item的列表</br>
  */
-public class Merge extends AbstractModule {
+public class Merge extends AbstractListModule {
 
 	private ArrayList<Integer> ins;
+	private String removeDuplications;
 
 	private ArrayList<Item> curItems;
 	private Item item1;
@@ -28,7 +31,7 @@ public class Merge extends AbstractModule {
 	private ArrayList<ArrayList<Item>> otherResults;
 	private Text tarText;
 	private Text refText;
-	private ArrayList al;
+	private ArrayList<Item> al;
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
@@ -40,6 +43,7 @@ public class Merge extends AbstractModule {
 		curItems = new ArrayList<Item>();
 		otherResults = new ArrayList<ArrayList<Item>>();
 		ins = en.getInputs();
+		removeDuplications = en.getParas().getChildTextTrim("removeDuplications", KV.gf);
 		if (ins.size() == 0)
 			throw new IOException();
 		for (Iterator it = ins.iterator(); it.hasNext();) {
@@ -53,50 +57,21 @@ public class Merge extends AbstractModule {
 
 		for (Integer i : ins) {
 			al = (ArrayList<Item>) results.get(i).GetResultList();
-			otherResults.add((ArrayList<Item>) al.clone());
+			ArrayList<Item> tempArrayList = (ArrayList<Item>) al.clone();
+			items.addAll(tempArrayList);
 		}
 	}
 
 	@Override
 	protected void Execute() throws Exception {
 		// ××××××××××××××××××××××警告：引用合并××××××××××××××××××××××××××××××
-		int size = otherResults.size();
-		int count = 0;
-		for (int i = 0; i < size; i++) {
-			if (i != size - 1) {
-				curItems = (ArrayList<Item>) otherResults.get(i).clone();
-				int temp1 = 0;
-				for (Iterator itOfCurItems = curItems.iterator(); itOfCurItems.hasNext(); temp1++) {
-					item1 = (Item) itOfCurItems.next();
-					tarText = new Text(item1.getValue("title") + item1.getValue("description"));
-					for (int j = i + 1; j < size; j++) {
-						int temp2 = 0;
-						for (Iterator itOfOtherRlts = otherResults.get(j).iterator(); itOfOtherRlts.hasNext(); temp2++) {
-							item2 = (Item) itOfOtherRlts.next();
-							refText = new Text(item2.getValue("title") + item2.getValue("description"));
-							double similarity = tarText.ComputeSimilarity(refText);
-							Log.logger.debug("i=" + i + " j=" + j + " temp1=" + temp1 + " temp2=" + temp2 + " simi=" + similarity);
-							count++;
-							if (similarity > KV.similarityThrashhold) {
-								itOfOtherRlts.remove();
-								item1.addRank();
-							}
-						}
-					}
-					Log.logger.debug("Added i=" + i + " j=" + " temp1=" + temp1 + " rank=" + item1.getRank());
-					item1.rankToMap();
-					items.add(item1);
-				}
-			} else {
-				curItems = (ArrayList<Item>) otherResults.get(i).clone();
-				for (Item item : curItems) {
-					item.rankToMap();
-					items.add(item);
-				}
-			}
+		if (removeDuplications.equals("1")) {
 
+			SimilarityDetector sd = new SimilarityDetector((ArrayList<Item>) items);
+			sd.Detect();
 		}
-		Log.logger.debug("Compare " + count + " times.");
+
+		// Log.logger.debug("Compare " + count + " times.");
 		rlt.SetResultList(items);
 	}
 

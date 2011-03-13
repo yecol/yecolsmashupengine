@@ -1,6 +1,6 @@
 package act.mashup.module;
 
-public class RemoveDuplication extends AbstractModule {
+public class RemoveDuplication extends AbstractListModule {
 
 	@Override
 	protected void Prepare() throws Exception {

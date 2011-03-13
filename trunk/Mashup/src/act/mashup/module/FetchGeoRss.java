@@ -31,7 +31,7 @@ import com.sun.syndication.io.XmlReader;
  * 返回：内部数据结构Item的列表
  */
 
-public class FetchGeoRss extends AbstractModule {
+public class FetchGeoRss extends AbstractListModule {
 
 	private String rssAddress;
 	private List<SyndEntry> entries;

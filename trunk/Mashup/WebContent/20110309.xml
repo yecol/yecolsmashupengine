@@ -1,43 +1,74 @@
-<em:enginemodel
-	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd "
-	xmlns:em="http://www.example.org/EngineModel" xmlns:gf="http://www.example.org/GeneralFigure"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<em:figure gf:classid="FetchRss" gf:id="2">
+<?xml version="1.0" encoding="UTF-8"?>
+<em:enginemodel xmlns:em="http://www.example.org/EngineModel"
+	xmlns:gf="http://www.example.org/GeneralFigure" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd ">
+
+	<em:figure gf:classid="FetchRss" gf:id="1">
 		<gf:LogicalAttribute>
-			<gf:url> http://news.qq.com/newsgn/rss_newsgn.xml</gf:url>
+			<gf:url>
+		         http://rss.sina.com.cn/news/marquee/ddt.xml
+		    </gf:url>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
-			<gf:inputs>
-				<gf:input>0</gf:input>
-			</gf:inputs>
+			<gf:inputs />
 			<gf:outputs>
-				<gf:output>13</gf:output>
+				<gf:output>17</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	<em:figure gf:classid="FetchRss" gf:id="4">
+
+	<em:figure gf:classid="FetchRss" gf:id="3">
 		<gf:LogicalAttribute>
-			<gf:url>http://rss.sina.com.cn/news/china/focus15.xml</gf:url>
+			<gf:url>
+		         http://rss.news.sohu.com/rss/focus.xml
+		    </gf:url>
+		    <gf:url>
+		         http://rss.news.sohu.com/rss/focus.xml
+		    </gf:url>
+			<gf:addUngeoItems>0</gf:addUngeoItems>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs />
+			<gf:outputs>
+				<gf:output>11</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+
+
+	<em:figure gf:classid="Merge" gf:id="5">
+		<gf:LogicalAttribute>
+		<gf:removeDuplications>1</gf:removeDuplications>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
-				<gf:input>0</gf:input>
+				<gf:input>17</gf:input>
+				<gf:input>11</gf:input>
 			</gf:inputs>
 			<gf:outputs>
 				<gf:output>14</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	<em:figure gf:classid="Merge" gf:id="6">
-		<gf:LogicalAttribute />
+
+
+<em:figure gf:classid="Sort" gf:id="20">
+		<gf:LogicalAttribute>
+			<gf:sort>
+				<gf:sortKey>
+				rank
+	        	</gf:sortKey>
+				<gf:sortKind>1</gf:sortKind>
+			</gf:sort>
+		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
-				<gf:input>13</gf:input>
 				<gf:input>14</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>17</gf:output>
+				<gf:output>15</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
+
 </em:enginemodel>
