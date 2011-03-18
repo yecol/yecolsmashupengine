@@ -2,6 +2,8 @@ package act.mashup.module;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +24,11 @@ public class FetchRss extends AbstractListModule {
 
 	private ArrayList<String> RssAddresses;
 	private List<SyndEntry> entries;
+	private DateFormat dateFormat;
 
 	@Override
 	protected void Prepare() throws Exception {
-		// TODO Auto-generated method stub
+		dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		RssAddresses=new ArrayList<String>();
 		List els = en.getParas().getChildren("url", KV.gf);
 		for (int i = 0; i < els.size(); i++) {
@@ -58,7 +61,7 @@ public class FetchRss extends AbstractListModule {
 					if (!entry.getAuthor().trim().equals(""))
 						_item.setValue("author", entry.getAuthor());
 					_item.setValue("link", entry.getLink());
-					_item.setValue("publishDate", entry.getPublishedDate() == null ? timeStamp.toString() : entry.getPublishedDate().toString());
+					_item.setValue("publishDate", entry.getPublishedDate() == null ? dateFormat.format(timeStamp) : dateFormat.format(entry.getPublishedDate()));
 					_item.setValue("description", entry.getDescription().getValue());
 					items.add(_item);
 				}

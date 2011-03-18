@@ -44,7 +44,6 @@ public class Sort extends AbstractListModule {
 			kinds.add(e.getChildTextTrim("sortKind", KV.gf));
 		}
 
-		System.out.println(keys.toString());
 		comparator = new ComboComparator(keys, kinds);
 
 	}
@@ -82,7 +81,6 @@ public class Sort extends AbstractListModule {
 			Collator collator = Collator.getInstance(Locale.CHINA);
 			while (collator.compare(i1.getValue(keys.get(i)), i2.getValue(keys.get(i))) == 0 && i < sortLength - 1) {
 				i++;
-
 			}
 			if (kinds.get(i).equals("1")) {
 				// ÕýÐò¡£

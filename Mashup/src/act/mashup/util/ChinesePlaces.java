@@ -21,9 +21,7 @@ public class ChinesePlaces {
 		placesSet=new HashSet<String>();
 		String dictPathStr=getClass().getResource("/").toString()+KV.placesDictPath;
 		URL dictPath=new URL(dictPathStr);
-		//System.out.println("RESOURCES:"+getClass().getResource("/").toString());
 		File dict = new File(dictPath.toURI());
-		//File dict = new File(KV.placesDictPath);
 		Scanner scanner;
 			scanner = new Scanner(dict,"utf-8");
 			int i=0;
@@ -50,13 +48,6 @@ public class ChinesePlaces {
 	public boolean FindPlace(String s){
 		return placesSet.contains(s);
 			
-	}
-	
-	public static void main(String[] args){
-		ChinesePlaces cp=ChinesePlaces.getInstance();
-		System.out.println("over");
-		System.out.println(cp.FindPlace("北京航空航天大学"));
-		System.out.println(cp.FindPlace("莱茵花园"));
 	}
 
 }
