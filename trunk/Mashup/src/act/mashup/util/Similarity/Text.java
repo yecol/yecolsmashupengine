@@ -182,4 +182,11 @@ public class Text {
 			}
 
 	}
+	
+	public String getMyWord(){
+		String outString=new String();
+		for(String s:this.MyWord.keySet())
+			outString=outString+" "+s;
+		return outString;
+	}
 }

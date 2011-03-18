@@ -34,9 +34,15 @@ public class SimilarityDetector {
 					for (b = a + 1; b < _length; b++) {
 						if (flags.get(b) != 1) {
 							Item refItem = items.get(b);
-							Text refText = new Text(refItem.getValue("title"));
-							double similarity=curText.ComputeSimilarity2(refText);
-							Log.logger.debug("a=" + a + ",b=" + b + " " +similarity );
+							Text refText = new Text(refItem.getValue("title")+refItem.getValue("description"));
+							double similarity = curText.ComputeSimilarity2(refText);
+							/*
+							 * if (similarity > 0.4) { Log.logger.debug("a=" + a
+							 * + ",b=" + b); Log.logger.debug("curText=" +
+							 * curText.getMyWord()); Log.logger.debug("refText="
+							 * + refText.getMyWord()); Log.logger.debug("simi="
+							 * + similarity); }
+							 */
 							if (similarity > KV.similarityThrashhold) {
 								flags.set(b, 1);
 								items.get(a).addRank();

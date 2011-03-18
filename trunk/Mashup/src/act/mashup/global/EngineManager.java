@@ -122,17 +122,11 @@ public class EngineManager {
 			}
 
 		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
 			Log.logger.fatal(e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			Log.logger.fatal(e);
 		}
-		/*
-		for (EngineNode en : engineNodes) {
-			System.out.println("enTest:" + en.toString());
-		}
-		*/
+
 
 		RunSequence();
 
@@ -168,7 +162,6 @@ public class EngineManager {
 
 		}
 
-		//System.out.println(results.toString());
 		Log.logger.info("ALL MODULES EXECUTE OVER");
 	}
 

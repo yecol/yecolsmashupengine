@@ -51,7 +51,6 @@ public class FetchXml extends AbstractListModule {
 		List iChildren = en.getParas().getChild("itemChildren", KV.gf).getChildren("itemChild", KV.gf);
 		for (Object o : iChildren) {
 			Element el = (Element) o;
-			System.out.println("text:"+el.getText()+" value:"+el.getValue());
 			itemChildren.add(el.getValue());
 		}
 
@@ -85,9 +84,7 @@ public class FetchXml extends AbstractListModule {
 			_item = new Item();
 
 			for (String s : itemChildren) {
-				// 将item内部的每个子元素补齐
 				_x = XPath.newInstance(s);
-				// System.out.println("_key="+_key+"_value="+transformParas.get(_key)+"_xv="+_x.valueOf(e));
 				_item.setValue(s, _x.valueOf(e));
 
 			}

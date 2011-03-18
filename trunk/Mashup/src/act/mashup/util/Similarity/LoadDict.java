@@ -48,11 +48,9 @@ public class LoadDict {
 					flag = false;
 					break;
 				}
-				/*
-				 * if (time < 10) { System.out.println(line); time++; }
-				 */
 				String[] textArray = line.split("\t");
 				// È¡´ÊÆµÐÅÏ¢
+				//if(textArray[3].matches("[NV]"))
 				this.sogou.put(textArray[0], textArray[1]);
 			}
 			Log.logger.debug("Sougou Dict Loaded. size="+this.sogou.size());
@@ -93,7 +91,6 @@ public class LoadDict {
 	public static void main(String[] args) {
 		LoadDict ld = LoadDict.getDict();
 		Map<String, String> map = ld.getSogou();
-		System.out.println("END");
 
 	}
 

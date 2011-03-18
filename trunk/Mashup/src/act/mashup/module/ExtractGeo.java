@@ -43,12 +43,10 @@ public class ExtractGeo extends AbstractListModule {
 			Item item=(Item)it.next();
 			string=item.getValue("title");
 			segments=cs.getSegments(string);
-			//System.out.println(segments.toString());
 			String place=ExtractGeoInformation(segments);
 			if(place==null){
 				string=item.getValue("description");
 				segments=cs.getSegments(string);
-				//System.out.println(segments.toString());
 				place=ExtractGeoInformation(segments);
 			}
 			if(place!=null&&place.length()!=0){
@@ -58,7 +56,6 @@ public class ExtractGeo extends AbstractListModule {
 				it.remove();	
 			}		
 		}
-		//System.out.println("this is ok:size="+items.size());
 		rlt.SetResultList(items);
 
 	}
