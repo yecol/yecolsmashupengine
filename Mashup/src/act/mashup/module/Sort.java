@@ -39,7 +39,7 @@ public class Sort extends AbstractListModule {
 		List sorts = en.getParas().getChildren("sort", KV.gf);
 		sortLength = sorts.size();
 		for (int i = 0; i < sortLength; i++) {
-			Element e = (Element) sorts.get(i);
+			Element e = (Element) sorts.get(i);			
 			keys.add(e.getChildTextTrim("sortKey", KV.gf));
 			kinds.add(e.getChildTextTrim("sortKind", KV.gf));
 		}

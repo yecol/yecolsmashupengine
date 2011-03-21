@@ -1,4 +1,4 @@
-package act.mashup.module;
+package act.mashup.module.list;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,6 +14,7 @@ import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
+import act.mashup.module.AbstractListModule;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -28,13 +29,31 @@ public class FetchRss extends AbstractListModule {
 
 	@Override
 	protected void Prepare() throws Exception {
-		dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		RssAddresses=new ArrayList<String>();
+		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		RssAddresses = new ArrayList<String>();
 		List els = en.getParas().getChildren("url", KV.gf);
 		for (int i = 0; i < els.size(); i++) {
-			Element e=(Element) els.get(i);
-			RssAddresses.add(e.getValue().trim());
+			Element e = (Element) els.get(i);
+			Integer istream;
+			try{
+				istream= Integer.parseInt(e.getAttributeValue("istream"));
+			}catch(NumberFormatException nfe){
+				istream=0;
+			}
+			if (istream != 0)
+				dynamicInputs.add(istream);
+			else
+				RssAddresses.add(e.getValue().trim());
 		}
+
+
+		if (this.en.isDynamic() == true) {
+			for (Integer i : dynamicInputs) {
+				RssAddresses.add(results.get(i).GetResultMap().get("url").toString());
+			}
+		}
+
 		if (RssAddresses.isEmpty())
 			throw new MalformedURLException();
 	}

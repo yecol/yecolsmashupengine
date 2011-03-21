@@ -19,6 +19,7 @@ public abstract class AbstractListModule {
 	protected Date timeStamp,debugTime;
 	protected List<Item> items;
 	protected Result rlt;
+	protected ArrayList<Integer> dynamicInputs;
 
 	/**
 	 * Default constructor.
@@ -27,6 +28,7 @@ public abstract class AbstractListModule {
 		timeStamp = new Date();
 		rlt = new Result(Result.TYPE_LIST);
 		items = new ArrayList<Item>();
+		dynamicInputs=new ArrayList<Integer>();
 	}
 
 	// 供Engine调用的方法

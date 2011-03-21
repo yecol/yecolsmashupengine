@@ -62,7 +62,9 @@ public class EngineManager {
 		List ioputs;
 		String classId;
 		Integer id;
+		boolean dynamic;
 		Element paras;
+		ArrayList attrIns;
 		ArrayList inputs;
 		ArrayList outputs;
 
@@ -75,28 +77,31 @@ public class EngineManager {
 			Document doc = sb.build(source);
 			Element rootElement = doc.getRootElement();
 			Log.logger.debug("Parse begin");
-			Log.logger.debug("Root Element is "+rootElement.toString());
+			Log.logger.debug("Root Element is " + rootElement.toString());
 			List figures = rootElement.getChildren("figure", KV.em);
 			// 对每一个figure进行对象化操作
 			for (Iterator iter = figures.iterator(); iter.hasNext();) {
 				figure = (Element) iter.next();
-				Log.logger.debug("Figure: "+figure.toString());
+				Log.logger.debug("Figure: " + figure.toString());
 
 				// 获得属性
 				classId = figure.getAttributeValue("classid", KV.gf);
+				dynamic = figure.getAttributeValue("dynamic", KV.gf).trim().equals("1") ? true : false;
 				id = Integer.parseInt(figure.getAttributeValue("id", KV.gf));
 				doneStatus.put(id, false);
 
+				// 获得属性输入
+				attrIns = new ArrayList<Integer>();
+				if (dynamic == true) {
+					ioputs = figure.getChild("AttributeInput", KV.gf).getChildren("istream", KV.gf);
+					for (Iterator it = ioputs.iterator(); it.hasNext();) {
+						ioput = (Element) it.next();
+						attrIns.add(Integer.parseInt(ioput.getValue().trim()));
+					}
+				}
+
 				// 获得参数
 				paras = figure.getChild("LogicalAttribute", KV.gf);
-				// paras = new HashMap<String, String>();
-				/*
-				 * for (Iterator it = ioputs.iterator(); it.hasNext();) { ioput
-				 * = (Element) it.next();
-				 * paras.put(ioput.getAttributeValue("name"),
-				 * ioput.getTextTrim());
-				 * System.out.println(ioput.getTextTrim()); }
-				 */
 
 				// 获得输入
 				ioputs = figure.getChild("interfaces", KV.gf).getChild("inputs", KV.gf).getChildren("input", KV.gf);
@@ -117,7 +122,7 @@ public class EngineManager {
 				}
 
 				// 对象化
-				engineNodes.add(new EngineNode(id, classId, paras, inputs, outputs));
+				engineNodes.add(new EngineNode(id, classId, paras, attrIns, inputs, outputs, dynamic));
 
 			}
 
@@ -126,7 +131,6 @@ public class EngineManager {
 		} catch (IOException e) {
 			Log.logger.fatal(e);
 		}
-
 
 		RunSequence();
 
@@ -199,17 +203,28 @@ public class EngineManager {
 		// 完全正确
 		else {
 			rootElement.setAttribute("status", "true");
-			List<Item> _itemList = this.results.get(i).GetResultList();
-			Element _el = null;
-			for (Item _item : _itemList) {
-				_el = new Element("item");
-				for (Iterator<String> it = _item.getKeys().iterator(); it.hasNext();) {
-					String _name = it.next();
-					Element _ele = new Element(_name);
-					_ele.setText(_item.getValue(_name));
-					_el.addContent(_ele);
+			if (this.results.get(i).GetType() == Result.TYPE_LIST) {
+				List<Item> _itemList = this.results.get(i).GetResultList();
+				Element _el = null;
+				for (Item _item : _itemList) {
+					_el = new Element("item");
+					for (Iterator<String> it = _item.getKeys().iterator(); it.hasNext();) {
+						String _name = it.next();
+						Element _ele = new Element(_name);
+						_ele.setText(_item.getValue(_name));
+						_el.addContent(_ele);
+					}
+					rootElement.addContent(_el);
 				}
-				rootElement.addContent(_el);
+			}
+			else if(this.results.get(i).GetType() == Result.TYPE_MAP){
+				Map<String,String> _itemMap = this.results.get(i).GetResultMap();
+				Element _el = null;
+				for (String key : _itemMap.keySet()) {
+					_el=new Element(key);
+					_el.setText(_itemMap.get(key));
+					rootElement.addContent(_el);
+				}
 			}
 		}
 		outDoc.setRootElement(rootElement);
