@@ -17,6 +17,7 @@ public abstract class AbstractMapModule {
 	protected Date timeStamp,debugTime;
 	protected Item item;
 	protected Result rlt;
+	protected ArrayList<Integer> dynamicInputs;
 
 	/**
 	 * Default constructor.
@@ -25,6 +26,7 @@ public abstract class AbstractMapModule {
 		timeStamp = new Date();
 		rlt = new Result(Result.TYPE_MAP);
 		item = new Item();
+		dynamicInputs=new ArrayList<Integer>();
 	}
 
 	// 供Engine调用的方法

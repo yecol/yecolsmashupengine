@@ -1,4 +1,4 @@
-package act.mashup.module;
+package act.mashup.module.list;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,10 +6,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.jdom.Element;
+
 import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
+import act.mashup.module.AbstractListModule;
 import act.mashup.util.Log;
 import act.mashup.util.Similarity.SimilarityDetector;
 import act.mashup.util.Similarity.Text;
@@ -43,7 +46,20 @@ public class Merge extends AbstractListModule {
 		curItems = new ArrayList<Item>();
 		otherResults = new ArrayList<ArrayList<Item>>();
 		ins = en.getInputs();
-		removeDuplications = en.getParas().getChildTextTrim("removeDuplications", KV.gf);
+
+		Element e = en.getParas().getChild("removeDuplications", KV.gf);
+
+		Integer istream;
+		try {
+			istream = Integer.parseInt(e.getAttributeValue("istream"));
+		} catch (NumberFormatException nfe) {
+			istream = 0;
+		}
+		if (en.isDynamic() == true && istream != 0)
+			removeDuplications = results.get(istream).GetResultMap().get("removeDuplications").toString();
+		else
+			removeDuplications = e.getValue().trim();
+
 		if (ins.size() == 0)
 			throw new IOException();
 		for (Iterator it = ins.iterator(); it.hasNext();) {
@@ -64,14 +80,12 @@ public class Merge extends AbstractListModule {
 
 	@Override
 	protected void Execute() throws Exception {
-		// ××××××××××××××××××××××警告：引用合并××××××××××××××××××××××××××××××
 		if (removeDuplications.equals("1")) {
 
 			SimilarityDetector sd = new SimilarityDetector((ArrayList<Item>) items);
 			sd.Detect();
 		}
 
-		// Log.logger.debug("Compare " + count + " times.");
 		rlt.SetResultList(items);
 	}
 
