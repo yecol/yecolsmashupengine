@@ -1,4 +1,4 @@
-package act.mashup.module.list;
+package act.mashup.module;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -7,7 +7,6 @@ import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
-import act.mashup.module.AbstractListModule;
 
 public class Join extends AbstractListModule {
 	// Join模块。将两个List结果通过关键字链接起来。分为左连接和右连接

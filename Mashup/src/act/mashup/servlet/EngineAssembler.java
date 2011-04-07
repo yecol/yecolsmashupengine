@@ -15,6 +15,7 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import act.mashup.global.EngineManager;
+import act.mashup.util.Log;
 
 /**
  * Servlet implementation class EngineAssembler
@@ -47,6 +48,7 @@ public class EngineAssembler extends HttpServlet {
 			
 			//在session中查找或者设置一个新的桩
 			EngineManager emgr=new EngineManager();
+			Log.logger.debug(request.getParameter("xml"));
 			emgr.BuildEngine(request.getParameter("xml"));
 			
 			

@@ -1,4 +1,4 @@
-package act.mashup.module.list;
+package act.mashup.module;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,7 +14,6 @@ import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
-import act.mashup.module.AbstractListModule;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -50,7 +49,7 @@ public class FetchRss extends AbstractListModule {
 
 		if (this.en.isDynamic() == true) {
 			for (Integer i : dynamicInputs) {
-				RssAddresses.add(results.get(i).GetResultMap().get("url").toString());
+				RssAddresses.add(results.get(i).GetResultMap().get(i.toString()).toString());
 			}
 		}
 

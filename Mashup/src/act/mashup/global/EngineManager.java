@@ -70,6 +70,7 @@ public class EngineManager {
 
 		// 从字符串开始解析XML文档
 		StringReader read = new StringReader(xmlString);
+		Log.logger.debug(xmlString.length()+xmlString);
 		InputSource source = new InputSource(read);
 		SAXBuilder sb = new SAXBuilder();
 
@@ -155,9 +156,7 @@ public class EngineManager {
 			for (EngineThread t : threads) {
 				try {
 					t.join();
-
 					t.updateStatus(satisfyStatus, doneStatus);
-
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -221,7 +220,7 @@ public class EngineManager {
 				Map<String,String> _itemMap = this.results.get(i).GetResultMap();
 				Element _el = null;
 				for (String key : _itemMap.keySet()) {
-					_el=new Element(key);
+					_el=new Element("no"+key);
 					_el.setText(_itemMap.get(key));
 					rootElement.addContent(_el);
 				}
