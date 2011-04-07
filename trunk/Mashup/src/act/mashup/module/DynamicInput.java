@@ -1,4 +1,4 @@
-package act.mashup.module.map;
+package act.mashup.module;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +8,6 @@ import org.jdom.Element;
 
 import act.mashup.global.EngineNode;
 import act.mashup.global.Result;
-import act.mashup.module.AbstractMapModule;
 import act.mashup.util.Log;
 
 public class DynamicInput extends AbstractMapModule {
@@ -36,7 +35,7 @@ public class DynamicInput extends AbstractMapModule {
 		Element _element;
 		for(Object o:el){
 			_element=(Element)o;
-		    inputsMap.put(_element.getName().trim(), _element.getValue().trim());
+		    inputsMap.put(en.getOutputs().get(0).toString(), _element.getValue().trim());
 		    Log.logger.debug(inputsMap.toString());
 			rlt.SetResultMap(inputsMap);
 		}	

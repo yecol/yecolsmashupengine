@@ -1,4 +1,4 @@
-package act.mashup.module.list;
+package act.mashup.module;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,7 +10,6 @@ import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
-import act.mashup.module.AbstractListModule;
 import act.mashup.util.ChinesePlaces;
 import act.mashup.util.ChineseSegment;
 

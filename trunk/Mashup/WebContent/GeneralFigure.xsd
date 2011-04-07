@@ -7,6 +7,7 @@
 	<xs:complexType name="basefigure">
 		<xs:attribute ref="id" use="required" />
 		<xs:attribute ref="classid" use="required" />
+		<xs:attribute ref="dynamic" use="required" />
 	</xs:complexType>
 
 
@@ -57,6 +58,8 @@
 
 	<xs:attribute name="id" type="xs:string" />
 	<xs:attribute name="classid" type="xs:string" />
+	<xs:attribute name="dynamic" type="xs:boolean" />
+	<xs:attribute name="istream" type="xs:integer" />
 	<xs:element name="x" type="xs:float" />
 	<xs:element name="y" type="xs:float" />
 	<xs:element name="configOpen" type="xs:boolean" />
@@ -64,7 +67,14 @@
 	<!-- Parameters -->
 
 	<!-- FetchRSS&GeoRSS -->
+	
 	<xs:element name="url" type="xs:string" />
+	<!-- <xs:element name="url">
+		<xs:complexType>
+			<xs:attribute ref="istream" use="optional" />
+		</xs:complexType>
+	</xs:element> -->
+	
 	<xs:element name="addUngeoItems" type="xs:boolean" />
 
 	<!-- Rename -->

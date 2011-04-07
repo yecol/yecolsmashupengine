@@ -1,4 +1,4 @@
-package act.mashup.module.list;
+package act.mashup.module;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
-import act.mashup.module.AbstractListModule;
 import act.mashup.util.Log;
 import act.mashup.util.Similarity.SimilarityDetector;
 import act.mashup.util.Similarity.Text;
