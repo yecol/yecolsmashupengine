@@ -36,7 +36,8 @@ public class Crop extends AbstractListModule {
 			istream = 0;
 		}
 		if (en.isDynamic() == true && istream != 0)
-			cropLength = Integer.parseInt(results.get(istream).GetResultMap().get("cropLength").toString());
+			//results.get(i).GetResultMap().get(i.toString()).toString()
+			cropLength = Integer.parseInt(results.get(istream).GetResultMap().get(istream.toString()).toString());
 		else
 			cropLength = Integer.parseInt(e.getValue().trim());
 	}

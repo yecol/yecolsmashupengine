@@ -48,7 +48,7 @@ public class EngineAssembler extends HttpServlet {
 			
 			//在session中查找或者设置一个新的桩
 			EngineManager emgr=new EngineManager();
-			Log.logger.debug(request.getParameter("xml"));
+			//Log.logger.debug(request.getParameter("xml").toString());
 			emgr.BuildEngine(request.getParameter("xml"));
 			
 			
@@ -73,17 +73,9 @@ public class EngineAssembler extends HttpServlet {
 	        format.setEncoding("gb2312");
 	        XMLOutputter outputter = new XMLOutputter(format);
 	        
-	        String outputIdString = request.getParameter("outputId");
-	        int outputIdInt;
-	        if(outputIdString != null)
-	        {
-	        	outputIdInt = Integer.parseInt(outputIdString);
-	        	outputter.output(emgr.GetResult(outputIdInt), out);
-	        }
-	        else
-	        {
-	        	outputter.output(emgr.GetResult(), out);
-	        }     
+	       
+	        outputter.output(emgr.GetRlt(), out);
+	          
 	        out.flush();   
 	        out.close();   
 			
