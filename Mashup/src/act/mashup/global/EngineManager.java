@@ -37,6 +37,7 @@ public class EngineManager {
 	private ArrayList<EngineNode> satisfyingNodes;
 	private Method prepareMethod;
 	private Method runMethod;
+	private String outputid;
 
 	/**
 	 * Default constructor.
@@ -67,16 +68,18 @@ public class EngineManager {
 		ArrayList attrIns;
 		ArrayList inputs;
 		ArrayList outputs;
+		
 
 		// 从字符串开始解析XML文档
 		StringReader read = new StringReader(xmlString);
-		Log.logger.debug(xmlString.length()+xmlString);
+		//Log.logger.debug(xmlString.length()+xmlString);
 		InputSource source = new InputSource(read);
 		SAXBuilder sb = new SAXBuilder();
 
 		try {
 			Document doc = sb.build(source);
 			Element rootElement = doc.getRootElement();
+			outputid=rootElement.getAttributeValue("output").toString().trim();
 			Log.logger.debug("Parse begin");
 			Log.logger.debug("Root Element is " + rootElement.toString());
 			List figures = rootElement.getChildren("figure", KV.em);
@@ -167,8 +170,18 @@ public class EngineManager {
 
 		Log.logger.info("ALL MODULES EXECUTE OVER");
 	}
+	
 
-	public Document GetResult() {
+	public Document GetRlt(){
+		Integer i=Integer.parseInt(outputid);
+		if(i==0)
+			return GetResult();
+		else
+			return GetResult(i);
+	}
+	
+	
+	private Document GetResult() {
 		Document outDoc = new Document();
 		Element rootsElement = new Element("roots");
 		Iterator<Integer> iterator = dataFlows.iterator();
@@ -178,9 +191,11 @@ public class EngineManager {
 		outDoc.setRootElement(rootsElement);
 		return outDoc;
 	}
+	
 
 	// 从result中生成XML
-	public Document GetResult(Integer i) {
+	private Document GetResult(Integer i) {
+		
 		Document outDoc = new Document();
 		Element rootElement = new Element("root");
 		rootElement.setAttribute("figureid", String.valueOf(i));
