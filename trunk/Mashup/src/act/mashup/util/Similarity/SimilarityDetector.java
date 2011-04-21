@@ -46,7 +46,7 @@ public class SimilarityDetector {
 							if (similarity > KV.similarityThrashhold) {
 								flags.set(b, 1);
 								items.get(a).addRank();
-								Log.logger.debug("Add a=" + a + ",rank=" + items.get(a).getRank());
+								//Log.logger.debug("Add a=" + a + ",rank=" + items.get(a).getRank());
 							}
 						}
 					}

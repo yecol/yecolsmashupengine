@@ -10,6 +10,8 @@ import act.mashup.global.KV;
 import act.mashup.global.Result;
 
 public class Crop extends AbstractListModule {
+	
+	//支持动态配置
 
 	private Integer in;
 	private Integer cropLength;
@@ -25,8 +27,6 @@ public class Crop extends AbstractListModule {
 		in = en.getInputs().get(0);
 		// 获得参数
 
-		// cropLength =
-		// Integer.parseInt(en.getParas().getChildTextTrim("cropLength",KV.gf));
 		Element e = en.getParas().getChild("cropLength", KV.gf);
 
 		Integer istream;

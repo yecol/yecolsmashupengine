@@ -70,9 +70,9 @@ public class EngineNode {
 		if (satisfy == true)
 			return;
 		else {
-			Log.logger.debug("stateArray:"+stateArray.toString());
+			//Log.logger.debug("stateArray:"+stateArray.toString());
 			
-			Log.logger.debug("attrIns:"+this.attrIns.toString());
+			//Log.logger.debug("attrIns:"+this.attrIns.toString());
 			boolean singleSatisfy = true;
 			//如果是动态参数输入模块则检测是否准备就绪
 			if(this.isDynamic==true&&this.attrIns.size()!=0){

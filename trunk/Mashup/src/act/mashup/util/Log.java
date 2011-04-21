@@ -14,8 +14,6 @@ public class Log {
 	public static Logger logger=Logger.getLogger(Log.class.getName());
 	
 	private Log(){
-		//PropertyConfigurator.configure(getClass().getResource("").toString()+KV.log4JPropertiesFile);
-		//File file=new File(getClass().getResource("/").toString()+KV.log4JPropertiesFile);
 		PropertyConfigurator.configure("C:\\"+KV.log4JPropertiesFile);
 	}
 	

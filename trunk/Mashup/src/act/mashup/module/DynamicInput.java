@@ -36,7 +36,7 @@ public class DynamicInput extends AbstractMapModule {
 		for(Object o:el){
 			_element=(Element)o;
 		    inputsMap.put(en.getOutputs().get(0).toString(), _element.getValue().trim());
-		    Log.logger.debug(inputsMap.toString());
+		    //Log.logger.debug(inputsMap.toString());
 			rlt.SetResultMap(inputsMap);
 		}	
 	}

@@ -52,14 +52,18 @@
 	</em:figure>
 
 
-<em:figure gf:classid="Sort" gf:id="20">
+<em:figure gf:classid="Filter" gf:id="20">
 		<gf:LogicalAttribute>
-			<gf:sort>
-				<gf:sortKey>
-				rank
-	        	</gf:sortKey>
-				<gf:sortKind>1</gf:sortKind>
-			</gf:sort>
+			<gf:filter>
+				<gf:permitKind>1</gf:permitKind>
+				<gf:permitItems>
+				<gf:permitItem>
+				<gf:field></gf:field>
+				<gf:
+				</gf:permitItem>
+				</gf:permitItems>
+			
+			</gf:filter>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>

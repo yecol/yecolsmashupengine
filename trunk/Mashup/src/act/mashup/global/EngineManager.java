@@ -80,13 +80,13 @@ public class EngineManager {
 			Document doc = sb.build(source);
 			Element rootElement = doc.getRootElement();
 			outputid=rootElement.getAttributeValue("output").toString().trim();
-			Log.logger.debug("Parse begin");
-			Log.logger.debug("Root Element is " + rootElement.toString());
+			//Log.logger.debug("Parse begin");
+			//Log.logger.debug("Root Element is " + rootElement.toString());
 			List figures = rootElement.getChildren("figure", KV.em);
 			// 对每一个figure进行对象化操作
 			for (Iterator iter = figures.iterator(); iter.hasNext();) {
 				figure = (Element) iter.next();
-				Log.logger.debug("Figure: " + figure.toString());
+				//Log.logger.debug("Figure: " + figure.toString());
 
 				// 获得属性
 				classId = figure.getAttributeValue("classid", KV.gf);
@@ -168,7 +168,7 @@ public class EngineManager {
 
 		}
 
-		Log.logger.info("ALL MODULES EXECUTE OVER");
+		//Log.logger.info("ALL MODULES EXECUTE OVER");
 	}
 	
 
