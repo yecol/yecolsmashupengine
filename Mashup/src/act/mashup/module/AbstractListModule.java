@@ -41,7 +41,7 @@ public abstract class AbstractListModule {
 			Prepare();
 			Execute();
 			debugTime=new Date();
-			Log.logger.info("This module has runned "+(debugTime.getTime()-timeStamp.getTime())+"ms.");
+			Log.logger.info(this.en.getClassId()+"\t"+(debugTime.getTime()-timeStamp.getTime()));
 		} catch (Exception e) {
 			Log.logger.fatal(e);
 			rlt.ErrorOccur(e.getMessage());

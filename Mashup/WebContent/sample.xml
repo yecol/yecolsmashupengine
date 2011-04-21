@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <em:enginemodel xmlns:em="http://www.example.org/EngineModel"
-	xmlns:gf="http://www.example.org/GeneralFigure" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:gf="http://www.example.org/GeneralFigure" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" output="6"
 	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd ">
 
 
@@ -13,18 +13,48 @@
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
-				<gf:input>
-          0
-        </gf:input>
+				<gf:input>0</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>
-          6
-        </gf:output>
+				<gf:output>6</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
+	
+	<em:figure gf:classid="Filter" gf:id="1" gf:dynamic="0">
+	<gf:AttributeInput/>
+	<gf:LogicalAttribute>
+		<gf:blockOrPermit>1</gf:blockOrPermit>
+		<gf:anyOrAll>1</gf:anyOrAll>
+		<gf:conditions>
+			<gf:condition>
+				<gf:field>description</gf:field>
+				<gf:relation>0</gf:relation>
+				<gf:key>中国</gf:key>
+			</gf:condition>
+			<gf:condition>
+				<gf:field>PublishDate</gf:field>
+				<gf:relation>1</gf:relation>
+				<gf:key>2011</gf:key>
+			</gf:condition>
+		</gf:conditions>
+	</gf:LogicalAttribute>
+	<gf:interfaces>
+		<gf:inputs>
+		<gf:input>6</gf:input>
+		</gf:inputs>
+		<gf:outputs>
+			<gf:output>17</gf:output>
+		</gf:outputs>
+	</gf:interfaces>
+</em:figure>
+	
+	
+	
+	
+	
 </em:enginemodel>
+
 
 
 <em:figure gf:classid="FetchRss" gf:id="1" gf:dynamic="1">
@@ -41,6 +71,38 @@
 		</gf:outputs>
 	</gf:interfaces>
 </em:figure>
+
+<em:figure gf:classid="Filter" gf:id="1" gf:dynamic="1">
+	<gf:AttributeInput>
+		<gf:istream>13</gf:istream>
+	</gf:AttributeInput>
+	<gf:LogicalAttribute>
+		<gf:blockOrPermit>1</gf:blockOrPermit>
+		<gf:anyOrAll>1</gf:anyOrAll>
+		<gf:conditions>
+			<gf:condition>
+				<gf:field>author</gf:field>
+				<gf:relation>0</gf:relation>
+				<gf:key istream="13" />
+			</gf:condition>
+			<gf:condition>
+				<gf:field>PublishDate</gf:field>
+				<gf:relation>1</gf:relation>
+				<gf:key>Mydate</gf:key>
+			</gf:condition>
+		</gf:conditions>
+	</gf:LogicalAttribute>
+	<gf:interfaces>
+		<gf:inputs>
+		<gf:input>16</gf:input>
+		</gf:inputs>
+		<gf:outputs>
+			<gf:output>17</gf:output>
+		</gf:outputs>
+	</gf:interfaces>
+</em:figure>
+
+
 
 
 <em:figure gf:classid="DynamicInput" gf:id="8" gf:dynamic="0">
@@ -110,7 +172,7 @@
 	</gf:interfaces>
 </em:figure>
 
-<em:figure gf:classid="FetchXml" gf:id="4" gf:dynamic="1">
+<em:figure gf:classid="FetchXml" gf:id="4" gf:dynamic="0">
 	<gf:LogicalAttribute>
 		<gf:url>http://www.w3schools.com/xml/cd_catalog.xml</gf:url>
 		<gf:itemRoot>/CATALOG/CD</gf:itemRoot>

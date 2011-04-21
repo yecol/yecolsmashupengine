@@ -21,6 +21,8 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 public class FetchRss extends AbstractListModule {
+	
+	//÷ß≥÷∂ØÃ¨≈‰÷√
 
 	private ArrayList<String> RssAddresses;
 	private List<SyndEntry> entries;

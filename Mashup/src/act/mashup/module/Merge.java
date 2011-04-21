@@ -16,12 +16,7 @@ import act.mashup.util.Log;
 import act.mashup.util.Similarity.SimilarityDetector;
 import act.mashup.util.Similarity.Text;
 
-/**
- * <p>
- * Merge Module
- * </P>
- * 参数：无</br> 返回：内部数据结构Item的列表</br>
- */
+
 public class Merge extends AbstractListModule {
 
 	private ArrayList<Integer> ins;

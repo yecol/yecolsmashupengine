@@ -55,7 +55,7 @@ public class EngineThread extends Thread {
 			Log.logger.fatal(e);
 		}
 
-		Log.logger.info("Sigle module " + en.getClassId() + " executed.");
+		//Log.logger.info("Sigle module " + en.getClassId() + " executed.");
 	}
 
 	public void updateStatus(Map<Integer, Integer> satisfyStatus, Map<Integer, Boolean> doneStatus) {

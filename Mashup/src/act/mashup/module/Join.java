@@ -3,6 +3,8 @@ package act.mashup.module;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.jdom.Element;
+
 import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
@@ -24,6 +26,7 @@ public class Join extends AbstractListModule {
 	@Override
 	protected void Prepare() throws Exception {
 		ins = en.getInputs();
+			
 		linkByLeft = en.getParas().getChildTextTrim("linkByLeft", KV.gf);
 		linkByRight = en.getParas().getChildTextTrim("linkByRight", KV.gf);
 		left = en.getParas().getChildTextTrim("left", KV.gf);

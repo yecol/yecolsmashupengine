@@ -14,6 +14,8 @@ import act.mashup.util.ChinesePlaces;
 import act.mashup.util.ChineseSegment;
 
 public class ExtractGeo extends AbstractListModule {
+	
+	//÷ß≥÷∂ØÃ¨≈‰÷√
 
 	private Integer in;
 	private ChineseSegment cs;
@@ -32,8 +34,6 @@ public class ExtractGeo extends AbstractListModule {
 	protected void Prepare() throws Exception {
 		Element e = en.getParas().getChild("addUngeoItems", KV.gf);
 
-		// addUngeoItems = en.getParas().getChildTextTrim("addUngeoItems",
-		// KV.gf);
 		Integer istream;
 		try {
 			istream = Integer.parseInt(e.getAttributeValue("istream"));

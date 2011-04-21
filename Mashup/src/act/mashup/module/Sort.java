@@ -1,6 +1,5 @@
 package act.mashup.module;
 
-import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
