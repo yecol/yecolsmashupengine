@@ -4,12 +4,15 @@
 	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd ">
 
 
-	<em:figure gf:classid="FetchRss" gf:id="2" gf:dynamic="0">
+	<em:figure gf:classid="FetchHtml" gf:id="2" gf:dynamic="0">
 		<gf:AttributeInput />
 		<gf:LogicalAttribute>
 			<gf:url>
-         http://news.qq.com/newsgn/rss_newsgn.xml
+         http://yecols.cn/blog
       </gf:url>
+      <gf:xPath>
+         //a
+      </gf:xPath>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
@@ -20,7 +23,10 @@
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	
+
+</em:enginemodel>
+
+
 	<em:figure gf:classid="Filter" gf:id="1" gf:dynamic="0">
 	<gf:AttributeInput/>
 	<gf:LogicalAttribute>
@@ -49,11 +55,6 @@
 	</gf:interfaces>
 </em:figure>
 	
-	
-	
-	
-	
-</em:enginemodel>
 
 
 
