@@ -23,5 +23,5 @@ public final class KV {
 	public static final String log4JPropertiesFile="log4j.properties";
 	
 	// Similarity Thrashhold 
-	public static final double similarityThrashhold=0.95;
+	public static final double similarityThrashhold=0.96;
 }
