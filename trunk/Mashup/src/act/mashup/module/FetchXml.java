@@ -1,12 +1,21 @@
 package act.mashup.module;
 
+import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.stream.Location;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
+
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.xpath.XPath;
 
@@ -14,6 +23,7 @@ import act.mashup.global.EngineNode;
 import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
+import act.mashup.util.Log;
 
 /**
  * <p>
@@ -69,12 +79,36 @@ public class FetchXml extends AbstractListModule {
 
 		// 获得XML文档的根节点作为上下文
 		Element rootElement = doc.getRootElement();
+		
+		/*
+		LinkedList<Element> like=new LinkedList<Element>();
+		like.add(rootElement);
+		while(like.isEmpty()==false){
+			Element e=like.getFirst();
+			e.removeNamespaceDeclaration(e.getNamespace());
+			like.removeFirst();
+			Log.logger.info("aaa "+e.getName()+" "+e.getNamespace().toString());
+			like.addAll(e.getChildren());
+		}
+		*/
+		
+		
+		//Namespace gft = Namespace.getNamespace("urn:yahoo:lcl");
+		//rootElement.removeNamespaceDeclaration(gft);
+		//Log.logger.info(rootElement.getName());
 
 		// 条目节点
 		List<Element> itemList = null;
 		Item _item = null;
 
+		//Log.logger.info(itemRoot);
+		
+		//XPath xp=XPath.newInstance(itemRoot);
+		//xp.addNamespace("urn:yahoo:lcl","urn:yahoo:lcl");
+		//itemList=xp.selectNodes(rootElement);
+		
 		itemList = XPath.selectNodes(rootElement, itemRoot);
+		//Log.logger.info(itemList.toString());
 
 		// 局部指针
 		XPath _x = null;

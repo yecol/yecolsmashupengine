@@ -35,18 +35,13 @@ public class SimilarityDetector {
 						if (flags.get(b) != 1) {
 							Item refItem = items.get(b);
 							Text refText = new Text(refItem.getValue("title")+refItem.getValue("description"));
-							double similarity = curText.ComputeSimilarity2(refText);
-							/*
-							 * if (similarity > 0.4) { Log.logger.debug("a=" + a
-							 * + ",b=" + b); Log.logger.debug("curText=" +
-							 * curText.getMyWord()); Log.logger.debug("refText="
-							 * + refText.getMyWord()); Log.logger.debug("simi="
-							 * + similarity); }
-							 */
+							//double similarity = curText.ComputeSimilarity2(refText);
+							double similarity = curText.ComputeSimilarity(refText);
+							//Log.logger.info(refItem.toString()+"\n"+curItem.toString());
+							//Log.logger.info("s1="+similarity1+"s2="+similarity);
 							if (similarity > KV.similarityThrashhold) {
 								flags.set(b, 1);
 								items.get(a).addRank();
-								//Log.logger.debug("Add a=" + a + ",rank=" + items.get(a).getRank());
 							}
 						}
 					}
