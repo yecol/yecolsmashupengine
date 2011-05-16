@@ -41,7 +41,7 @@ public abstract class AbstractMapModule {
 			debugTime=new Date();
 			Log.logger.info("This module has runned "+(debugTime.getTime()-timeStamp.getTime())+"ms.");
 		} catch (Exception e) {
-			Log.logger.fatal(e);
+			Log.logger.fatal(e.getStackTrace().toString());
 			rlt.ErrorOccur(e.getMessage());
 		} finally {
 			outputs = en.getOutputs();
