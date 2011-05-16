@@ -1,6 +1,7 @@
 package act.mashup.module;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,11 @@ public class DynamicInput extends AbstractMapModule {
 		Element _element;
 		for(Object o:el){
 			_element=(Element)o;
-		    inputsMap.put(en.getOutputs().get(0).toString(), _element.getValue().trim());
+			Iterator iterator = en.getOutputs().iterator();
+			while (iterator.hasNext()) {
+				inputsMap.put(iterator.next().toString(), _element.getValue().trim());
+			}
+		    
 		    //Log.logger.debug(inputsMap.toString());
 			rlt.SetResultMap(inputsMap);
 		}	

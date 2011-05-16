@@ -26,7 +26,8 @@ public class Filter extends AbstractListModule {
 	}
 
 	@Override
-	protected void Prepare() throws Exception {
+	protected void Prepare(){
+		try{
 		conditions = new ArrayList<Condition>();
 
 		in = en.getInputs().get(0);
@@ -43,7 +44,7 @@ public class Filter extends AbstractListModule {
 			}
 		}
 		else{
-			System.out.println("dynamic");
+			//System.out.println("dynamic");
 			for(Object o:es){
 				Element e=(Element)o;
 				Integer istream;
@@ -55,6 +56,9 @@ public class Filter extends AbstractListModule {
 				}
 				System.out.println(istream);
 				if(istream!=0){
+					System.out.println("istream="+istream);
+					System.out.println(results.get(istream).GetResultMap().toString());
+					
 					String dynamicInput=results.get(istream).GetResultMap().get(istream.toString()).toString();
 					c=new Condition(e.getChildTextTrim("field", KV.gf), e.getChildTextTrim("relation", KV.gf), dynamicInput);	
 				}
@@ -63,11 +67,15 @@ public class Filter extends AbstractListModule {
 				conditions.add(c);
 			}
 		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	protected void Execute() throws Exception {
+	protected void Execute(){
 		// permit case
+		try{
 		List temp = results.get(in).GetResultList();
 		for (Object o : temp) {
 			Item _item = (Item) o;
@@ -131,6 +139,9 @@ public class Filter extends AbstractListModule {
 
 		}
 		rlt.SetResultList(items);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 
 	}
 
