@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<em:enginemodel
-	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd "
-	output="195" xmlns:em="http://www.example.org/EngineModel" xmlns:gf="http://www.example.org/GeneralFigure"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<em:figure gf:dynamic="0" gf:classid="FetchRss" gf:id="193">
-		<gf:AttributeInput />
+<em:enginemodel xmlns:em="http://www.example.org/EngineModel"
+	xmlns:gf="http://www.example.org/GeneralFigure" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	output="6"
+	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd ">
+
+
+
+	<em:figure gf:classid="FetchRss" gf:id="1" gf:dynamic="0">
+		<gf:AttributeInput>
+		</gf:AttributeInput>
 		<gf:LogicalAttribute>
-			<gf:url type="String">http://news.qq.com/newsgn/rss_newsgn.xml</gf:url>
+			<gf:url>http://rss.news.yahoo.com/rss/yahoonewsroom</gf:url>
+		</gf:LogicalAttribute>
+		<gf:interfaces>
+			<gf:inputs />
+			<gf:outputs>
+				<gf:output>17</gf:output>
+			</gf:outputs>
+		</gf:interfaces>
+	</em:figure>
+
+
+	<em:figure gf:classid="GoogleTranslate" gf:id="2" gf:dynamic="0">
+		<gf:LogicalAttribute>
+			<gf:AttributeInput />
+			<gf:target>zh-cn</gf:target>
 		</gf:LogicalAttribute>
 		<gf:interfaces>
 			<gf:inputs>
-				<gf:input>0</gf:input>
+				<gf:input>17</gf:input>
 			</gf:inputs>
 			<gf:outputs>
-				<gf:output>195</gf:output>
+				<gf:output>10</gf:output>
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
