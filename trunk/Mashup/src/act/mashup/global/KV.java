@@ -24,4 +24,8 @@ public final class KV {
 	
 	// Similarity Thrashhold 
 	public static final double similarityThrashhold=0.96;
+	
+	//Google API Key
+	public static final String ENCODING = "UTF-8";
+	public static final String googleAPIKey="AIzaSyDvQkoudmKjqjSMWp81U4s30ki5yQU307A";
 }

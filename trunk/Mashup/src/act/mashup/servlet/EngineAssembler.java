@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import org.json.JSONException;
+import org.json.JSONML;
 
 import act.mashup.global.EngineManager;
 import act.mashup.util.Log;
@@ -24,63 +26,73 @@ import act.mashup.util.Log;
 public class EngineAssembler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public EngineAssembler() {
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Default constructor.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request,response);
+	public EngineAssembler() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-			
-			//在session中查找或者设置一个新的桩
-			EngineManager emgr=new EngineManager();
-			//Log.logger.debug(request.getParameter("xml").toString());
-			emgr.BuildEngine(request.getParameter("xml"));
-			
-			
-			
-			response.setContentType("text/xml");
-			//指定响应类型
-			response.setCharacterEncoding("gb2312");
-	        PrintWriter out = response.getWriter();
-			//获得书写器
-	        
-	        /*
-	        String rlt=null;
-	        rlt=request.getParameter("rlt");
-	        try{
-	        	out.println(emgr.GetResult().toString());
-	        }
-	        */
-	        
-	        //out.println(emgr.GetResult(5).toString());
-	        //XMLOutputter outputter = new XMLOutputter();
-	        Format format=Format.getCompactFormat();
-	        format.setEncoding("gb2312");
-	        XMLOutputter outputter = new XMLOutputter(format);
-	        
-	       
-	        outputter.output(emgr.GetRlt(), out);
-	          
-	        out.flush();   
-	        out.close();   
-			
 
-		
+		// 在session中查找或者设置一个新的桩
+		EngineManager emgr = new EngineManager();
+		emgr.BuildEngine(request.getParameter("xml"));
+		String outputType = request.getParameter("opt");
+		if (outputType != null && outputType.equals("json")) {
+
+			response.setContentType("text/plain");
+			// 指定响应类型
+			response.setCharacterEncoding("gb2312");
+			PrintWriter out = response.getWriter();
+			// 获得书写器
+
+			Format format = Format.getCompactFormat();
+			format.setEncoding("gb2312");
+			XMLOutputter outputter = new XMLOutputter(format);
+			
+			Log.logger.info(outputter.outputString(emgr.GetRlt()));
+
+			try {
+				out.println(JSONML.toJSONObject(outputter.outputString(emgr.GetRlt())));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			out.flush();
+			out.close();
+
+		} else {
+
+			response.setContentType("text/xml");
+			// 指定响应类型
+			response.setCharacterEncoding("gb2312");
+			PrintWriter out = response.getWriter();
+			// 获得书写器
+
+			Format format = Format.getCompactFormat();
+			format.setEncoding("gb2312");
+			XMLOutputter outputter = new XMLOutputter(format);
+
+			outputter.output(emgr.GetRlt(), out);
+
+			out.flush();
+			out.close();
+
+		}
 	}
 
 }

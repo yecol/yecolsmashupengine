@@ -53,7 +53,6 @@ public class ExtractGeo extends AbstractListModule {
 
 	@Override
 	protected void Execute() throws Exception {
-		// TODO Auto-generated method stub
 		cs.testSegment();
 		for (Iterator it = items.iterator(); it.hasNext();) {
 			Item item = (Item) it.next();
