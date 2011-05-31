@@ -61,5 +61,11 @@ public class SimilarityDetector {
 			}
 		}
 	}
+	public static void main(String[] ar){
+		Text a=new Text("¸èÇú");
+		Text b=new Text("¸èÎè");
+		System.out.println(a.ComputeSimilarity(b));
+		
+	}
 
 }

@@ -172,6 +172,7 @@ public class EngineManager {
 	}
 	
 
+	//»ñµÃXMLÎÄµµ
 	public Document GetRlt(){
 		Integer i=Integer.parseInt(outputid);
 		if(i==0)
