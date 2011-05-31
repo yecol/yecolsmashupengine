@@ -29,7 +29,7 @@ public class GoogleTranslate extends AbstractListModule {
 	protected void Prepare() throws Exception {
 
 		targetLanguage = en.getParas().getChildTextTrim("target", KV.gf);
-		Log.logger.info("target=" + targetLanguage);
+		//Log.logger.info("target=" + targetLanguage);
 
 		in = en.getInputs().get(0);
 		items.addAll(results.get(in).GetResultList());
@@ -37,11 +37,11 @@ public class GoogleTranslate extends AbstractListModule {
 		keys = new ArrayList<String>();
 		for (int i = 0; i < os.length; i++) {
 			String s = (String) os[i];
-			if (s.equalsIgnoreCase("publishDate") == false && s.equalsIgnoreCase("link")) {
+			if (s.equalsIgnoreCase("publishDate") == false && s.equalsIgnoreCase("link")==false) {
 				keys.add((String) os[i]);
 			}
 		}
-		Log.logger.info(keys.toString());
+		//Log.logger.info(keys.toString());
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public final class Translate extends GoogleAPI {
     	//validateReferrer();
     	
     	String wrapedURL=URL.replaceAll("#KEY#", KV.googleAPIKey).replaceAll("#TO#", to)+text;
-    	//Log.logger.info(wrapedURL);
+    	Log.logger.info(wrapedURL);
     	final URL url = new URL(wrapedURL);
     	
     	final JSONObject json = retrieveJSON(url);

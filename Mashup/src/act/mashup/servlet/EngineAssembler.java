@@ -16,6 +16,8 @@ import org.jdom.output.XMLOutputter;
 import org.json.JSONException;
 import org.json.JSONML;
 
+import com.google.gson.Gson;
+
 import act.mashup.global.EngineManager;
 import act.mashup.util.Log;
 
@@ -50,7 +52,11 @@ public class EngineAssembler extends HttpServlet {
 
 		// 在session中查找或者设置一个新的桩
 		EngineManager emgr = new EngineManager();
-		emgr.BuildEngine(request.getParameter("xml"));
+		//emgr.BuildEngine(request.getParameter("xml"));
+		
+		emgr.BuildEngine(new String(request.getParameter("xml").getBytes("ISO8859-1"),"utf-8"));
+		//Log.logger.info(request.getParameter("xml"));
+		//System.out.println(request.getParameter("xml"));
 		String outputType = request.getParameter("opt");
 		if (outputType != null && outputType.equals("json")) {
 
@@ -65,9 +71,12 @@ public class EngineAssembler extends HttpServlet {
 			XMLOutputter outputter = new XMLOutputter(format);
 			
 			Log.logger.info(outputter.outputString(emgr.GetRlt()));
+			
+			
+			
 
 			try {
-				out.println(JSONML.toJSONObject(outputter.outputString(emgr.GetRlt())));
+				out.println(JSONML.toJSONArray(outputter.outputString(emgr.GetRlt())));
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -82,12 +91,15 @@ public class EngineAssembler extends HttpServlet {
 			response.setCharacterEncoding("gb2312");
 			PrintWriter out = response.getWriter();
 			// 获得书写器
+			
+			
 
 			Format format = Format.getCompactFormat();
 			format.setEncoding("gb2312");
 			XMLOutputter outputter = new XMLOutputter(format);
 
 			outputter.output(emgr.GetRlt(), out);
+			
 
 			out.flush();
 			out.close();
