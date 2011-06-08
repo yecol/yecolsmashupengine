@@ -1,0 +1,65 @@
+1<?xml version="1.0" encoding="gb2312"?>
+ 2<Result xmlns="http://www.fiorano.com/fesb/activity/DBQueryOnInput2/Out">
+ 3   <row resultcount="1">
+ 4      <users_id>1001     </users_id>
+ 5      <users_name>wangwei   </users_name>
+ 6      <users_group>80        </users_group>
+ 7      <users_address>1001号   </users_address>
+ 8   </row>
+ 9   <row resultcount="1">
+10      <users_id>1002</users_id>
+11      <users_name>wangwei   </users_name>
+12      <users_group>80        </users_group>
+13      <users_address>1002号   </users_address>
+14   </row>
+15   <row resultcount="1">
+16      <users_id>1003</users_id>
+17      <users_name>wangwei   </users_name>
+18      <users_group>80        </users_group>
+19      <users_address>1003号   </users_address>
+20   </row>
+21   <row resultcount="1">
+22      <users_id>1004</users_id>
+23      <users_name>wangwei   </users_name>
+24      <users_group>80        </users_group>
+25      <users_address>1004号   </users_address>
+26   </row>
+27</Result>
+
+代码当中 xmlns="http://www.fiorano.com/fesb/activity/DBQueryOnInput2/Out">
+是这个XML文件的命名空间(Namespace)读取该文档的元素值时必须指定其命名空间不然会产生java.lang.NullPointerException 空指针异常
+实际执行代码
+
+public class DuXMLTest2 {
+    public void loadXMLdoc(){
+        FileInputStream fi = null;
+        try {
+            fi = new FileInputStream("Test.xml");
+            SAXBuilder sb = new SAXBuilder();
+            try {
+                Document doc = sb.build(fi);
+                Element root = doc.getRootElement();
+                Namespace ns = root.getNamespace();
+                List jiedian = root.getChildren();
+                Element et = null;
+                for(int i=0;i<jiedian.size();i++){
+                    et = (Element) jiedian.get(i);
+                    System.out.println(et.getChild("users_id",ns).getText());
+                }
+            } catch (JDOMException e) {
+                // TODO 自动生成 catch 块
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO 自动生成 catch 块
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            // TODO 自动生成 catch 块
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args){
+        DuXMLTest2 dt = new DuXMLTest2();
+        dt.loadXMLdoc();
+    }
+}

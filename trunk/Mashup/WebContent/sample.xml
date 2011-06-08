@@ -138,6 +138,21 @@
 	</gf:interfaces>
 </em:figure>
 
+<em:figure gf:classid="YahooSearch" gf:id="2" gf:dynamic="0">
+	<gf:LogicalAttribute>
+		<gf:AttributeInput />
+		<gf:keyword>搜索字</gf:keyword>
+	</gf:LogicalAttribute>
+	<gf:interfaces>
+		<gf:inputs>
+			<gf:input>17</gf:input>
+		</gf:inputs>
+		<gf:outputs>
+			<gf:output>10</gf:output>
+		</gf:outputs>
+	</gf:interfaces>
+</em:figure>
+
 
 <em:figure gf:classid="ExtractGeo" gf:id="2" gf:dynamic="1">
 	<gf:LogicalAttribute>

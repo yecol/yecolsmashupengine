@@ -28,4 +28,7 @@ public final class KV {
 	//Google API Key
 	public static final String ENCODING = "UTF-8";
 	public static final String googleAPIKey="AIzaSyDvQkoudmKjqjSMWp81U4s30ki5yQU307A";
+	
+	//Yahoo Key
+	public static final String yahooAPIKey="dj0yJmk9a014emVnYk1xQUl5JmQ9WVdrOVZFVkNibkZCTkdjbWNHbzlNelk0T1RBek16WXkmcz1jb25zdW1lcnNlY3JldCZ4PTBl";
 }
