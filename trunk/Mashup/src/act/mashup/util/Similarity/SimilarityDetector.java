@@ -30,15 +30,24 @@ public class SimilarityDetector {
 			for (; a < _length - 1; a++) {
 				if (flags.get(a) != 1) {
 					Item curItem = items.get(a);
-					Text curText = new Text(curItem.getValue("title"));
+					Text curText;
+					if (curItem.getKeys().contains(KV.DESCRIPTION)) {
+						curText = new Text(curItem.getValue(KV.TITLE) + curItem.getValue(KV.DESCRIPTION));
+					} else {
+						curText = new Text(curItem.getValue(KV.TITLE));
+					}
 					for (b = a + 1; b < _length; b++) {
 						if (flags.get(b) != 1) {
 							Item refItem = items.get(b);
-							Text refText = new Text(refItem.getValue("title")+refItem.getValue("description"));
-							//double similarity = curText.ComputeSimilarity2(refText);
+							Text refText;
+							if (refItem.getKeys().contains(KV.DESCRIPTION)) {
+								refText = new Text(refItem.getValue(KV.TITLE) + refItem.getValue(KV.DESCRIPTION));
+							} else {
+								refText = new Text(refItem.getValue(KV.TITLE));
+							}
 							double similarity = curText.ComputeSimilarity(refText);
-							//Log.logger.info(refItem.toString()+"\n"+curItem.toString());
-							//Log.logger.info("s1="+similarity1+"s2="+similarity);
+							// Log.logger.info(refItem.toString()+"\n"+curItem.toString());
+							// Log.logger.info("s1="+similarity1+"s2="+similarity);
 							if (similarity > KV.similarityThrashhold) {
 								flags.set(b, 1);
 								items.get(a).addRank();
@@ -61,11 +70,12 @@ public class SimilarityDetector {
 			}
 		}
 	}
-	public static void main(String[] ar){
-		Text a=new Text("¸èÇú");
-		Text b=new Text("¸èÎè");
+
+	public static void main(String[] ar) {
+		Text a = new Text("¸èÇú");
+		Text b = new Text("¸èÎè");
 		System.out.println(a.ComputeSimilarity(b));
-		
+
 	}
 
 }

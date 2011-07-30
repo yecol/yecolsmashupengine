@@ -53,19 +53,18 @@ public class ExtractGeo extends AbstractListModule {
 
 	@Override
 	protected void Execute() throws Exception {
-		cs.testSegment();
 		for (Iterator it = items.iterator(); it.hasNext();) {
 			Item item = (Item) it.next();
-			string = item.getValue("title");
+			string = item.getValue(KV.TITLE);
 			segments = cs.getSegments(string);
 			String place = ExtractGeoInformation(segments);
-			if (place == null) {
-				string = item.getValue("description");
+			if (place == null&&item.getKeys().contains(KV.DESCRIPTION)) {
+				string = item.getValue(KV.DESCRIPTION);
 				segments = cs.getSegments(string);
 				place = ExtractGeoInformation(segments);
 			}
 			if (place != null && place.length() != 0) {
-				item.setValue("place", place);
+				item.setValue(KV.PLACE, place);
 			} else if (addUngeoItems.equals("0")) {
 				it.remove();
 			}
