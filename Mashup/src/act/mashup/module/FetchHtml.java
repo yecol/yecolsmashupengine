@@ -67,7 +67,7 @@ public class FetchHtml extends AbstractListModule {
 		for (Object o : fitNodes) {
 			TagNode tn = (TagNode) o;
 			Item _item = new Item();
-			_item.setValue("title", tn.getText().toString());
+			_item.setValue(KV.TITLE, tn.getText().toString());
 			String href = tn.getAttributeByName("href");
 
 			// Log.logger.debug("before\t"+href);
@@ -95,9 +95,9 @@ public class FetchHtml extends AbstractListModule {
 
 			}
 			// Log.logger.debug("after\t"+href);
-			_item.setValue("link", href);
+			_item.setValue(KV.LINK, href);
 
-			_item.setValue("publishDate", dateFormat.format(timeStamp));
+			_item.setValue(KV.PUBLISHDATE, dateFormat.format(timeStamp));
 			items.add(_item);
 		}
 		Date debugTime3 = new Date();
