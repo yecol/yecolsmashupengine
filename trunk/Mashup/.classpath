@@ -41,5 +41,8 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/Mashup/ext/gson/gson-1.7.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="ext/weibo4j/commons-codec.jar"/>
+	<classpathentry kind="lib" path="ext/weibo4j/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="ext/weibo4j/commons-logging-1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
