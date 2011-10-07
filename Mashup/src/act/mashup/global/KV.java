@@ -39,4 +39,9 @@ public final class KV {
 
 	// Yahoo Key
 	public static final String yahooAPIKey = "dj0yJmk9a014emVnYk1xQUl5JmQ9WVdrOVZFVkNibkZCTkdjbWNHbzlNelk0T1RBek16WXkmcz1jb25zdW1lcnNlY3JldCZ4PTBl";
+	
+	//Weibo Key
+	public static final String weiboConsumerKey="3669719157";
+	public static final String weiboConsumerSecret="930d245d7ed96b95201862cbe27ca5b4";
+
 }
