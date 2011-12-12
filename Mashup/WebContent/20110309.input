@@ -3,6 +3,26 @@
 	xmlns:gf="http://www.example.org/GeneralFigure" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	output="36"
 	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd ">
+	 <em:figure gf:dynamic="0" gf:classid="SinaWeibo" gf:id="7">
+    <gf:AttributeInput/>
+    <gf:LogicalAttribute>
+      <gf:token>cc3628c01b1f3a045040ec003963d9fa/gf:token>
+      <gf:tokenSecret>0d162fd127d0deef5ab3444d0def281f</gf:tokenSecret>
+      <gf:type>1</gf:type>
+    </gf:LogicalAttribute>
+    <gf:interfaces>
+      <gf:inputs>
+        <gf:input>0</gf:input>
+      </gf:inputs>
+      <gf:outputs>
+        <gf:output>11</gf:output>
+      </gf:outputs>
+    </gf:interfaces>
+  </em:figure>
+</em:enginemodel>
+	
+	
+	
 	<em:figure gf:classid="FetchHtml" gf:dynamic="0" gf:id="2">
 		<gf:AttributeInput />
 		<gf:LogicalAttribute>
