@@ -29,7 +29,6 @@ public class GoogleTranslate extends AbstractListModule {
 	protected void Prepare() throws Exception {
 
 		targetLanguage = en.getParas().getChildTextTrim("target", KV.gf);
-		//Log.logger.info("target=" + targetLanguage);
 
 		in = en.getInputs().get(0);
 		items.addAll(results.get(in).GetResultList());

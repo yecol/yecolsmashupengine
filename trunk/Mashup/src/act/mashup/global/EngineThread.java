@@ -53,16 +53,13 @@ public class EngineThread extends Thread {
 			Log.logger.fatal(e);
 		} catch (InvocationTargetException e) {
 			Log.logger.fatal(e);
+			e.printStackTrace();
 		}
 
-		//Log.logger.info("Sigle module " + en.getClassId() + " executed.");
 	}
 
 	public void updateStatus(Map<Integer, Integer> satisfyStatus, Map<Integer, Boolean> doneStatus) {
-		/*
-		 * for(Integer i: en.getOutputs()){ satisfyStatus.put(i, true); }
-		 * satisfyStatus.put(this.en.getOutputs(), true);
-		 */
+		
 		doneStatus.put(this.en.getId(), true);
 
 		//System.out.println("test results:" + this.results.toString());
