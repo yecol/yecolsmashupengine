@@ -15,7 +15,7 @@ public class LocalPlacesSearch {
 	private static final String PASSWORD="sdp123";
 	private static final double RANGE=0.5;
 	
-	private static final String QUERY_STRING="select * from #TABLE# where latitude between #POSITION_LAT#-#RANGE# and #POSITION_LAT#+#RANGE# and longitude between #POSITION_LON#-#RANGE# and #POSITION_LON#+#RANGE# order by 'rank' desc limit 10";
+	private static final String QUERY_STRING="select * from #TABLE# where latitude between #POSITION_LAT#-#RANGE# and #POSITION_LAT#+#RANGE# and longitude between #POSITION_LON#-#RANGE# and #POSITION_LON#+#RANGE# order by rank desc limit 10";
 	
 	public static final String TYPE_HOTEL="hotel";
 	public static final String TYPE_RESORT="resort";
@@ -46,11 +46,9 @@ public class LocalPlacesSearch {
 	public ResultSet SearchByPosition(Position position,String type){
 		ResultSet rs = null;
 		String query=QUERY_STRING.replaceAll("#TABLE#", type).replaceAll("#POSITION_LAT#", Double.toString(position.getLatitude())).replaceAll("#POSITION_LON#", Double.toString(position.getLongitude())).replaceAll("#RANGE#", Double.toString(RANGE));
+		System.out.println(query);		
 		try {
 			rs = stmt.executeQuery(query);
-			while(rs.next()){
-				System.out.println(rs.getString(3));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

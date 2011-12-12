@@ -3,20 +3,7 @@
 	xmlns:gf="http://www.example.org/GeneralFigure" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	output="13"
 	xsi:schemaLocation="http://www.example.org/EngineModel EngineModel.xsd http://www.example.org/GeneralFigure GeneralFigure.xsd ">
-	<em:figure gf:classid="FetchRss" gf:dynamic="0" gf:id="2">
-		<gf:AttributeInput />
-		<gf:LogicalAttribute>
-			<gf:url type="String">http://news.qq.com/newsgn/rss_newsgn.xml</gf:url>
-		</gf:LogicalAttribute>
-		<gf:interfaces>
-			<gf:inputs>
-				<gf:input>0</gf:input>
-			</gf:inputs>
-			<gf:outputs>
-				<gf:output>10</gf:output>
-			</gf:outputs>
-		</gf:interfaces>
-	</em:figure>
+
 	<em:figure gf:classid="Filter" gf:dynamic="1" gf:id="6">
 		<gf:AttributeInput>
 			<gf:istream>17</gf:istream>
@@ -47,21 +34,5 @@
 			</gf:outputs>
 		</gf:interfaces>
 	</em:figure>
-	<em:figure gf:classid="DynamicInput" gf:dynamic="0" gf:id="15">
-		<gf:AttributeInput />
-		<gf:LogicalAttribute>
-			<gf:text>北京</gf:text>
-			<gf:prompt>Key word</gf:prompt>
-			<gf:defaulttext>北京</gf:defaulttext>
-		</gf:LogicalAttribute>
-		<gf:interfaces>
-			<gf:inputs>
-				<gf:input>0</gf:input>
-			</gf:inputs>
-			<gf:outputs>
-				<gf:output>17</gf:output>
-				<gf:output>18</gf:output>
-			</gf:outputs>
-		</gf:interfaces>
-	</em:figure>
+
 </em:enginemodel>
