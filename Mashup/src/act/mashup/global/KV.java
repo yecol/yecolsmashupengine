@@ -6,6 +6,8 @@ public final class KV {
 
 	// Key-Values
 
+	public static final boolean useBoss = true;
+
 	// Namespace
 	public static final Namespace em = Namespace.getNamespace("em", "http://www.example.org/EngineModel");
 	public static final Namespace gf = Namespace.getNamespace("gf", "http://www.example.org/GeneralFigure");
@@ -16,6 +18,7 @@ public final class KV {
 	public static final String AUTHOR = "author";
 	public static final String LINK = "link";
 	public static final String PLACE = "place";
+	public static final String RELATIVE_IMAGE = "relateImage";
 	public static final String PUBLISHDATE = "publishDate";
 
 	// Url address for geo-tag news
@@ -39,9 +42,9 @@ public final class KV {
 
 	// Yahoo Key
 	public static final String yahooAPIKey = "dj0yJmk9a014emVnYk1xQUl5JmQ9WVdrOVZFVkNibkZCTkdjbWNHbzlNelk0T1RBek16WXkmcz1jb25zdW1lcnNlY3JldCZ4PTBl";
-	
-	//Weibo Key
-	public static final String weiboConsumerKey="3669719157";
-	public static final String weiboConsumerSecret="930d245d7ed96b95201862cbe27ca5b4";
+
+	// Weibo Key
+	public static final String weiboConsumerKey = "3669719157";
+	public static final String weiboConsumerSecret = "930d245d7ed96b95201862cbe27ca5b4";
 
 }
