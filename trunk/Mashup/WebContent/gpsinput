@@ -34,7 +34,7 @@
 
 	<em:figure gf:classid="LocalSearch" gf:dynamic="1" gf:id="6">
 		<gf:AttributeInput>
-			<gf:istream>13</gf:istream>
+			<gf:istream>13</gf:istream>ga
 			<gf:istream>14</gf:istream>
 		</gf:AttributeInput>
 		<gf:LogicalAttribute>
