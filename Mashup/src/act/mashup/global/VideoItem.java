@@ -1,5 +1,7 @@
 package act.mashup.global;
 
+import org.jdom.Element;
+
 public class VideoItem {
 	private String VideoTitle;
 	private String VideoDesc;
@@ -65,6 +67,28 @@ public class VideoItem {
 	public String toString() {
 		return "VideoItem [VideoTitle=" + VideoTitle + ", VideoDesc=" + VideoDesc + ", VideoDuration=" + VideoDuration + ", VideoThumbURL=" + VideoThumbURL + ", VideoLinkURL="
 				+ VideoLinkURL + ", VideoURL=" + VideoURL + "]";
+	}
+	
+	public Element toElement(){
+		Element element = new Element("VideoItem");
+		
+		Element _ele0 = new Element("VideoTitle");
+		_ele0.addContent(this.getVideoTitle());
+		element.addContent(_ele0);
+		
+		Element _ele1 = new Element("VideoDesc");
+		_ele1.addContent(this.getVideoDesc());
+		element.addContent(_ele1);
+		
+		Element _ele2 = new Element("VideoThumbURL");
+		_ele2.addContent(this.getVideoThumbURL());
+		element.addContent(_ele2);
+		
+		Element _ele3 = new Element("VideoURL");
+		_ele3.addContent(this.getVideoURL());
+		element.addContent(_ele3);
+	
+		return element;
 	}
 
 }

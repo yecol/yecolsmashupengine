@@ -197,10 +197,9 @@ public class YahooBoss {
 
 		try {
 
-			// YahooBoss signPostTest = new YahooBoss();
-			// signPostTest.SearchImageWithKey("½ðÕýÈÕ", 2);
+			YahooBoss signPostTest = new YahooBoss();
+		    signPostTest.SearchImageWithKey("beijing", 2);
 
-			// signPostTest.returnHttpData();
 
 		} catch (Exception e) {
 			log.info("Error", e);

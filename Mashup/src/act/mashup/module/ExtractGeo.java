@@ -55,11 +55,11 @@ public class ExtractGeo extends AbstractListModule {
 	protected void Execute() throws Exception {
 		for (Iterator it = items.iterator(); it.hasNext();) {
 			Item item = (Item) it.next();
-			string = item.getValue(KV.TITLE);
+			string = item.getValue(KV.TITLE).toString();
 			segments = cs.getSegments(string);
 			String place = ExtractGeoInformation(segments);
 			if (place == null&&item.getKeys().contains(KV.DESCRIPTION)) {
-				string = item.getValue(KV.DESCRIPTION);
+				string = item.getValue(KV.DESCRIPTION).toString();
 				segments = cs.getSegments(string);
 				place = ExtractGeoInformation(segments);
 			}
