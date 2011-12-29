@@ -50,7 +50,7 @@ public class GoogleTranslate extends AbstractListModule {
 				Item item = (Item) it.next();
 				String text = "";
 				for (int j = 0; j < keys.size(); j++) {
-					text = text + "&q=" + URLEncoder.encode(item.getValue(keys.get(j)), KV.ENCODING);
+					text = text + "&q=" + URLEncoder.encode(item.getValue(keys.get(j)).toString(), KV.ENCODING);
 				}
 				ArrayList<String> resultText = Translate.execute(text, targetLanguage);
 				for (int j = 0; j < keys.size(); j++) {

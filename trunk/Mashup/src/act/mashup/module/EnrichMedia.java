@@ -13,7 +13,9 @@ import act.mashup.global.Item;
 import act.mashup.global.KV;
 import act.mashup.global.Result;
 import act.mashup.global.VideoItem;
+import act.mashup.util.ChineseSegment;
 
+import com.sohu.tv.SohuSingleton;
 import com.yahoo.boss.YahooBoss;
 
 public class EnrichMedia extends AbstractListModule {
@@ -27,9 +29,10 @@ public class EnrichMedia extends AbstractListModule {
 
 	private String searchKey;
 	private ArrayList<String> segments;
+	private ChineseSegment cs;
 
-	private List<ImageItem> imageItems;
-	private List<VideoItem> videoItems;
+	// private List<ImageItem> imageItems;
+	// private List<VideoItem> videoItems;
 
 	// 供Engine调用的函数
 	public void run(EngineNode en, Map<Integer, Result> results) {
@@ -41,6 +44,7 @@ public class EnrichMedia extends AbstractListModule {
 		Element relPhoto = en.getParas().getChild("relPhotoCount", KV.gf);
 		Element relVideo = en.getParas().getChild("relVideoCount", KV.gf);
 
+		cs = ChineseSegment.getInstance();
 		Integer photoIstream, videoIstream;
 		try {
 			photoIstream = Integer.parseInt(relPhoto.getAttributeValue("istream"));
@@ -66,36 +70,30 @@ public class EnrichMedia extends AbstractListModule {
 	protected void Execute() throws Exception {
 		for (Iterator it = items.iterator(); it.hasNext();) {
 			Item item = (Item) it.next();
-			searchKey = item.getValue(KV.TITLE);
-			imageItems = yahooBoss.SearchImageWithKey(searchKey, relPhotoCount);
-			if(imageItems!=null){
-				for(int i=0;i<imageItems.size();i++){
-					item.setValue(KV., place);
-				}
-				
-			}
+			searchKey = cs.getSegments(item.getValue(KV.TITLE).toString()).get(0);
+			if (searchKey != null && searchKey.equals("") == false) {
 
-			if (place == null && item.getKeys().contains(KV.DESCRIPTION)) {
-				string = item.getValue(KV.DESCRIPTION);
-				segments = cs.getSegments(string);
-				place = ExtractGeoInformation(segments);
-			}
-			if (place != null && place.length() != 0) {
-				item.setValue(KV.PLACE, place);
-			} else if (addUngeoItems.equals("0")) {
-				it.remove();
+//				List<ImageItem> imageItems = yahooBoss.SearchImageWithKey(searchKey, relPhotoCount);
+//				if (imageItems != null) {
+//					item.setValue("relImages", imageItems);
+//				}
+				
+				List<VideoItem> videoItems = SohuSingleton.searchVideoItemByKey(searchKey, relPhotoCount);
+				if (videoItems != null) {
+					item.setValue("relVideos", videoItems);
+				}
 			}
 		}
 		rlt.SetResultList(items);
 
 	}
 
-	private String ExtractGeoInformation(ArrayList<String> segments) {
-		for (String segment : segments) {
-			if (cp.FindPlace(segment) == true)
-				return segment;
-		}
-		return null;
-	}
+	// private String ExtractGeoInformation(ArrayList<String> segments) {
+	// for (String segment : segments) {
+	// if (cp.FindPlace(segment) == true)
+	// return segment;
+	// }
+	// return null;
+	// }
 
 }

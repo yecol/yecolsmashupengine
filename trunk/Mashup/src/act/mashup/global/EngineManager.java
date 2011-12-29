@@ -15,6 +15,8 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.InputSource;
 
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
+
 import act.mashup.util.Log;
 
 /**
@@ -226,7 +228,24 @@ public class EngineManager {
 					for (Iterator<String> it = _item.getKeys().iterator(); it.hasNext();) {
 						String _name = it.next();
 						Element _ele = new Element(_name);
-						_ele.setText(_item.getValue(_name));
+						Object obj = _item.getValue(_name);
+						if(obj instanceof String) {
+							Log.logger.debug("this.is.string");
+							_ele.setText(_item.getValue(_name).toString());
+						}
+						else if(obj instanceof List){
+							Log.logger.debug("this.is.List");
+							for(Object o:(List)obj){
+								if(o instanceof ImageItem){
+									//TODO
+								}else if(o instanceof VideoItem){
+									Log.logger.debug("this.is.video");
+									VideoItem vi=(VideoItem)o;
+									Element _elem = vi.toElement();
+									_ele.addContent(_elem);
+								}
+							}
+						}
 						_el.addContent(_ele);
 					}
 					rootElement.addContent(_el);

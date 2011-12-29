@@ -6,19 +6,19 @@ import java.util.Set;
 
 public class Item implements Comparable {
 
-	private Map<String, String> KVMap;
+	private Map<String, Object> KVMap;
 	private Integer rank;
 
 	public Item() {
 		rank = 0;
-		KVMap = new HashMap<String, String>();
+		KVMap = new HashMap<String, Object>();
 	}
 
 	public Set<String> getKeys() {
 		return KVMap.keySet();
 	}
 
-	public String getValue(String key) {
+	public Object getValue(String key) {
 		return KVMap.get(key);
 	}
 
@@ -31,7 +31,7 @@ public class Item implements Comparable {
 			return false;
 	}
 
-	public void setValue(String key, String value) {
+	public void setValue(String key, Object value) {
 		KVMap.put(key, value);
 	}
 

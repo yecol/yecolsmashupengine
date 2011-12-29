@@ -165,11 +165,11 @@ public class Filter extends AbstractListModule {
 		}
 
 		private boolean isContains(Item item) {
-			return item.getValue(field).contains(keyword);
+			return item.getValue(field).toString().contains(keyword);
 		}
 
 		private boolean isNotContains(Item item) {
-			return !item.getValue(field).contains(keyword);
+			return !item.getValue(field).toString().contains(keyword);
 		}
 	}
 

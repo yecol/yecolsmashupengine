@@ -32,18 +32,18 @@ public class SimilarityDetector {
 					Item curItem = items.get(a);
 					Text curText;
 					if (curItem.getKeys().contains(KV.DESCRIPTION)) {
-						curText = new Text(curItem.getValue(KV.TITLE) + curItem.getValue(KV.DESCRIPTION));
+						curText = new Text(curItem.getValue(KV.TITLE).toString() + curItem.getValue(KV.DESCRIPTION).toString());
 					} else {
-						curText = new Text(curItem.getValue(KV.TITLE));
+						curText = new Text(curItem.getValue(KV.TITLE).toString());
 					}
 					for (b = a + 1; b < _length; b++) {
 						if (flags.get(b) != 1) {
 							Item refItem = items.get(b);
 							Text refText;
 							if (refItem.getKeys().contains(KV.DESCRIPTION)) {
-								refText = new Text(refItem.getValue(KV.TITLE) + refItem.getValue(KV.DESCRIPTION));
+								refText = new Text(refItem.getValue(KV.TITLE).toString() + refItem.getValue(KV.DESCRIPTION).toString());
 							} else {
-								refText = new Text(refItem.getValue(KV.TITLE));
+								refText = new Text(refItem.getValue(KV.TITLE).toString());
 							}
 							double similarity = curText.ComputeSimilarity(refText);
 							// Log.logger.info(refItem.toString()+"\n"+curItem.toString());
