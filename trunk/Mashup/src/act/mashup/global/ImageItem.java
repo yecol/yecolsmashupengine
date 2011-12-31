@@ -1,5 +1,7 @@
 package act.mashup.global;
 
+import org.jdom.Element;
+
 public class ImageItem {
 	private String ImageTitle;
 	private String ImageThumbURL;
@@ -45,6 +47,24 @@ public class ImageItem {
 	@Override
 	public String toString() {
 		return "ImageItem [ImageTitle=" + ImageTitle + ", ImageThumbURL=" + ImageThumbURL + ", ImageURL=" + ImageURL + ", ImageRefererURL=" + ImageRefererURL + "]";
+	}
+	
+	public Element toElement(){
+		Element element = new Element("ImageItem");
+		
+		Element _ele0 = new Element("ImageTitle");
+		_ele0.addContent(this.getImageTitle());
+		element.addContent(_ele0);
+		
+		Element _ele1 = new Element("ImageThumbURL");
+		_ele1.addContent(this.getImageThumbURL());
+		element.addContent(_ele1);
+		
+		Element _ele2 = new Element("ImageRefererURL");
+		_ele2.addContent(this.getImageRefererURL());
+		element.addContent(_ele2);
+	
+		return element;
 	}
 
 }

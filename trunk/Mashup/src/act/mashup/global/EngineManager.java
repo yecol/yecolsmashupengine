@@ -237,7 +237,9 @@ public class EngineManager {
 							Log.logger.debug("this.is.List");
 							for(Object o:(List)obj){
 								if(o instanceof ImageItem){
-									//TODO
+									ImageItem ii=(ImageItem)o;
+									Element _elem = ii.toElement();
+									_ele.addContent(_elem);
 								}else if(o instanceof VideoItem){
 									Log.logger.debug("this.is.video");
 									VideoItem vi=(VideoItem)o;

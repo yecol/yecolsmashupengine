@@ -19,15 +19,30 @@
     </gf:interfaces>
   </em:figure>
   
-<em:figure gf:dynamic="0" gf:classid="EnrichMedia" gf:id="8">
+  
+  <em:figure gf:classid="Crop" gf:id="8" gf:dynamic="1">
+	<gf:LogicalAttribute>
+		<gf:cropLength>4</gf:cropLength>
+	</gf:LogicalAttribute>
+	<gf:interfaces>
+		<gf:inputs>
+			<gf:input>36</gf:input>
+		</gf:inputs>
+		<gf:outputs>
+			<gf:output>9</gf:output>
+		</gf:outputs>
+	</gf:interfaces>
+</em:figure>
+  
+<em:figure gf:dynamic="0" gf:classid="EnrichMedia" gf:id="9">
     <gf:AttributeInput/>
     <gf:LogicalAttribute>
-      <gf:relPhotoCount>4</gf:relPhotoCount>
+      <gf:relPhotoCount>3</gf:relPhotoCount>
       <gf:relVideoCount>4</gf:relVideoCount>
     </gf:LogicalAttribute>
     <gf:interfaces>
       <gf:inputs>
-        <gf:input>36</gf:input>
+        <gf:input>9</gf:input>
       </gf:inputs>
       <gf:outputs>
         <gf:output>37</gf:output>

@@ -63,7 +63,7 @@ public class YahooBoss {
 			params = params.concat("?q=");
 
 			// Encode Query string before concatenating
-			params = params.concat(URLEncoder.encode(this.getSearchString(), "UTF-8"));
+			params = params.concat(URLEncoder.encode(this.getSearchString(), ENCODE_FORMAT));
 
 			// Create final URL
 			String url = yahooServer + params;
@@ -119,7 +119,7 @@ public class YahooBoss {
 			params = params.concat("?q=");
 
 			// Encode Query string before concatenating
-			params = params.concat(URLEncoder.encode(searchKey, "UTF-8"));
+			params = params.concat(URLEncoder.encode(searchKey, ENCODE_FORMAT));
 
 			// Create final URL
 			String url = yahooServer + params;
@@ -137,6 +137,7 @@ public class YahooBoss {
 				// Send the request
 				if (responseCode == HTTP_STATUS_OK) {
 					resultImageItemList = new ArrayList<ImageItem>();
+
 					JSONObject httpJsonResult = new JSONObject(httpRequest.getResponseBody());
 					JSONArray results = httpJsonResult.getJSONObject("bossresponse").getJSONObject("images").getJSONArray("results");
 					for (int i = 0; i < Math.min(resultSize, results.length()); i++) {
@@ -169,7 +170,7 @@ public class YahooBoss {
 	}
 
 	private String getSearchString() {
-		return "±±º½";
+		return "ï¿½ï¿½ï¿½ï¿½";
 	}
 
 	private boolean isConsumerKeyExists() {
@@ -198,8 +199,8 @@ public class YahooBoss {
 		try {
 
 			YahooBoss signPostTest = new YahooBoss();
-		    signPostTest.SearchImageWithKey("beijing", 2);
-
+			System.out.println(signPostTest.SearchImageWithKey("º£µíÇø", 2).toString());
+		
 
 		} catch (Exception e) {
 			log.info("Error", e);

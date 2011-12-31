@@ -54,11 +54,11 @@ public class EnrichMedia extends AbstractListModule {
 			videoIstream = 0;
 		}
 		if (en.isDynamic() == true && photoIstream != 0) {
-			relPhotoCount = Math.max(5, Integer.parseInt(results.get(photoIstream).GetResultMap().get("relPhotoCount").toString()));
-			relVideoCount = Math.max(5, Integer.parseInt(results.get(videoIstream).GetResultMap().get("relVideoCount").toString()));
+			relPhotoCount = Math.min(5, Integer.parseInt(results.get(photoIstream).GetResultMap().get("relPhotoCount").toString()));
+			relVideoCount = Math.min(5, Integer.parseInt(results.get(videoIstream).GetResultMap().get("relVideoCount").toString()));
 		} else {
-			relPhotoCount = Math.max(5, Integer.parseInt(relPhoto.getValue().trim()));
-			relVideoCount = Math.max(5, Integer.parseInt(relVideo.getValue().trim()));
+			relPhotoCount = Math.min(5, Integer.parseInt(relPhoto.getValue().trim()));
+			relVideoCount = Math.min(5, Integer.parseInt(relVideo.getValue().trim()));
 		}
 
 		yahooBoss = new YahooBoss();
@@ -73,10 +73,10 @@ public class EnrichMedia extends AbstractListModule {
 			searchKey = cs.getSegments(item.getValue(KV.TITLE).toString()).get(0);
 			if (searchKey != null && searchKey.equals("") == false) {
 
-//				List<ImageItem> imageItems = yahooBoss.SearchImageWithKey(searchKey, relPhotoCount);
-//				if (imageItems != null) {
-//					item.setValue("relImages", imageItems);
-//				}
+				List<ImageItem> imageItems = yahooBoss.SearchImageWithKey(searchKey, relPhotoCount);
+				if (imageItems != null) {
+					item.setValue("relImages", imageItems);
+				}
 				
 				List<VideoItem> videoItems = SohuSingleton.searchVideoItemByKey(searchKey, relPhotoCount);
 				if (videoItems != null) {
