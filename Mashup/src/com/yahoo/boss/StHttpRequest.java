@@ -11,12 +11,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.log4j.Logger;
-
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
+
+import org.apache.log4j.Logger;
 
 /**
  * @author David Hardtke
@@ -43,6 +43,8 @@ public class StHttpRequest {
 			URL u = new URL(url);
 
 			HttpURLConnection uc = (HttpURLConnection) u.openConnection();
+
+			uc.setRequestProperty("Accept-Charset", "UTF-8");
 
 			if (consumer != null) {
 				try {
@@ -86,14 +88,19 @@ public class StHttpRequest {
 			responseCode = uc.getResponseCode();
 
 			if (200 == responseCode || 401 == responseCode || 404 == responseCode) {
-				BufferedReader rd = new BufferedReader(new InputStreamReader(responseCode == 200 ? uc.getInputStream() : uc.getErrorStream()));
+				InputStreamReader inputStreamReader = new InputStreamReader((responseCode == 200 ? uc.getInputStream() : uc.getErrorStream()),"UTF-8");
+				BufferedReader rd = new BufferedReader(inputStreamReader);
+				
+
+				System.out.println("ENCODE=" + uc.getContentEncoding());
 				StringBuffer sb = new StringBuffer();
 				String line;
 				while ((line = rd.readLine()) != null) {
 					sb.append(line);
 				}
 				rd.close();
-				setResponseBody(sb.toString());
+				String resultUTF8 = new String(sb.toString());
+				setResponseBody(resultUTF8);
 			}
 		} catch (MalformedURLException ex) {
 			throw new IOException(url + " is not valid");
