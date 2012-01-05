@@ -45,8 +45,7 @@ public class LocalPlacesSearch {
 	
 	public ResultSet SearchByPosition(Position position,String type){
 		ResultSet rs = null;
-		String query=QUERY_STRING.replaceAll("#TABLE#", type).replaceAll("#POSITION_LAT#", Double.toString(position.getLatitude())).replaceAll("#POSITION_LON#", Double.toString(position.getLongitude())).replaceAll("#RANGE#", Double.toString(RANGE));
-		System.out.println(query);		
+		String query=QUERY_STRING.replaceAll("#TABLE#", type).replaceAll("#POSITION_LAT#", Double.toString(position.getLatitude())).replaceAll("#POSITION_LON#", Double.toString(position.getLongitude())).replaceAll("#RANGE#", Double.toString(RANGE));	
 		try {
 			rs = stmt.executeQuery(query);
 		} catch (SQLException e) {
