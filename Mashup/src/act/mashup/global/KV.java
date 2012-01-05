@@ -18,6 +18,7 @@ public final class KV {
 	public static final String AUTHOR = "author";
 	public static final String LINK = "link";
 	public static final String PLACE = "place";
+	public static final String COST = "cost";
 	public static final String RELATIVE_IMAGE = "relateImage";
 	public static final String PUBLISHDATE = "publishDate";
 
