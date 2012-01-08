@@ -57,8 +57,16 @@ public class EnrichMedia extends AbstractListModule {
 			relPhotoCount = Math.min(5, Integer.parseInt(results.get(photoIstream).GetResultMap().get("relPhotoCount").toString()));
 			relVideoCount = Math.min(5, Integer.parseInt(results.get(videoIstream).GetResultMap().get("relVideoCount").toString()));
 		} else {
-			relPhotoCount = Math.min(5, Integer.parseInt(relPhoto.getValue().trim()));
-			relVideoCount = Math.min(5, Integer.parseInt(relVideo.getValue().trim()));
+			try {
+				relPhotoCount = Math.min(5, Integer.parseInt(relPhoto.getValue().trim()));
+			} catch (NumberFormatException e) {
+				relPhotoCount = 0;
+			}
+			try {
+				relVideoCount = Math.min(5, Integer.parseInt(relVideo.getValue().trim()));
+			} catch (NumberFormatException e) {
+				relVideoCount = 0;
+			}
 		}
 
 		yahooBoss = new YahooBoss();
@@ -70,14 +78,21 @@ public class EnrichMedia extends AbstractListModule {
 	protected void Execute() throws Exception {
 		for (Iterator it = items.iterator(); it.hasNext();) {
 			Item item = (Item) it.next();
-			searchKey = cs.getSegments(item.getValue(KV.TITLE).toString()).get(0);
+			ArrayList<String> segments = cs.getSegments(item.getValue(KV.TITLE).toString());
+
+			if (segments.size() >= 2)
+				searchKey = segments.get(0).concat(segments.get(1));
+			else if (segments.size() > 0) {
+				searchKey = segments.get(0);
+			}
+
 			if (searchKey != null && searchKey.equals("") == false) {
 
 				List<ImageItem> imageItems = yahooBoss.SearchImageWithKey(searchKey, relPhotoCount);
 				if (imageItems != null) {
 					item.setValue("relImages", imageItems);
 				}
-				
+
 				List<VideoItem> videoItems = SohuSingleton.searchVideoItemByKey(searchKey, relPhotoCount);
 				if (videoItems != null) {
 					item.setValue("relVideos", videoItems);

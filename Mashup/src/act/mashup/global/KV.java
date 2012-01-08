@@ -21,6 +21,9 @@ public final class KV {
 	public static final String COST = "cost";
 	public static final String RELATIVE_IMAGE = "relateImage";
 	public static final String PUBLISHDATE = "publishDate";
+	public static final String LATITUDE = "lat";
+	public static final String LONGITUDE = "lon";
+	public static final String TYPE="type";
 
 	// Url address for geo-tag news
 	public static final String geoUrlPrefixWithUngeo = "http://ws.geonames.org/rssToGeoRSS?geoRSS=simple&addUngeocodedItems=true&feedUrl=";

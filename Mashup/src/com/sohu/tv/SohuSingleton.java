@@ -27,6 +27,10 @@ public class SohuSingleton {
 
 		List<VideoItem> videoItems = new ArrayList<VideoItem>();
 
+		if (resultSets == null) {
+			return null;
+		}
+
 		for (int i = 0; i < Math.min(resultSize, resultSets.getCount()); i++) {
 
 			VideoItem videoItem = new VideoItem();
