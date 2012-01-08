@@ -199,7 +199,7 @@ public class YahooBoss {
 		try {
 
 			YahooBoss signPostTest = new YahooBoss();
-			System.out.println(signPostTest.SearchImageWithKey("海淀区", 2).toString());
+			System.out.println(signPostTest.SearchImageWithKey("全国 考研", 2).toString());
 		
 
 		} catch (Exception e) {

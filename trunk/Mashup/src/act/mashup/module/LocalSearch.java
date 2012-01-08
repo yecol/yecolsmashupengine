@@ -1,10 +1,7 @@
 package act.mashup.module;
 
-import java.net.MalformedURLException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.jdom.Element;
@@ -36,7 +33,7 @@ public class LocalSearch extends AbstractListModule {
 	@Override
 	protected void Prepare() throws Exception {
 		// TODO Auto-generated method stub
-		localPlacesSearch = LocalPlacesSearch.getInstance();
+		localPlacesSearch = new LocalPlacesSearch();
 		double lat = Double.parseDouble(en.getParas().getChildTextTrim("latitude", KV.gf));
 		double lng = Double.parseDouble(en.getParas().getChildTextTrim("longitude", KV.gf));
 		String type = en.getParas().getChildTextTrim("type", KV.gf);
@@ -79,6 +76,9 @@ public class LocalSearch extends AbstractListModule {
 				Item item = new Item();
 				item.setValue(KV.TITLE, rs.getString("name"));
 				item.setValue(KV.PLACE, rs.getString("address"));
+				item.setValue(KV.LATITUDE, rs.getString("latitude"));
+				item.setValue(KV.LONGITUDE, rs.getString("longitude"));
+				item.setValue(KV.TYPE, typePara);
 
 				items.add(item);
 			}
@@ -88,6 +88,9 @@ public class LocalSearch extends AbstractListModule {
 				item.setValue(KV.TITLE, rs.getString("name"));
 				item.setValue(KV.PLACE, rs.getString("address"));
 				item.setValue(KV.COST, rs.getString("ticket"));
+				item.setValue(KV.LATITUDE, rs.getString("latitude"));
+				item.setValue(KV.LONGITUDE, rs.getString("longitude"));
+				item.setValue(KV.TYPE, typePara);
 				items.add(item);
 			}
 		} else if (typePara == LocalPlacesSearch.TYPE_RESTAURANT) {
@@ -96,17 +99,22 @@ public class LocalSearch extends AbstractListModule {
 				item.setValue(KV.TITLE, rs.getString("name"));
 				item.setValue(KV.PLACE, rs.getString("address"));
 				item.setValue(KV.COST, rs.getString("averagecost"));
+				item.setValue(KV.LATITUDE, rs.getString("latitude"));
+				item.setValue(KV.LONGITUDE, rs.getString("longitude"));
+				item.setValue(KV.TYPE, typePara);
 				items.add(item);
 			}
 		}
 
 		rlt.SetResultList(items);
+
+		localPlacesSearch.RemoveResouce();
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		LocalPlacesSearch locale = LocalPlacesSearch.getInstance();
+		LocalPlacesSearch locale = new LocalPlacesSearch();
 		ResultSet rs = locale.SearchByPosition(new Position(39.28, 116.0), LocalPlacesSearch.TYPE_HOTEL);
 		try {
 			System.out.println(rs.getFetchSize());
